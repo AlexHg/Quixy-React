@@ -7,6 +7,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCard from 'components/NewsCard';
+import {noticias} from '../../data.json';
 import './style.scss';
 
 export default class BusquedaPage extends React.Component {
@@ -14,7 +15,7 @@ export default class BusquedaPage extends React.Component {
     super();
     this.state = {
       busqueda: "",
-      resultados: [],
+      resultados: noticias,
     };
   }
 
@@ -22,10 +23,7 @@ export default class BusquedaPage extends React.Component {
     let busquedaInput = event.target
     this.setState({
       busqueda: busquedaInput.value,
-      resultados: [
-        {title: "hols", content: "content1"},
-        {title: "hola", content: "content2"},
-      ]
+      resultados: noticias,
     })
   }
 
@@ -54,7 +52,7 @@ export default class BusquedaPage extends React.Component {
           <b>{this.state.busqueda}</b>
         </p>
         {this.state.resultados.map( (resultado, i) => 
-          <NewsCard key={i} title={resultado.title} content={resultado.content}/>
+          <NewsCard key={i} params={resultado.noticia[0]}/>
         )}
           
       </div>

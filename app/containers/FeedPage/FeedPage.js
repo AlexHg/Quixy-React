@@ -7,16 +7,17 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import NewsCard from 'components/NewsCard';
 import './style.scss';
+import {noticias} from '../../data.json';
 
 export default class FeedPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
+  // load in JSON data from file
+
   constructor(){
     super();
+    console.log(noticias[0].noticia[0].title);
     this.state = {
-      resultados: [
-        {title: "hols", content: "content1"},
-        {title: "hola", content: "content2"},
-      ],
+      resultados: noticias,
     };
   }
   // Since state and props are static,
@@ -39,7 +40,8 @@ export default class FeedPage extends React.Component {
         <div id="FeedContainer">
           <section>
             {this.state.resultados.map( (resultado, i) => 
-              <NewsCard key={i} title={resultado.title} content={resultado.content}/>
+              
+              <NewsCard key={i} params={resultado.noticia[0]}/>
             )}
           </section>
           <aside></aside>
