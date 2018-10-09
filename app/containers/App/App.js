@@ -32,7 +32,6 @@ const App = () => (
       <Route exact path="/" component={HomePage} />
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
-      <Route path="/features" component={FeaturePage} />
       <Route path="" component={NotFoundPage} />
     </Switch>
     <Footer />

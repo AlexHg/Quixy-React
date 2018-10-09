@@ -17,3 +17,15 @@
     }
   }
 }
+#FeedContainer{
+  section, aside{
+    display:inline-block;
+    vertical-align: top;
+    width:calc(50% - 10px);
+    margin: 10px 5px;
+  }
+  aside{
+    height: 300px;
+    background:url("http://cfvod.kaltura.com/p/2051731/sp/205173100/thumbnail/entry_id/1_64p2vytf/version/100001/width/617/height/350")
+  }
+}
