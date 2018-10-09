@@ -39,7 +39,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <div className="home-page">
           <section className="centered">
             <h2>Datos de este prototipo</h2>
-            <p>....</p>
+            <h3 style={{textAlign:"left"}}>
+              Prototipo v0.1 a 09/10/2018
+            </h3>
+            <ul style={{textAlign:"left"}}>
+              <li>Mineria de noticias automaticas mediante internet</li>
+              <li>Sintesís de noticias mediante extracción como metodo de analisis de lenguaje natural</li>
+              <li>Estrtuctura de la BD por medio de JSON</li>
+              <li>Prototipo por componentes reactivos</li>
+              <li>Algoritmo de busqueda de noticias por titulo y contenido mediante de expresiones regulares</li>
+            </ul>
           </section>
         </div>
       </article>

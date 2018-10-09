@@ -19,11 +19,25 @@ export default class BusquedaPage extends React.Component {
     };
   }
 
+  regexpSearch = (array,regexp) => {
+    var filtered = [];
+    for (var i = 0; i < array.length; i++) {
+        var noticia = array[i].noticia[0];
+        if (
+            regexp.test(noticia.title) || 
+            regexp.test(noticia.summary_text)
+        ){
+            filtered.push(array[i]);
+        }
+    }
+    return filtered;
+  }
+
   busquedaHandler = event => {
     let busquedaInput = event.target
     this.setState({
       busqueda: busquedaInput.value,
-      resultados: noticias,
+      resultados: this.regexpSearch(noticias, new RegExp(busquedaInput.value,'i')),
     })
   }
 
