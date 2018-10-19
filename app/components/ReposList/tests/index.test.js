@@ -1,7 +1,7 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import RepoListItem from 'containers/RepoListItem';
+import RepoListPage from 'containers/RepoListPage';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ReposList from '../index';
@@ -39,7 +39,7 @@ describe('<ReposList />', () => {
 
     expect(
       renderedComponent.contains(
-        <List items={repos} component={RepoListItem} />
+        <List items={repos} component={RepoListPage} />
       )
     ).toEqual(true);
   });

@@ -19,6 +19,9 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <Link className="router-link" to="/feed">
             Feed
           </Link>
+          <Link className="router-link" to="/sesion">
+            Cerrar sesion
+          </Link>
 
         </div>
       </div>

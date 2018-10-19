@@ -4,7 +4,11 @@ import './style.scss';
 
 const NewsCard = ({params}) => (
   <article className="NewsCard">
-    <div className="Header">
+    <div style={{display:"flex", justifyContent:"space-between", width: 100+"%", paddingBottom:"10px"}}>
+        <b>{params.company.toUpperCase()}</b>
+        <span>{(new Date(params.published)).toLocaleDateString("en-US")}</span>
+    </div>
+    <div className="Header">      
       <img src={params.image} className="Thumbnail"/>
       <h3>
         <a href={params.url} style={{color: "black"}}>{params.title}</a>

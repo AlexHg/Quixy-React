@@ -7,7 +7,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCard from 'components/NewsCard';
-import {noticias} from '../../data.json';
+//import {noticias} from '../../dataold.json';
+import {newspapers} from '../../data.json';
 import './style.scss';
 
 export default class BusquedaPage extends React.Component {
@@ -15,14 +16,17 @@ export default class BusquedaPage extends React.Component {
     super();
     this.state = {
       busqueda: "",
-      resultados: noticias,
+      resultados: this.getNews(), 
+      searchAwait: false,
     };
   }
 
+  getNews = () => [...newspapers[0].data.noticias];
+
   regexpSearch = (array,regexp) => {
-    var filtered = [];
+    var filtered = []; 
     for (var i = 0; i < array.length; i++) {
-        var noticia = array[i].noticia[0];
+        var noticia = array[i];
         if (
             regexp.test(noticia.title) || 
             regexp.test(noticia.summary_text)
@@ -30,15 +34,35 @@ export default class BusquedaPage extends React.Component {
             filtered.push(array[i]);
         }
     }
+    
     return filtered;
   }
 
   busquedaHandler = event => {
     let busquedaInput = event.target
-    this.setState({
-      busqueda: busquedaInput.value,
-      resultados: this.regexpSearch(noticias, new RegExp(busquedaInput.value,'i')),
-    })
+
+    var makeSearch = async () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.setState({
+            busqueda: busquedaInput.value,
+            resultados: this.regexpSearch(this.getNews(), new RegExp(busquedaInput.value,'i')),
+          })
+          this.state.searchAwait = false;
+          console.log("Waiting Search: ",this.state.searchAwait)
+        }, 1000)
+      })
+    }
+
+    if(!this.state.searchAwait){
+      this.state.searchAwait = true;
+      console.log("Waiting Search: ",this.state.searchAwait)
+      makeSearch();
+    }else console.log("nope")
+
+    
+
+    
   }
 
   render() { 
@@ -66,7 +90,7 @@ export default class BusquedaPage extends React.Component {
           <b>{this.state.busqueda}</b>
         </p>
         {this.state.resultados.map( (resultado, i) => 
-          <NewsCard key={i} params={resultado.noticia[0]}/>
+          <NewsCard key={i} params={resultado}/> 
         )}
           
       </div>

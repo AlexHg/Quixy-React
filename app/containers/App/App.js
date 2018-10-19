@@ -13,6 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import FeedPage from 'containers/FeedPage/Loadable';
+import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
@@ -30,6 +31,7 @@ const App = () => (
     <Header />
     <Switch>
       <Route exact path="/" component={HomePage} />
+      <Route path="/sesion" component={SignupPage} />
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
       <Route path="" component={NotFoundPage} />

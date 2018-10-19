@@ -7,7 +7,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import NewsCard from 'components/NewsCard';
 import './style.scss';
-import {noticias} from '../../data.json';
+import {noticias} from '../../dataold.json';
 
 export default class FeedPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function

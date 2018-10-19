@@ -1,5 +1,5 @@
 /**
- * RepoListItem
+ * RepoListPage
  *
  * Lists the name and the issue count of a repository
  */
@@ -10,7 +10,7 @@ import ListItem from 'components/ListItem';
 import { IssueIcon } from 'components/Icons';
 import './style.scss';
 
-export default class RepoListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class RepoListPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const { item } = this.props;
     let nameprefix = '';
@@ -41,7 +41,7 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
   }
 }
 
-RepoListItem.propTypes = {
+RepoListPage.propTypes = {
   item: PropTypes.object,
   currentUser: PropTypes.string,
 };

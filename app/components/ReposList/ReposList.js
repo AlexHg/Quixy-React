@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
-import RepoListItem from 'containers/RepoListItem';
+import RepoListPage from 'containers/RepoListPage';
 
 const ReposList = ({ loading, error, repos }) => {
   if (loading) {
@@ -19,7 +19,7 @@ const ReposList = ({ loading, error, repos }) => {
   }
 
   if (repos !== false) {
-    return <List items={repos} component={RepoListItem} />;
+    return <List items={repos} component={RepoListPage} />;
   }
 
   return null;
