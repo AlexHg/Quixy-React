@@ -7,7 +7,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div className="header">
-        <h1 className="centered">Prototipo 0.1</h1>
+        <h3 className="centered">Quixy P2</h3>
         
         <div className="nav-bar">
           <Link className="router-link" to="/">

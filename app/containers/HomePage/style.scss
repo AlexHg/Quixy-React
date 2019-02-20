@@ -1,32 +1,25 @@
-.home-page {
-  
-  h2 {
-    font-size: 1.5em;
+.feature-page {
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.25em;
   }
   
-  section {
-    margin: 3em auto;
+  ul {
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    padding-left: 1.75em;
 
-    &:first-child {
-      margin-top: 0;
-    }
+    li {
+      margin: 1em 0;
 
-    &.centered {
-      text-align: center;
-    }
-  }
-
-  form {
-    margin-bottom: 1em;
-
-    input {
-      outline: none;
-      border-bottom: 1px dotted #999;
+      p.title {
+        font-weight: bold;
+      }
     }
   }
-
-  span.at-prefix {
-    color: black;
-    margin-left: 0.4em;
-  }
+}
+.news-cards-container{
+  width:25%;
+  overflow-y: scroll;
+  max-height: 94vh;
+  padding: 0 1rem;
 }

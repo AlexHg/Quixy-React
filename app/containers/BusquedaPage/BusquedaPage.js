@@ -58,17 +58,13 @@ export default class BusquedaPage extends React.Component {
       this.state.searchAwait = true;
       console.log("Waiting Search: ",this.state.searchAwait)
       makeSearch();
-    }else console.log("nope")
-
-    
-
-    
+    }    
   }
 
   render() { 
   
     return (
-      <div className="feature-page">
+      <div className="feature-page news-cards-container">
         <Helmet>
           <title>Busqueda</title>
           <meta
@@ -76,15 +72,14 @@ export default class BusquedaPage extends React.Component {
             content="Feature page of React.js Boilerplate application"
           />
         </Helmet>
-        <h1>Busqueda</h1>
-        <div>
+        <div >
           <br/>
           <TextField 
             label="Ingrese su busqueda" 
             name="busqueda" 
             onChange={this.busquedaHandler}
           />
-        </div>        
+        </div>  
         <p>
           {this.state.busqueda && "Buscando resultados para: "}
           <b>{this.state.busqueda}</b>

@@ -31,12 +31,12 @@ const App = () => (
     <Header />
     <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route path="/sesion" component={SignupPage} />
+      <Route path="/sesion" exact component={SignupPage} />
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
       <Route path="" component={NotFoundPage} />
     </Switch>
-    <Footer />
+    
   </div>
 );
 
