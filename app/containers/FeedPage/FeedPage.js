@@ -33,7 +33,7 @@ export default class FeedPage extends React.Component {
           <title>Feed Page</title>
           <meta
             name="description"
-            content="Feature page of React.js Boilerplate application"
+            content="Quixy | Plataforma de noticias inteligente"
           />
         </Helmet>
         <h1>Feed</h1>

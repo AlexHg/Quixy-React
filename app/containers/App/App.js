@@ -17,16 +17,15 @@ import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 import './style.scss';
 
 const App = () => (
   <div className="app-wrapper">
     <Helmet
-      titleTemplate="%s - React.js Boilerplate"
-      defaultTitle="React.js Boilerplate"
+      titleTemplate="%s - Quixy | Plataforma de noticias inteligente"
+      defaultTitle="Quixy | Plataforma de noticias inteligente"
     >
-      <meta name="description" content="A React.js Boilerplate application" />
+      <meta name="description" content="Plataforma de noticias inteligente (IA, PNL, RS)" />
     </Helmet>
     <Header />
     <Switch>

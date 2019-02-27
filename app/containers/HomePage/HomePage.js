@@ -8,6 +8,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCard from 'components/NewsCard';
+import BreakingNew from 'components/BreakingNew';
 //import {noticias} from '../../dataold.json';
 import {newspapers} from '../../data.json';
 import './style.scss';
@@ -23,71 +24,31 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 
   getNews = () => [...newspapers[0].data.noticias];
-
-  /*regexpSearch = (array,regexp) => {
-    var filtered = []; 
-    for (var i = 0; i < array.length; i++) {
-      var noticia = array[i];
-      if (
-          regexp.test(noticia.title) || 
-          regexp.test(noticia.summary_text)
-      ){
-          filtered.push(array[i]);
-      }
-    }
-    return filtered;
-  }*/
-
-  /*busquedaHandler = event => {
-    let busquedaInput = event.target
-
-    var makeSearch = async () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          this.setState({
-            busqueda: busquedaInput.value,
-            resultados: this.regexpSearch(this.getNews(), new RegExp(busquedaInput.value,'i')),
-          })
-          this.state.searchAwait = false;
-          console.log("Waiting Search: ",this.state.searchAwait)
-        }, 1000)
-      })
-    }
-
-    if(!this.state.searchAwait){
-      this.state.searchAwait = true;
-      console.log("Waiting Search: ",this.state.searchAwait)
-      makeSearch();
-    }    
-  }*/
   
   render() { 
-  
     return (
-      <div className="feature-page news-cards-container">
-        <Helmet>
-          <title>Busqueda</title>
-          <meta
-            name="description"
-            content="Feature page of React.js Boilerplate application"
-          />
-        </Helmet>
-        {/*<div >
-          <br/>
-          <TextField 
-            label="Ingrese su busqueda" 
-            name="busqueda" 
-            onChange={this.busquedaHandler}
-          />
-        </div>  */}
-        {/*<p>
-          {this.state.busqueda && "Buscando resultados para: "}
-          <b>{this.state.busqueda}</b>
-        </p>*/}
-        {this.state.resultados.map( (resultado, i) => 
-            <NewsCard key={i} params={resultado}/> 
-        )}
-          
+      <div className="feature-page">
+        <aside className="NewsCardsContainer">
+          <Helmet>
+            <title>Inicio</title>
+            <meta
+              name="description"
+              content="Quixy | Plataforma de noticias inteligente"
+            />
+          </Helmet>
+          {this.state.resultados.map( (resultado, i) => 
+              <NewsCard key={i} params={resultado}/> 
+          )}
+        </aside>
+        <section className="PrincipalContent">
+          <div className="BreakingNewsSlider">
+            <BreakingNew key={1} params={{
+              image:require("images/bnews/b1.jpg"), 
+              title:"Lorem Ipsum Dat ed Ipsum",
+              degree:["#9198e5","#e66465","#9be591"]
+            }} />
+          </div>
+        </section>
       </div>
     );
   }

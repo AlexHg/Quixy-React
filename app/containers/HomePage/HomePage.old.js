@@ -1,18 +1,18 @@
 /*
- * BusquedaPage
+ * HomePage
  *
- * List all the features
+ * This is the first thing users see of our App, at the '/' route
  */
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCard from 'components/NewsCard';
-import BreakingNew from 'components/NewsCard';
 //import {noticias} from '../../dataold.json';
 import {newspapers} from '../../data.json';
 import './style.scss';
 
-export default class BusquedaPage extends React.Component {
+export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(){
     super();
     this.state = {
@@ -24,22 +24,21 @@ export default class BusquedaPage extends React.Component {
 
   getNews = () => [...newspapers[0].data.noticias];
 
-  regexpSearch = (array,regexp) => {
+  /*regexpSearch = (array,regexp) => {
     var filtered = []; 
     for (var i = 0; i < array.length; i++) {
-        var noticia = array[i];
-        if (
-            regexp.test(noticia.title) || 
-            regexp.test(noticia.summary_text)
-        ){
-            filtered.push(array[i]);
-        }
+      var noticia = array[i];
+      if (
+          regexp.test(noticia.title) || 
+          regexp.test(noticia.summary_text)
+      ){
+          filtered.push(array[i]);
+      }
     }
-    
     return filtered;
-  }
+  }*/
 
-  busquedaHandler = event => {
+  /*busquedaHandler = event => {
     let busquedaInput = event.target
 
     var makeSearch = async () => {
@@ -60,8 +59,8 @@ export default class BusquedaPage extends React.Component {
       console.log("Waiting Search: ",this.state.searchAwait)
       makeSearch();
     }    
-  }
-
+  }*/
+  
   render() { 
   
     return (
@@ -73,23 +72,25 @@ export default class BusquedaPage extends React.Component {
             content="Quixy | Plataforma de noticias inteligente"
           />
         </Helmet>
-        <div >
+        {/*<div >
           <br/>
           <TextField 
             label="Ingrese su busqueda" 
             name="busqueda" 
             onChange={this.busquedaHandler}
           />
-        </div>  
-        <p>
+        </div>  */}
+        {/*<p>
           {this.state.busqueda && "Buscando resultados para: "}
           <b>{this.state.busqueda}</b>
-        </p>
+        </p>*/}
         {this.state.resultados.map( (resultado, i) => 
-          <NewsCard key={i} params={resultado}/> 
+            <NewsCard key={i} params={resultado}/> 
         )}
           
       </div>
     );
   }
 }
+
+

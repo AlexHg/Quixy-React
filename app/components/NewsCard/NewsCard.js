@@ -20,10 +20,10 @@ const NewsCard = ({params}) => (
     </div>
     <img className="Thumbnail" src={params.top_image} />
     <a href={params.url}>
-      <div class="NewsCardContainer">
+      <div className="NewsCardContainer">
         <div className="Header">      
           <h4 className="Title">
-            <a href={params.url} title={params.title}></a>
+            <span title={params.title}></span>
           </h4>
         </div>
       </div>  
