@@ -2,12 +2,25 @@
   display:grid;
   grid-template-columns: 400px auto;
   grid-template-rows: auto;
+  width:100%;
+  transition: all .5s;
+  
+  @media screen and (max-width:900px) {
+    width:calc(100% + 400px);
+    &[data-off-canvas="true"]{
+      margin-left: -400px;
+    }
+    &[data-off-canvas="false"]{
+      margin-left: 0px;
+    }
+   
+  }
   .NewsCardsContainer{
     overflow-y: scroll;
     max-height: 94vh;
     padding: 0 1rem;
-    background:white;
-    box-shadow: -10px 0px 10px 1px #aaaaaa;
+    //background:#0d0310;
+    //box-shadow: -10px 0px 10px 1px #aaaaaa;
   }
   .PrincipalContent{
     overflow-y: scroll;
@@ -15,7 +28,22 @@
     .BreakingNewsSlider{
       padding: 10px 1rem;
     }
+    .CollectionsContainer{
+      padding: .5rem;
+      text-align: center;
+      //padding: 10px 1rem;
+      /*display:flex;
+      justify-content: space-between;
+      flex-wrap:wrap;*/
+      .RecomendationTitle{
+        color:white;
+        margin-left:.7rem;
+        text-align:left;
+        display:bloc;
+      }
+    }
   }
+
   h1 {
     font-size: 2em;
     margin-bottom: 0.25em;

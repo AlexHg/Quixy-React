@@ -8,7 +8,7 @@ const BreakingNew = ({params}) => (
         <div className="BreakingNewContainer" style={{
             background:"linear-gradient(135deg,"+params.degree[0]+", "+params.degree[1]+")"
         }}>
-            <img src={params.image}/>
+            <img className="BackgroundImage" src={params.image}/>
             <span className="RibbonLabel">¡Breaking New! - EN VIVO °</span>
             <div className="Title">
                 <span>{params.title}</span>

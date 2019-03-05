@@ -30,6 +30,12 @@ import 'styles/theme.scss';
 
 import configureStore from './configureStore';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIgloo, faIdBadge, faStar, faListAlt, faLink } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faIgloo, faIdBadge, faStar, faListAlt, faLink);
+
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.scss';
 
 const Colors = ["#645dcb"];
@@ -13,8 +14,9 @@ const NewsCard = ({params}) => (
     <div className="Actions">
       <div className="ActionsContainer">
         <div className="ActionsList">
-          <a href="#">X</a> &nbsp;&nbsp;
-          <a href="#">X</a>
+          <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;
+          <a href="#" className="Action"><FontAwesomeIcon icon="list-alt" /></a> &nbsp;&nbsp;
+          <a href={params.url} className="Action" target="_blank"><FontAwesomeIcon icon="link" /></a>
         </div>
       </div>
     </div>
