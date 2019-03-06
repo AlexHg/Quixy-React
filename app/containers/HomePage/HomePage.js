@@ -11,6 +11,7 @@ import NewsCard from 'components/NewsCard';
 import Collection from 'components/Collection';
 import BreakingNew from 'components/BreakingNew';
 //import {noticias} from '../../dataold.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {newspapers} from '../../data.json';
 import './style.scss';
 
@@ -25,10 +26,10 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 
   getNews = () => [...newspapers[0].data.noticias];
-  
+
   render() { 
     return (
-      <div className="feature-page" data-off-canvas="true">
+      <div className="feature-page" data-offcanvas="true" >
         <aside className="NewsCardsContainer">
           <Helmet>
             <title>Inicio</title>

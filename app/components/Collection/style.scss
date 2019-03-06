@@ -12,6 +12,18 @@
     margin:.5rem; 
     border-radius:.5rem;
 
+    @media screen and (max-width:700px){
+        width: 150px;
+        height: 220px;
+        .Actions:hover{
+            width: 250px!important;
+            height: 270px !important;
+            .ActionsContainer{
+                height:94px!important;
+            }
+        }
+    }
+
     img.BackgroundImage{
         position: absolute;
         top: -9999px;

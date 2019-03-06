@@ -27,8 +27,8 @@ describe('<ReposList />', () => {
         owner: {
           login: 'flexdinesh'
         },
-        html_url: 'https://github.com/flexdinesh/react-redux-boilerplate',
-        name: 'react-redux-boilerplate',
+        html_url: 'https://konecta.team',
+        name: 'Quixy-plataforma-de-noticias-inteligente',
         open_issues_count: 20,
         full_name: 'flexdinesh/react-redux-boilerplate'
       }

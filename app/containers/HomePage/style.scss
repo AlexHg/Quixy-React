@@ -6,11 +6,12 @@
   transition: all .5s;
   
   @media screen and (max-width:900px) {
+    
     width:calc(100% + 400px);
-    &[data-off-canvas="true"]{
+    &[data-offcanvas="true"]{
       margin-left: -400px;
     }
-    &[data-off-canvas="false"]{
+    &[data-offcanvas="false"]{
       margin-left: 0px;
     }
    
