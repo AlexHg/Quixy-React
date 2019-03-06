@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCard from 'components/NewsCard';
 import Collection from 'components/Collection';
@@ -38,8 +39,20 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
               content="Quixy | Plataforma de noticias inteligente"
             />
           </Helmet>
-          {this.state.resultados.map( (resultado, i) => 
-              <NewsCard key={i} params={resultado}/> 
+          {this.state.resultados.map( (resultado, i) => {
+
+              //Tratar titulo para crear url
+              let de = 'ÁÃÀÄÂÉËÈÊÍÏÌÎÓÖÒÔÚÜÙÛÑÇáãàäâéëèêíïìîóöòôúüùûñç',
+                a = 'AAAAAEEEEIIIIOOOOUUUUNCaaaaaeeeeiiiioooouuuunc',
+                regex = new RegExp('['+de+']' , 'ug');
+
+              resultado.urlNew = resultado.title.toLowerCase()
+                .replace(regex, match => a.charAt(de.indexOf(match)))
+                .replace(/[^\w\s]/gi, '')
+                .replace(/ /gi,"-");
+
+              return ( <NewsCard key={i} params={resultado}/> );
+            }
           )}
         </aside>
         <section className="PrincipalContent">

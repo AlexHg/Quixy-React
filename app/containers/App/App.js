@@ -18,6 +18,7 @@ import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import './style.scss';
+import NewsCardViewer from 'components/NewsCardView/NewsCardViewer';
 
 const App = () => (
   <div className="app-wrapper">
@@ -33,6 +34,10 @@ const App = () => (
       <Route path="/sesion" exact component={SignupPage} />
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
+
+      <Route path="/NewsCard/:new" component={NewsCardViewer} />
+
+
       <Route path="" component={NotFoundPage} />
     </Switch>
     
