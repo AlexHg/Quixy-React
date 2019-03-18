@@ -27,11 +27,11 @@ const NewsCard = ({params}) => (
         </div>
       </div>
     </div>
-    <img className="Thumbnail" src={params.top_image} />
+    <img className="Thumbnail" src={params.thumbnail} />
     {/*<a href={params.url}>*/}
     <Link className="router-link" to={{
-      pathname: "/NewsCard/"+params.urlNew,
-      state: { modal: true, params: params },
+      pathname: "/NewsCard/"+params.slug,
+      state: { modal: true, params: params, id: params._id, slug: params.slug },
     }}>
       <div className="NewsCardContainer">
         <div className="Header">      

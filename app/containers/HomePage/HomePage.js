@@ -13,7 +13,15 @@ import Collection from 'components/Collection';
 import BreakingNew from 'components/BreakingNew';
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {newspapers} from '../../data.json';
+
+import http from 'http';
+
+
+//var request = client.request('PUT', '/users/1');
+
+
 import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -21,12 +29,22 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     super();
     this.state = {
       busqueda: "",
-      resultados: this.getNews(), 
+      resultados: [], 
       searchAwait: false,
     };
   }
-
-  getNews = () => [...newspapers[0].data.noticias];
+  
+  componentWillMount() { 
+    fetch('http://localhost:8080/api/newscards/')
+      .then((response) => {
+        return response.json()
+      }).then((newscards) => {
+        console.log(newscards);
+        this.setState({ resultados: newscards })
+      })
+    /*var client = http.createClient(8080, 'localhost');
+    return client.request('PUT', '/api/newscards/');*/
+  };
 
   render() { 
     return (
@@ -42,16 +60,18 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           {this.state.resultados.map( (resultado, i) => {
 
               //Tratar titulo para crear url
-              let de = 'ÁÃÀÄÂÉËÈÊÍÏÌÎÓÖÒÔÚÜÙÛÑÇáãàäâéëèêíïìîóöòôúüùûñç',
+              /*let de = 'ÁÃÀÄÂÉËÈÊÍÏÌÎÓÖÒÔÚÜÙÛÑÇáãàäâéëèêíïìîóöòôúüùûñç',
                 a = 'AAAAAEEEEIIIIOOOOUUUUNCaaaaaeeeeiiiioooouuuunc',
                 regex = new RegExp('['+de+']' , 'ug');
 
               resultado.urlNew = resultado.title.toLowerCase()
                 .replace(regex, match => a.charAt(de.indexOf(match)))
                 .replace(/[^\w\s]/gi, '')
-                .replace(/ /gi,"-");
+                .replace(/ /gi,"-");*/
 
               return ( <NewsCard key={i} params={resultado}/> );
+
+              //return <div id={i} key={i}></div>;
             }
           )}
         </aside>
