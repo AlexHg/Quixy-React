@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+
 import './style.scss';
 
 export default class SignupPage extends React.Component {
@@ -17,6 +18,8 @@ export default class SignupPage extends React.Component {
       email: "",
       password: ""
     }
+    
+    
 
     //this.handleChange();
   }
@@ -32,6 +35,31 @@ export default class SignupPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    fetch('http://localhost:8080/api/auth/login',{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.email,
+        "password": this.state.password,
+      })
+    }).then((response) => {
+      return response.json()
+    }).then((user) => {
+      
+      if(user.type == 'error' && user.alert) alert(user.message)
+      else{ 
+        /*this.setState({ session: user })
+        console.log(this.state.session);*/
+        var u = user.userData
+        u.password="************";
+        localStorage.setItem('session',JSON.stringify(u));
+        this.props.history.push('/')
+      }
+     
+    })
   }
   // Since state and props are static,
   // there's no need to re-render this component
@@ -39,7 +67,13 @@ export default class SignupPage extends React.Component {
     return false;
   }
 
+  componentWillMount() {
+    //Middleware temporal
+    if(localStorage.getItem("session") != undefined)
+      this.props.history.push('/')
+  }
   render() {
+    
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit} type="email">
@@ -56,6 +90,7 @@ export default class SignupPage extends React.Component {
             <FormControl
               //value={this.state.password}
               onChange={this.handleChange}
+              autoComplete="new-password"
               type="password"
             />
           </FormGroup>

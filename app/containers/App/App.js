@@ -20,6 +20,19 @@ import Header from 'components/Header';
 import './style.scss';
 import NewsCardViewer from 'components/NewsCardView/NewsCardViewer';
 
+class Logout extends React.Component {
+  constructor(){
+    super()
+  }
+  componentDidMount(){
+    localStorage.removeItem("session")
+    this.props.history.push('/sesion');
+  }
+  render(){
+    return <div></div>;
+  }
+}
+
 const App = () => (
   <div className="app-wrapper">
     <Helmet
@@ -31,7 +44,10 @@ const App = () => (
     <Header />
     <Switch>
       <Route exact path="/" component={HomePage} />
+
       <Route path="/sesion" exact component={SignupPage} />
+      <Route path="/logout" exact component={Logout} />
+      
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
 

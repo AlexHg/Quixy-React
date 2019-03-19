@@ -28,6 +28,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   constructor(){
     super();
     this.state = {
+      session: {},
       busqueda: "",
       resultados: [], 
       searchAwait: false,
@@ -39,7 +40,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       .then((response) => {
         return response.json()
       }).then((newscards) => {
-        console.log(newscards);
+        //console.log(newscards);
         this.setState({ resultados: newscards })
       })
     /*var client = http.createClient(8080, 'localhost');
