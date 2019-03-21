@@ -15,8 +15,6 @@ import qwest from 'qwest';
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {newspapers} from '../../data.json';
-
 import http from 'http';
 
 

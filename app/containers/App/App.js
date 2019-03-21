@@ -18,7 +18,7 @@ import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import './style.scss';
-import NewsCardViewer from 'components/NewsCardView/NewsCardViewer';
+import NewsCardPage from 'containers/NewsCardPage/Loadable';
 
 class Logout extends React.Component {
   constructor(){
@@ -50,7 +50,7 @@ const App = () => (
       <Route path="/busqueda" component={BusquedaPage} />
       <Route path="/feed" component={FeedPage} />
 
-      <Route path="/NewsCard/:new" component={NewsCardViewer} />
+      <Route path="/NewsCard/:slug" component={NewsCardPage} />
 
 
       <Route path="" component={NotFoundPage} />

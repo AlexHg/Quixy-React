@@ -15,34 +15,53 @@ const Colors = ["#645dcb"];
     </div>
   )
 }*/
+const SlugCreator = (str) => {
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = str.toLowerCase();
 
-const NewsCard = ({params}) => (
-  <article className="NewsCard" style={{background:"no-repeat left top, linear-gradient("+Colors[Math.floor(Math.random() * Colors.length)]+", rgba(0,0,0,0))"}}>
-    <div className="Actions">
-      <div className="ActionsContainer">
-        <div className="ActionsList">
-          <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;
-          <a href="#" className="Action"><FontAwesomeIcon icon="list-alt" /></a> &nbsp;&nbsp;
-          <a href={params.url} className="Action" target="_blank"><FontAwesomeIcon icon="link" /></a>
+  // remove accents, swap ñ for n, etc
+  var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+  var to   = "aaaaeeeeiiiioooouuuunc------";
+  for (var i=0, l=from.length ; i<l ; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // collapse whitespace and replace by -
+      .replace(/-+/g, '-'); // collapse dashes
+
+  return str;
+}
+
+const NewsCard = ({params}) => {
+  
+  params.slug = SlugCreator(params.title)
+  
+  return(
+    <article className="NewsCard" style={{background:"no-repeat left top, linear-gradient("+Colors[Math.floor(Math.random() * Colors.length)]+", rgba(0,0,0,0))"}}>
+      <div className="Actions">
+        <div className="ActionsContainer">
+          <div className="ActionsList">
+            <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;
+            <a href="#" className="Action"><FontAwesomeIcon icon="list-alt" /></a> &nbsp;&nbsp;
+            <a href={params.url} className="Action" target="_blank"><FontAwesomeIcon icon="link" /></a>
+          </div>
         </div>
       </div>
-    </div>
-    <img className="Thumbnail" src={params.thumbnail} />
-    {/*<a href={params.url}>*/}
-    <Link className="router-link" to={{
-      pathname: "/NewsCard/"+params.slug,
-      state: { modal: true, params: params, id: params._id, slug: params.slug },
-    }}>
-      <div className="NewsCardContainer">
-        <div className="Header">      
-          <h4 className="Title">
-            <span title={params.title}></span>
-          </h4>
-        </div>
-      </div>  
-    </Link>
-    {/*</a>*/}
-  </article>
-);
+      <img className="Thumbnail" src={params.thumbnail} />
+      
+      <Link className="router-link" to={"/NewsCard/"+params.slug}>
+        <div className="NewsCardContainer">
+          <div className="Header">      
+            <h4 className="Title">
+              <span title={params.title}></span>
+            </h4>
+          </div>
+        </div>  
+      </Link>
+      {/*</a>*/}
+    </article>
+  )
+};
 
 export default NewsCard;
