@@ -1,0 +1,49 @@
+.SignupContainer{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 85vh;
+    max-height: 100vh;
+    overflow-y:scroll;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    .Signup{
+        background:white;
+        border-radius: .3rem;
+        padding:2rem 2.5rem;
+        text-align: center;
+
+        #errorl{
+            margin-bottom: 1rem;
+            
+            span{
+                color:red;
+                background:pink;
+                font-size: .5rem;
+                border:1px solid red;
+                border-radius: .2rem;
+                padding: .2rem .5rem; 
+                margin: .2rem;
+                display: inline-block;
+            }
+        }
+        .Login, .Register{
+            text-align: left;
+            display:inline-block;
+            width: 400px;
+            padding:1rem;
+            vertical-align: top;
+            .form-group{
+                display:flex;
+                margin-bottom:.5rem;
+                align-items: center;
+                justify-content: space-between;
+                input{
+                    border: 1px solid gray;
+                    padding: .3rem .5rem;
+                    border-radius: .2rem;
+                }
+            }
+            
+        }
+    }
+}

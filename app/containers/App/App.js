@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
@@ -24,12 +24,11 @@ class Logout extends React.Component {
   constructor(){
     super()
   }
-  componentDidMount(){
-    localStorage.removeItem("session")
-    this.props.history.push('/sesion');
+  componentWillMount(){
+    sessionStorage.removeItem("session")
   }
   render(){
-    return <div></div>;
+    return <Redirect to='/sesion' />;
   }
 }
 
