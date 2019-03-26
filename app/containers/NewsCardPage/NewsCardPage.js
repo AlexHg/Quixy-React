@@ -9,7 +9,6 @@ import qwest from 'qwest';
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 import http from 'http';
 
 import './style.scss';
@@ -23,20 +22,59 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       busqueda: "",
       resultados: [], 
       searchAwait: false,
+      newscard: null,
     };
   }
   componentWillMount() {
-    
-    console.log(this.state.slug, this.state.session)
+    fetch('http://localhost:8080/api/newscards/slug/'+this.state.slug)
+      .then((response) => {
+        return response.json()
+      }).then((newscard_r) => {
+        console.log(newscard_r);
+        this.setState({ newscard: newscard_r })
+      })
   }
   render() {
-    const { state = {} } = location;
-    const { modal } = state;
     return (
       <div className="ModalViewerContainer" style={{height:"5000px"}}>
           <div className="ModalViewer">
+              <div className="NewsCardContainer">
+                <div className="Thumbnail left-side"></div>
+                <div className="Summary">
+                  <h3 className="Title"></h3>
+                  <p className="SummaryContent"></p>
+                  <div className="CompleteNew">
+                    Ver la nota completa
+                  </div>
+                  <div className="Actions"></div>
+                </div>
+              </div>
               
-              <h1>{this.state.slug}</h1>
+              <div className="GallerySlide COMPONENT">
+                <div className="Image"></div>
+              </div>
+
+              <div className="CommentBox COMPONENT">
+                <div className="Comment">
+                  <div className="ProfileImage"></div>
+                  <div className="CommentContent">
+                    <div className="UserName"></div>
+                    <p className="CommentText"></p>
+                    <div className="Actions"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="RelatedCollections">
+                COMPONENT LIST
+              </div>
+
+              <div className="RelatedNewsCards">
+                COMPONENT LIST
+              </div>
+
+
+              <h1>{JSON.stringify(this.state.newscard)}</h1>
             
           </div>
       </div>

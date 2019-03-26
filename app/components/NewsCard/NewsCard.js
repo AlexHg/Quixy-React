@@ -15,6 +15,13 @@ const Colors = ["#645dcb"];
     </div>
   )
 }*/
+
+const onErrorImage = (image) => {
+  image.onerror = "";
+  image.src = "/images/noimage.gif";
+  return true;
+}
+
 const SlugCreator = (str) => {
   str = str.replace(/^\s+|\s+$/g, ''); // trim
   str = str.toLowerCase();
@@ -35,7 +42,7 @@ const SlugCreator = (str) => {
 
 const NewsCard = ({params}) => {
   
-  params.slug = SlugCreator(params.title)
+  //params.slug = SlugCreator(params.title)
   
   return(
     <article className="NewsCard" style={{background:"no-repeat left top, linear-gradient("+Colors[Math.floor(Math.random() * Colors.length)]+", rgba(0,0,0,0))"}}>
@@ -48,7 +55,7 @@ const NewsCard = ({params}) => {
           </div>
         </div>
       </div>
-      <img className="Thumbnail" src={params.thumbnail} />
+      <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src="http://www.bandt.com.au/information/uploads/2015/03/iStock_000042108274_Small-1260x840.jpg"}}/>
       
       <Link className="router-link" to={"/NewsCard/"+params.slug}>
         <div className="NewsCardContainer">
