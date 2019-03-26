@@ -33,10 +33,10 @@ import configureStore from './configureStore';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper);
-
+library.add(faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight );
+ 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});

@@ -1,7 +1,7 @@
 @import './global-styles.scss';
 
 
-button{
+button, a[type=btn]{
     border: 2px solid #645dcb;
     color: #645dcb;
     &:hover{
