@@ -24,6 +24,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       newscard: {},
     };
   }
+
   componentWillMount() {
     fetch("http://localhost:8080/api/newscards/slug/"+this.state.slug)
       .then((response) => {
@@ -56,7 +57,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
           <div className="ModalViewer">
               <div className="NewsCardContainer">
                 <div className="Thumbnail left-side">
-                  <img src={this.state.newscard.thumbnail}/>
+                  <img src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src="http://www.bandt.com.au/information/uploads/2015/03/iStock_000042108274_Small-1260x840.jpg"}}/>
                 </div>
                 <div className="SummaryContainer">
                   <h3 className="Title">

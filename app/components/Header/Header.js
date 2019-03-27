@@ -33,6 +33,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     if (document.querySelector("[data-offcanvas]") == null) 
       //Si no hay offCanvas
       window.location = "/";
+      //this.forceUpdate(<Redirect to='/' />);
 
     var canvas = document.querySelector("[data-offcanvas]")
     if(canvas.dataset.offcanvas == 'true') 
