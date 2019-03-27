@@ -78,6 +78,27 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
       "https://images.unsplash.com/photo-1507723714871-f8d4b0d065b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
     ]
+
+    var comments = [
+      { 
+        name: 'Alejandro Hernandez', 
+        email: 'alejandro@konecta.team',
+        date: Date.now(), 
+        content: "Este es un comentario de prueba",
+      },
+      { 
+        name: 'Alejandro Hernandez', 
+        email: 'alejandro@konecta.team',
+        date: Date.now(), 
+        content: "Este es un comentario de prueba",
+      },
+      { 
+        name: 'Alejandro Hernandez', 
+        email: 'alejandro@konecta.team',
+        date: Date.now(), 
+        content: "Este es un comentario de prueba",
+      }
+    ]
     return (
       <div className="ModalViewerContainer">
           <div className="ModalViewer">
@@ -145,11 +166,13 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                 
               </div>
               
-              <div className="controlcont" style={{marginTop: '1rem'}}>
+              <div className="controlcont" style={{marginTop: '2rem'}}>
                 <button className="control" data-dir="left" onClick={this.scrollGallery}>&lt;</button>
                 &nbsp;
                 <button className="control" data-dir="right" onClick={this.scrollGallery}>></button>
               </div>
+
+              {/*this.state.newscard.gallery*/}
               <div className="GallerySlide">
                 <div className="SlideContainer">
                   {gallery.map((image, i)=>(
@@ -158,15 +181,34 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                 </div>
               </div>
 
-              <div className="CommentBox COMPONENT">
-                <div className="Comment">
-                  <div className="ProfileImage"></div>
-                  <div className="CommentContent">
-                    <div className="UserName"></div>
-                    <p className="CommentText"></p>
-                    <div className="Actions"></div>
+              {/*this.state.newscard.actions.comments*/}
+              <div className="CommentBox">
+                {this.state.session != undefined &&
+                  <div className="CommentInput">
+                      <textarea placeholder="Escribe algo..."></textarea>
+                      <br/>
+                      <button className="CommentGo">Comentar</button>
                   </div>
-                </div>
+                }
+                {comments.map((comment, i)=>(
+                  <div className="Comment">
+                    <div className="CommentHeader">
+                      <div className="ProfileImage">
+                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg"/>
+                      </div>
+                      <div className="CommentData">
+                        <span className="CommentDate">{this.formatDate(comment.date)}</span>
+                        <div className="UserName">
+                          <a href={comment.email}>{comment.name}</a>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="CommentText">{comment.content}</span>
+                    <br/><br/>
+                    <button className="Actions" data-email={comment.email}>Responder</button>
+
+                  </div>
+                ))}
               </div>
 
               <div className="RelatedCollections">

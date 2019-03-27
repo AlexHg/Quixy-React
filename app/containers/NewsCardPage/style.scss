@@ -101,4 +101,44 @@
             }
         }
     }
+    .CommentBox{
+        margin-top: 2rem;
+        width: 500px;
+        .CommentInput{
+            border: 1px solid black;
+            background:white;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+            textarea{
+                width:100%;
+                border:1px solid #b3d4fc;
+                min-height: 70px;
+            }
+        }
+        .Comment{
+            border: 1px solid black;
+            background:white;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+            .CommentHeader{
+                display:flex;
+                justify-content: flex-start;
+                
+                .CommentData{
+                    padding: 0 1rem;
+                    .CommentDate{
+                        font-size:12px;
+                    }
+                }
+                
+                img {
+                    width: 50px;
+                }
+                
+            }
+            
+        }
+    }
 }

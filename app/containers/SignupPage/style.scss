@@ -1,16 +1,19 @@
 .SignupContainer{
     display:flex;
     justify-content: space-around;
-    align-items: center;
-    min-height: 85vh;
+    align-items: flex-start;
+    
     max-height: 100vh;
     overflow-y:scroll;
+    
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     .Signup{
         background:white;
         border-radius: .3rem;
         padding:2rem 2.5rem;
+        margin:4rem 0;
         text-align: center;
+        height: fit-content;
 
         #errorl{
             margin-bottom: 1rem;
