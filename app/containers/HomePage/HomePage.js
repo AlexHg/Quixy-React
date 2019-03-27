@@ -14,7 +14,7 @@ import BreakingNew from 'components/BreakingNew';
 import qwest from 'qwest';
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {apiRestHost,apiRestHostDev} from '../../server.json';
 import http from 'http';
 
 
@@ -35,7 +35,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
   
   componentWillMount() { 
-    fetch('http://localhost:8080/api/newscards/')
+    fetch("http://"+window.location.hostname+':8080/api/newscards/')
       .then((response) => {
         return response.json()
       }).then((newscards) => {

@@ -20,6 +20,8 @@ import Header from 'components/Header';
 import './style.scss';
 import NewsCardPage from 'containers/NewsCardPage/Loadable';
 
+import {apiRestHost,apiRestHostDev} from '../../server.json';
+
 class Logout extends React.Component {
   constructor(){
     super()
@@ -34,7 +36,7 @@ class Logout extends React.Component {
 
 const App = () => {
   (function(){
-    fetch('http://localhost:8080/api/auth/history/newscards')
+    fetch("http://"+window.location.hostname+':8080/api/auth/history/newscards')
       .then((response) => {
         return response.json()
       }).then((session) => {

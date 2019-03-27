@@ -7,7 +7,7 @@ import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 import './style.scss';
-
+import {apiRestHost,apiRestHostDev} from '../../server.json';
 export default class SignupPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   // load in JSON data from file
@@ -34,14 +34,14 @@ export default class SignupPage extends React.Component {
   }
   handleSubmitLogin = event => {
     event.preventDefault();
-    fetch('http://localhost:8080/api/auth/login',{
+    fetch("http://"+window.location.hostname+':8080/api/auth/login',{
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "email": this.state.lemail,
+        "email": this.state.lemail.toLowerCase(),
         "password": this.state.lpassword,
       })
     }).then((response) => {
@@ -62,7 +62,7 @@ export default class SignupPage extends React.Component {
   }
   handleSubmitRegister = event => {
     event.preventDefault();
-    fetch('http://localhost:8080/api/auth/register',{
+    fetch("http://"+window.location.hostname+':8080/api/auth/register',{
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -70,7 +70,7 @@ export default class SignupPage extends React.Component {
       },
       body: JSON.stringify({
         "name": this.state.rname,
-        "email": this.state.remail,
+        "email": this.state.remail.toLowerCase(),
         "password": this.state.rpassword,
         "confirmedPassword": this.state.rpasswordRepeat,
       })

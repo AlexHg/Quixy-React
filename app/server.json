@@ -1,0 +1,4 @@
+{
+    "apiRestHost": "http://187.167.188.124:8080",
+    "apiRestHostDev": "http://localhost:8080"
+}

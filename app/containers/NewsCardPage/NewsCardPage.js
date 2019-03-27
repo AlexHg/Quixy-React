@@ -8,7 +8,7 @@ import BreakingNew from 'components/BreakingNew';
 import qwest from 'qwest';
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {apiRestHost,apiRestHostDev} from '../../server.json';
 import http from 'http';
 
 import './style.scss';
@@ -26,7 +26,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
   }
 
   componentWillMount() {
-    fetch("http://localhost:8080/api/newscards/slug/"+this.state.slug)
+    fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+this.state.slug)
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
@@ -124,7 +124,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                     </div>
                     
                   </h3>
-                  <p className="Summary">{this.state.newscard.summary}</p>
+                  <span className="Summary">{this.state.newscard.summary}</span>
                   
                   <div className="Actions">
                     <button className="CompleteNew" onClick={this.completeNew} >
@@ -203,6 +203,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                         </div>
                       </div>
                     </div>
+                    <br/>
                     <span className="CommentText">{comment.content}</span>
                     <br/><br/>
                     <button className="Actions" data-email={comment.email}>Responder</button>
