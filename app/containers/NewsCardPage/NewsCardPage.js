@@ -51,7 +51,33 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
     var f=new Date(date);
     return diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
   }
+  scrollGallery = (event) => {
+    let direction = event.target.dataset.dir;
+    console.log(direction)
+
+    let galleryBox = document.querySelector(".GallerySlide")
+    let counter = 0
+    let limit = 400;
+    let aument = 10
+    let scrolling = setInterval(()=>{
+      counter += aument
+      if(direction == 'right') galleryBox.scrollLeft += aument
+      else galleryBox.scrollLeft -= aument
+      if(counter >= limit) clearInterval(scrolling);
+    }, 10);
+    
+  }
   render() {
+    var gallery = [
+      "https://ichef.bbci.co.uk/news/660/cpsprodpb/37B5/production/_89716241_thinkstockphotos-523060154.jpg",
+      "https://media1.tenor.com/images/5c406b927ec59a31eb67e3366f3121ef/tenor.gif?itemid=11909469",
+      "https://www.newton.ac.uk/files/covers/968361.jpg",
+      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
+      "https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+      "https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80",
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      "https://images.unsplash.com/photo-1507723714871-f8d4b0d065b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
+    ]
     return (
       <div className="ModalViewerContainer">
           <div className="ModalViewer">
@@ -119,8 +145,17 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                 
               </div>
               
-              <div className="GallerySlide COMPONENT">
-                <div className="Image"></div>
+              <div className="controlcont" style={{marginTop: '1rem'}}>
+                <button className="control" data-dir="left" onClick={this.scrollGallery}>&lt;</button>
+                &nbsp;
+                <button className="control" data-dir="right" onClick={this.scrollGallery}>></button>
+              </div>
+              <div className="GallerySlide">
+                <div className="SlideContainer">
+                  {gallery.map((image, i)=>(
+                    <a href={image} target="_window" key={i}><img className="GalleryImage" src={image}/></a>
+                  ))}
+                </div>
               </div>
 
               <div className="CommentBox COMPONENT">
@@ -135,7 +170,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
               </div>
 
               <div className="RelatedCollections">
-                COMPONENT LIST
+                
               </div>
 
               <div className="RelatedNewsCards">
