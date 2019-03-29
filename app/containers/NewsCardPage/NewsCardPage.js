@@ -104,7 +104,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
           <div className="ModalViewer">
               <div className="NewsCardContainer">
                 <div className="Thumbnail left-side">
-                  <img src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src="http://www.bandt.com.au/information/uploads/2015/03/iStock_000042108274_Small-1260x840.jpg"}}/>
+                  <img src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
                 </div>
                 <div className="SummaryContainer">
                   <h3 className="Title">
@@ -194,7 +194,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                   <div className="Comment">
                     <div className="CommentHeader">
                       <div className="ProfileImage">
-                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg"/>
+                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
                       </div>
                       <div className="CommentData">
                         <span className="CommentDate">{this.formatDate(comment.date)}</span>

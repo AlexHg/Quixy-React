@@ -45,28 +45,27 @@ const NewsCard = ({params}) => {
   //params.slug = SlugCreator(params.title)
   
   return(
-    <article className="NewsCard" style={{background:"no-repeat left top, linear-gradient("+Colors[Math.floor(Math.random() * Colors.length)]+", rgba(0,0,0,0))"}}>
-      <div className="Actions">
-        <div className="ActionsContainer">
-          <div className="ActionsList">
-            <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;
-            <a href="#" className="Action"><FontAwesomeIcon icon="list-alt" /></a> &nbsp;&nbsp;
-            <a href={params.url} className="Action" target="_blank"><FontAwesomeIcon icon="link" /></a>
-          </div>
-        </div>
-      </div>
-      <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src="http://www.bandt.com.au/information/uploads/2015/03/iStock_000042108274_Small-1260x840.jpg"}}/>
+    <article className="NewsCard">
       
-      <Link className="router-link" to={"/NewsCard/"+params.slug}>
-        <div className="NewsCardContainer">
-          <div className="NewsCardHeader">      
-            <h4 className="NewsCardTitle">
-              <span title={params.title}></span>
-            </h4>
-          </div>
-        </div>  
-      </Link>
-      {/*</a>*/}
+      
+      <div className="NewsCardBody">
+        
+        <div className="NewsCardContent">
+          <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />
+          <Link className="NewsCardTitle" to={"/NewsCard/"+params.slug}>
+            {params.title}
+          </Link>
+          <p className="Summary">{params.summary}</p>
+        </div>
+        <div className="clip">
+          <Link to={"/NewsCard/"+params.slug}>
+            <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+          </Link>
+        </div>
+        
+      </div>
+      
+
     </article>
   )
 };

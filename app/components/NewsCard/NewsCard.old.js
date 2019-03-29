@@ -9,7 +9,7 @@ const NewsCard = ({params}) => (
         <span>{(new Date(params.published)).toLocaleDateString("en-US")}</span>
     </div>
     <div className="Header">      
-      <img src={params.top_image} className="Thumbnail"/>
+      <img src={params.top_image} className="Thumbnail" onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
       <h3>
         <a href={params.url} style={{color: "black"}}>{params.title}</a>
         <small style={{color: "gray"}}>

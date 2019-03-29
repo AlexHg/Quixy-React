@@ -4,7 +4,7 @@ import './style.scss';
 
 const Collection = ({params}) => (
     <div className="Collection">
-        <img className="BackgroundImage" src={params.image}/>
+        <img className="BackgroundImage" src={params.image} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
         <div className="CollectionInfo">
             <div className="arrow"></div>
             <h3 className="title">{params.title}</h3>

@@ -1,112 +1,53 @@
-$cardHeight:120px;
-$titleHeight:calc(120px - 2.1rem);
-
 .NewsCard{
-    background-blend-mode: saturation;
-    color:white;
-    height:$cardHeight;
-    margin: 0 0 20px 0;
-    overflow:hidden;
-    position: relative;
-    transition:all .2s;
-    .Actions{
-        background:#feee37;
-        border-radius: 100%;
-        height: 60px;
-        position: absolute;
-        right:-30px;
-        top:-30px;
-        transition:all .7s ease-in-out;
-        width: 60px;
-        z-index:10;
-        font-size:23px;
-        overflow: hidden;
-        .Action{
-            color:purple;
-        }
-        .ActionsContainer{
-            color:black;
-            opacity: 0;
-            transition:all 1s;
-            z-index: -2;
-        }
-        &:hover{
-            height: 300px;
-            right:-100px;
-            top:-100px;
-            width:300px;
-            
-            & .ActionsContainer{
-                align-items: center;
-                height: 117px;
-                display: flex;
-                justify-content: center;
-                left:20px;
-                opacity: 1;
-                position: absolute;
-                top:100px;
-                width: 180px;
-            }
-        }
+    
+    border:1px solid #E2E2E2;
+    border-radius:4px;
+    margin-bottom: 1rem;
+    &:hover{
+        border:1px solid rgb(197, 197, 197);
     }
-    .Thumbnail{
-        position: absolute;
-        top:0;
-        width: 75%;
-        -webkit-mask-position: 0 0;
-        -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, 
-            color-stop(0.00,  rgba(0,0,0,1)),
-            color-stop(0.35,  rgba(0,0,0,.8)),
-            color-stop(0.40,  rgba(0,0,0,.6)),
-            color-stop(0.45,  rgba(0,0,0,.4)),
-            color-stop(0.75,  rgba(0,0,0,.02)),
-            color-stop(1.00,  rgba(0,0,0,0)));    
-        z-index:0;
+    //max-width: 700px;
+    .NewsCardTitle{
+        font-size: 1.5rem;
+        display:block;
+        text-decoration: none;
+        color:black;
+        margin-bottom:.5rem;
+        font-weight: 500;
     }
-    .NewsCardContainer{
-        position: absolute;
-        top:0;
-        width: 100%;
-        height: 100%;
-        display:flex;
-        align-content: center;
+    .NewsCardBody{
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        .NewsCardHeader{
-            .NewsCardTitle{
-                padding:0 1rem;
-                text-overflow: ellipsis;
+        .NewsCardContent{
+            width: calc(100% - 180px);
+            .Summary{
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;  /* Number of lines displayed before it truncate */
                 overflow: hidden;
-                max-height:$titleHeight;
-                span{
-                    $border-color: black;
-                    text-shadow: 1px 0 0 $border-color, -1px 0 0 $border-color, 0 1px 0 $border-color, 0 -1px 0 $border-color, 1px 1px $border-color, -1px -1px 0 $border-color, 1px -1px 0 $border-color, -1px 1px 0 $border-color;
-                    position: relative;
-                    font-size:1.2rem;
-                    text-decoration: none;
-                    display:inline-block;
-                    font-weight: 1000;
-                    &::before {
-                        content:attr(title);
-                        color:white!important;
-                        /*EFECTO BLEND EN LETRAS
-                        position: absolute;
-                        opacity: .6;
-                        mix-blend-mode:luminosity;*/
-                        opacity:1;
-                    }
-                    
-                    /*EFECTO BLEND EN LETRAS 
-                    &::after {
-                        content:attr(title);
-                        mix-blend-mode:saturation;
-                        color:#feee37!important;
-                    }*/
-                }
-
+            }
+        }
+        .clip{
+            height: 150px;
+            width: 150px;
+            border-radius: 4px;
+            position:relative;
+            overflow: hidden;
+            .Thumbnail{
+                position: absolute;
+                top: -9999px;
+                bottom: -9999px;
+                left: -9999px;
+                right: -9999px;
+                margin: auto;
+                min-width: 100%;
+                height: 100%;
             }
         }
     }
-
+    
     
 }
 
