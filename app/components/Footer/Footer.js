@@ -19,7 +19,7 @@ class Footer extends React.Component { // eslint-disable-line react/prefer-state
     return(
         <div className="Footer">
             <div className="ButtonF">
-                <FontAwesomeIcon icon="newspaper" style={{cursor:'pointer'}} />
+                <FontAwesomeIcon icon="warehouse" style={{cursor:'pointer'}} />
             </div>
             <div className="ButtonF">
                 <FontAwesomeIcon icon="newspaper" style={{cursor:'pointer'}} />

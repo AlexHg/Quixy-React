@@ -14,58 +14,21 @@
         justify-content: center;
         align-items: center;
         color:white;
+        cursor:pointer;
+        font-size:1.2rem;
+    }
+    @media screen and (min-width:1000px){
+        display:none!important;
     }
 }
 
 .t1 ~ .Footer{
     background: #741c3e;
-    .logo{
-        background: #520e28;
-    }
-    .router-link {
-        &:active, &:hover {
-        //background: #645dcb;
-        color: #FFF;
-        background:#520e28;
-        border: 2px solid transparent;
-        }
-    }
-    .profilem{
-        border:3px solid #520e28;
-    }
 }
 .t2 ~ .Footer{
     background: #2b4e94;
-    .logo{
-        background: #1f3e7c;
-    }
-    .router-link {
-        &:active, &:hover {
-        //background: #645dcb;
-        color: #FFF;
-        background:#1f3e7c;
-        border: 2px solid transparent;
-        }
-    }
-    .profilem{
-        border:3px solid #1f3e7c;
-    }
 }
 
 .t3 ~ .Footer{
     background: #222;
-    .logo{
-        background: #bb1919;
-    }
-    .router-link {
-        &:active, &:hover {
-        //background: #645dcb;
-        color: #FFF;
-        background:#bb1919;
-        border: 2px solid transparent;
-        }
-    }
-    .profilem{
-        border:3px solid #bb1919;
-    }
 }

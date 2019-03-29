@@ -59,8 +59,8 @@ const NewsCard = ({params}) => {
       
       <Link className="router-link" to={"/NewsCard/"+params.slug}>
         <div className="NewsCardContainer">
-          <div className="Header">      
-            <h4 className="Title">
+          <div className="NewsCardHeader">      
+            <h4 className="NewsCardTitle">
               <span title={params.title}></span>
             </h4>
           </div>

@@ -97,7 +97,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           </div>
         </aside>
         <section className="ShowAreaNewsCards">
-
+          {this.state.resultados.map( (resultado, i) => <NewsCard key={i} params={resultado}/> )}
         </section>
 
       </div>
