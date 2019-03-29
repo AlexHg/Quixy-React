@@ -1,0 +1,71 @@
+.Footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 90000;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    .ButtonF{
+        border:1px solid rgba(0,0,0,.2);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        color:white;
+    }
+}
+
+.t1 ~ .Footer{
+    background: #741c3e;
+    .logo{
+        background: #520e28;
+    }
+    .router-link {
+        &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#520e28;
+        border: 2px solid transparent;
+        }
+    }
+    .profilem{
+        border:3px solid #520e28;
+    }
+}
+.t2 ~ .Footer{
+    background: #2b4e94;
+    .logo{
+        background: #1f3e7c;
+    }
+    .router-link {
+        &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#1f3e7c;
+        border: 2px solid transparent;
+        }
+    }
+    .profilem{
+        border:3px solid #1f3e7c;
+    }
+}
+
+.t3 ~ .Footer{
+    background: #222;
+    .logo{
+        background: #bb1919;
+    }
+    .router-link {
+        &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#bb1919;
+        border: 2px solid transparent;
+        }
+    }
+    .profilem{
+        border:3px solid #bb1919;
+    }
+}

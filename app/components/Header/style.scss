@@ -12,6 +12,10 @@
     display:none!important;
   }
 }
+.nav-mobile{
+  font-size: 1.7rem;
+}
+
 #profile-menu-launcher{
   display:none;
   &:checked ~ .profile-menu {
@@ -23,16 +27,27 @@
   width: 300px;
   background:#222;
   position: absolute;
-  top:44px;
+  top:51px;
   right:-300px;
   z-index: 300;
   transition:all .5s;
 }
-.header{
+.Header{
   &.t1{
     background: #741c3e;
     .logo{
       background: #520e28;
+    }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#520e28;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid #520e28;
     }
   }
   &.t2{
@@ -40,22 +55,38 @@
     .logo{
       background: #1f3e7c;
     }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#1f3e7c;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid #1f3e7c;
+    }
   }
   &.t3{
     background: #222;
     .logo{
-      background: #f9f9f9;
-    }
-  }
-  &.t4{
-    background: #222;
-    .logo{
       background: #bb1919;
+    }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#bb1919;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid #bb1919;
     }
   }
   
 }
-.header{
+.Header{
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -98,9 +129,9 @@
     border:2px solid #272727;
     border-radius: 100%;
     overflow:hidden;
-    width: 35px;
-    height: 35px;
-    margin-left: 1rem;
+    width: 37px;
+    height: 37px;
+    margin-left: .5rem;
     cursor:pointer;
   }
   .router-link {

@@ -12,18 +12,6 @@
     //margin:.5rem; 
     border-radius:4px;
 
-    @media screen and (max-width:700px){
-        width: 150px;
-        height: 220px;
-        .Actions:hover{
-            width: 250px!important;
-            height: 270px !important;
-            .ActionsContainer{
-                height:94px!important;
-            }
-        }
-    }
-
     img.BackgroundImage{
         position: absolute;
         top: -9999px;
@@ -34,51 +22,6 @@
         min-width: 100%;
         height: 100%;
         cursor: pointer;
-    }
-    .Actions{
-        background:#feee37;
-        border-radius: 100%;
-        height: 60px;
-        position: absolute;
-        right:-30px;
-        top:-30px;
-        transition:all .7s ease-in-out;
-        width: 60px;
-        z-index:20;
-        font-size:23px;
-        overflow: hidden;
-        .Action{
-            color:purple;
-        }
-        .ActionsContainer{
-            color:black;
-            opacity: 0;
-            transition:all 1s;
-            z-index: -2;
-        }
-        &:hover{
-            height: 300px;
-            right:-51px;
-            top:-150px;
-            width:300px;
-            align-items: center;
-            & .ActionsContainer{
-                align-items: center;
-                height: 114px;
-                display: flex;
-                justify-content: center;
-                left:0px;
-                opacity: 1;
-                position: absolute;
-                top:150px;
-                width: 100%;
-                
-            }
-        }
-        &:hover ~ .CollectionInfo{
-            height:35px;
-            overflow-y: initial;
-        }
     }
     &:hover .CollectionInfo{
         height: 200px;

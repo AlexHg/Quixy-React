@@ -43,20 +43,22 @@
         .RibbonLabel{
             position: absolute;
             z-index:10;
-            
+            left:5px;
+            //bottom: 50px;
+            top: 5px;
             background:#bb1919;
             color:white;
-            padding: 5px 1rem;
+            padding: 2px .5rem;
             font-weight: 1000;
-            font-size:12px;
+            font-size:10px;
             &::after{
-                content: '';
+                //content: '';
                 position: absolute;
-                right: -28px;
+                left: -28px;
                 top: 0;
                 width: 0;
                 height: 0;
-                border-right: 28px solid transparent;
+                border-left: 28px solid transparent;
                 border-top: 28px solid #bb1919;
                 clear: both;
             }

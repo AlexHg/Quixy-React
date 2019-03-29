@@ -4,14 +4,6 @@ import './style.scss';
 
 const Collection = ({params}) => (
     <div className="Collection">
-        <div className="Actions" style={{display:'none'}}>
-            <div className="ActionsContainer">
-                <div className="ActionsList">
-                    <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;
-                    <a href="#" className="Action"><FontAwesomeIcon icon="list-alt" /></a>
-                </div>
-            </div>
-        </div>
         <img className="BackgroundImage" src={params.image}/>
         <div className="CollectionInfo">
             <div className="arrow"></div>

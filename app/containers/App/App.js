@@ -17,6 +17,7 @@ import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import './style.scss';
 import NewsCardPage from 'containers/NewsCardPage/Loadable';
 
@@ -67,7 +68,7 @@ const App = () => {
 
         <Route path="" component={NotFoundPage} />
       </Switch>
-      
+      <Footer></Footer> 
     </div>
   )
 };

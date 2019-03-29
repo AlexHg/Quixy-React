@@ -33,9 +33,9 @@ import configureStore from './configureStore';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
+import { faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight, faUser } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight );
+library.add(faIgloo, faIdBadge, faStar, faListAlt, faLink, faBars, faNewspaper, faThumbsUp, faShareAlt, faQuoteRight, faUser );
  
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
