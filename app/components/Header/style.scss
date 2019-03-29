@@ -21,7 +21,7 @@
 .profile-menu{
   height: 100vh;
   width: 300px;
-  background:black;
+  background:#222;
   position: absolute;
   top:44px;
   right:-300px;
@@ -29,11 +29,40 @@
   transition:all .5s;
 }
 .header{
+  &.t1{
+    background: #741c3e;
+    .logo{
+      background: #520e28;
+    }
+  }
+  &.t2{
+    background: #2b4e94;
+    .logo{
+      background: #1f3e7c;
+    }
+  }
+  &.t3{
+    background: #222;
+    .logo{
+      background: #f9f9f9;
+    }
+  }
+  &.t4{
+    background: #222;
+    .logo{
+      background: #bb1919;
+    }
+  }
+  
+}
+.header{
   display:flex;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 1.5rem .5rem 2rem;
-  background: black;
+  padding: 0 1.5rem 0 0rem;
+  //background: #222;
+  //background: #2b4e94;
+  background: #741c3e;
   color:white;
   vertical-align: bottom;
   .centered{
@@ -43,6 +72,18 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .logo {
+    //background: #bb1919;
+    //background: #f9f9f9;
+    //background: green;
+    //background: #1f3e7c;
+    background: #520e28;
+    height: 100%;
+    padding:.4rem 2.5rem;
+    img{
+      width: 60px;
+    }
   }
   img {
     width: 100%;
@@ -54,7 +95,7 @@
   }
   .profilem{
     display:inline-flex;
-    border:2px solid #645dcb;
+    border:2px solid #272727;
     border-radius: 100%;
     overflow:hidden;
     width: 35px;
@@ -64,8 +105,8 @@
   }
   .router-link {
     display: inline-flex;
-    padding: 0.2em 1.5em;
-    margin: 0 1em;
+    padding: 0.2em 1em;
+    margin: 0 .2em;
     text-decoration: none;
     border-radius: 4px;
     -webkit-font-smoothing: antialiased;
@@ -73,15 +114,18 @@
     user-select: none;
     cursor: pointer;
     outline: 0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 14px;
-    border: 2px solid #645dcb;
-    color: #645dcb;
+    border: 2px solid transparent;
+    //border: 2px solid #645dcb;
+    //color: #645dcb;
+    color:white;
 
     &:active, &:hover {
-      background: #645dcb;
+      //background: #645dcb;
       color: #FFF;
+      border: 2px solid white;
     }
   }
 }

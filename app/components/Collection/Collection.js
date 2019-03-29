@@ -4,7 +4,7 @@ import './style.scss';
 
 const Collection = ({params}) => (
     <div className="Collection">
-        <div className="Actions">
+        <div className="Actions" style={{display:'none'}}>
             <div className="ActionsContainer">
                 <div className="ActionsList">
                     <a href="#" className="Action"><FontAwesomeIcon icon="star"  /></a> &nbsp;&nbsp;

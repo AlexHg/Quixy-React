@@ -104,7 +104,9 @@ export default class SignupPage extends React.Component {
     return (
       <div className="SignupContainer">
         <div className="Signup">
-          <h2>¡Bienvenido a Quixy!</h2><br/>
+          <div style={{width:'100%'}}>
+            <img src={require("images/darklogo.png")} style={{width:'100px'}}/><br/><br/>
+          </div>
           <div className="Login">
             <form onSubmit={this.handleSubmitLogin}>
               
@@ -126,17 +128,25 @@ export default class SignupPage extends React.Component {
                   type="password"
                 />
               </FormGroup>
-              <br/><Button
+              <br/><br/>
+              <Button
                 block
                 type="submit"
                 bsSize="large"
                 //disabled={!this.validateLForm()}
               >
                 Iniciar sesión
-              </Button><br/>
+              </Button> &nbsp;
+              <Button
+
+                //disabled={!this.validateRForm()}
+              >
+                Crear una cuenta
+              </Button>
+              <br/>
             </form>
           </div>
-          <div className="Register">
+          <div className="Register" style={{display:'none'}}>
 
             <form id="" onSubmit={this.handleSubmitRegister}>
               <h3 style={{textalign:'left'}}>Registrar cuenta</h3><br/>
@@ -181,6 +191,7 @@ export default class SignupPage extends React.Component {
               >
                 Registrarse
               </Button><br/>
+              
               
             </form>
           </div>

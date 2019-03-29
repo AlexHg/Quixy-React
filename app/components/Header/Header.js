@@ -48,12 +48,13 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render() {
   
     return (
-      <div className="header">
+      <div className="header t2">
         <h3 className="centered">
-          <span className="newspaperBtn">
-            <FontAwesomeIcon icon="newspaper" style={{cursor:"pointer"}} onClick={this.newspaperBtnOffCanvas} />&nbsp;&nbsp;
-          </span>
-          Quixy P2
+          <Link to="/">
+            <div className="logo">
+                <img src={require("images/whitelogo.png")} />
+            </div>
+          </Link>
         </h3>
         <div className="rightside">
           <div className="nav-bar">

@@ -18,7 +18,7 @@ button, a[type=btn]{
 
 /* Track */
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
@@ -27,10 +27,10 @@ button, a[type=btn]{
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgb(196, 195, 195); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    background: #645dcb; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgb(196, 195, 195); 
+    background: #645dcb; 
     opacity: .7;
 }

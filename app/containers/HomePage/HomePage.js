@@ -11,15 +11,10 @@ import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField
 import NewsCard from 'components/NewsCard';
 import Collection from 'components/Collection';
 import BreakingNew from 'components/BreakingNew';
-import qwest from 'qwest';
-//import {noticias} from '../../dataold.json';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {apiRestHost,apiRestHostDev} from '../../server.json';
 import http from 'http';
-
-
-//var request = client.request('PUT', '/users/1');
-
 
 import './style.scss';
 
@@ -39,36 +34,30 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       .then((response) => {
         return response.json()
       }).then((newscards) => {
-        //console.log(newscards);
         this.setState({ resultados: newscards })
       })
-    /*var client = http.createClient(8080, 'localhost');
-    return client.request('PUT', '/api/newscards/');*/
   };
 
   render() { 
     return (
       <div className="feature-page" data-offcanvas="true" >
-        <aside className="NewsCardsContainer">
-          <Helmet>
-            <title>Inicio</title>
-            <meta
-              name="description"
-              content="Quixy | Plataforma de noticias inteligente"
-            />
-          </Helmet>
-          {this.state.resultados.map( (resultado, i) => <NewsCard key={i} params={resultado}/> )}
-        </aside>
-        <section className="PrincipalContent">
+        <Helmet>
+          <title>Inicio</title>
+          <meta
+            name="description"
+            content="Quixy | Plataforma de noticias inteligente"
+          />
+        </Helmet>
+        <aside className="FeaturedAside">
           <div className="BreakingNewsSlider">
             <BreakingNew key={1} params={{
               image:require("images/bnews/b1.jpg"), 
               title:"Lorem Ipsum Dat ed Ipsum",
-              degree:["#9198e5","#e66465","#9be591"]
+              //degree:["#649ce6","#91e591","#9be591"]
             }} />
           </div>
           <div className="CollectionsContainer">
-            <h3 className="RecomendationTitle">Popular</h3>
+            <h3 className="RecomendationTitle">Recomendo para ti</h3>
             <Collection key={1} params={{
               title:"AMLO en presidencia",
               image:require("images/bnews/b1.jpg"),
@@ -76,85 +65,41 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             }} />
             <Collection key={2} params={{
               title:"El congreso del estado Mex",
-              image:require("images/bnews/b1.jpg"),
+              image:"http://seguidoresdeverdad.com/seguidoresdeverdad/html/blog/wp-content/uploads/2017/01/politicos-770x300.jpg",
             }} />
             <Collection key={3} params={{
               title:"lorem",
-              image:require("images/bnews/b1.jpg"),
+              image:"https://img.gestion.pe/files/ec_article_multimedia_gallery/uploads/2017/11/08/5a03559158092.jpeg",
             }} />
             <Collection key={4} params={{
               title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={5} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={6} params={{
-              title:"AMLO en presidencia",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={7} params={{
-              title:"El congreso del estado Mex",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={8} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={9} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={10} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
+              image:"https://pbs.twimg.com/profile_images/1040750620871815168/rWbZvyrs_400x400.jpg",
             }} />
 
-            <h3 className="RecomendationTitle">Recomendacion</h3>
-            <Collection key={11} params={{
+            <h3 className="RecomendationTitle">Recien llegado</h3>
+            <Collection key={1} params={{
               title:"AMLO en presidencia",
               image:require("images/bnews/b1.jpg"),
               description:"Lorem Ipsum Dat ed Ipsum"
             }} />
-            <Collection key={12} params={{
+            <Collection key={2} params={{
               title:"El congreso del estado Mex",
-              image:require("images/bnews/b1.jpg"),
+              image:"http://seguidoresdeverdad.com/seguidoresdeverdad/html/blog/wp-content/uploads/2017/01/politicos-770x300.jpg",
             }} />
-            <Collection key={13} params={{
+            <Collection key={3} params={{
               title:"lorem",
-              image:require("images/bnews/b1.jpg"),
+              image:"https://img.gestion.pe/files/ec_article_multimedia_gallery/uploads/2017/11/08/5a03559158092.jpeg",
             }} />
-            <Collection key={14} params={{
+            <Collection key={4} params={{
               title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={15} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={16} params={{
-              title:"AMLO en presidencia",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={17} params={{
-              title:"El congreso del estado Mex",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={18} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={19} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
-            }} />
-            <Collection key={20} params={{
-              title:"lorem",
-              image:require("images/bnews/b1.jpg"),
+              image:"https://pbs.twimg.com/profile_images/1040750620871815168/rWbZvyrs_400x400.jpg",
             }} />
           </div>
+        </aside>
+        <section className="ShowAreaNewsCards">
+
         </section>
+
       </div>
     );
   }
