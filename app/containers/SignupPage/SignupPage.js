@@ -84,9 +84,21 @@ export default class SignupPage extends React.Component {
           errors += "<span>"+i+"</span>" 
         })
         document.querySelector("#errorl").innerHTML = errors;
+      } else {
+        document.querySelector(".Register form").reset();
+        this.handleShowLogin();
       }
-     
     })
+  }
+
+  handleShowRegister(){
+    document.querySelector(".Login").style="display:none"
+    document.querySelector(".Register").style="display:block"
+  }
+
+  handleShowLogin(){
+    document.querySelector(".Login").style="display:block"
+    document.querySelector(".Register").style="display:none"
   }
   
   // Since state and props are static,
@@ -137,10 +149,7 @@ export default class SignupPage extends React.Component {
               >
                 Iniciar sesión
               </Button> &nbsp;
-              <Button
-
-                //disabled={!this.validateRForm()}
-              >
+              <Button onClick={this.handleShowRegister} >
                 Crear una cuenta
               </Button>
               <br/>
@@ -190,8 +199,10 @@ export default class SignupPage extends React.Component {
                 //disabled={!this.validateRForm()}
               >
                 Registrarse
-              </Button><br/>
-              
+              </Button> &nbsp;
+              <Button onClick={this.handleShowLogin} >
+                Ya tengo una cuenta
+              </Button>
               
             </form>
           </div>
