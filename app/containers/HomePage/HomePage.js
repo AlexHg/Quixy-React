@@ -64,7 +64,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
               description:"Lorem Ipsum Dat ed Ipsum"
             }} />
             <Collection key={2} params={{
-              title:"El congreso del estado Mex",
+              title:"El congreso del estado de México",
               image:"http://seguidoresdeverdad.com/seguidoresdeverdad/html/blog/wp-content/uploads/2017/01/politicos-770x300.jpg",
             }} />
             <Collection key={3} params={{
