@@ -69,7 +69,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             </Link>
             
             {!this.state.session.active &&
-              <Link className="router-link" to="/sesion">
+              <Link className="router-link" to="/session">
                 Iniciar sesión
               </Link>
             }

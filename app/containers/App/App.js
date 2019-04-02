@@ -32,7 +32,7 @@ class Logout extends React.Component {
     sessionStorage.removeItem("session")
   }
   render(){
-    return <Redirect to='/sesion' />;
+    return <Redirect to='/session' />;
   }
 }
 
@@ -57,20 +57,15 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
-        
-
         <Route exact path="/feed/:page?" component={Principal} />
 
 
-        <Route path="/sesion" exact component={SignupPage} />
-        <Route path="/logout" exact component={Logout} />
+        
         
         <Route path="/busqueda" component={BusquedaPage} />
-
-        <Route path="/NewsCard/:slug" component={NewsCardPage} />
-
         
-
+        <Route path="/session" exact component={SignupPage} />
+        <Route path="/logout" exact component={Logout} />
 
         <Route path="" component={NotFoundPage} />
       </Switch>

@@ -35,7 +35,20 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       }).then((newscards) => {
         this.setState({ resultados: newscards })
       })
+
+    return "cargando...";
   };
+
+  componentDidMount(){
+    setTimeout(
+      ()=> document.querySelector('.NewsCardFeed').className += " mounted",
+      200
+    )
+  }
+
+  componentWillUnmount(){
+    document.querySelector('.NewsCardFeed').className += " unmounting";
+  }
 
   render() { 
     return (
@@ -48,7 +61,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           />
         </Helmet>
 
-        {this.state.resultados.map( (resultado, i) => <NewsCard key={i} params={resultado}/> )}
+        {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado}/> )}
       </div>
     );
   }

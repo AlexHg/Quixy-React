@@ -32,3 +32,11 @@ button, a[type=btn]{
   font-weight: bold;
   font-size: 14px;
 }
+
+
+//ACTIONS
+
+.unmounting{
+  transition:all .5s;
+  opacity: 0;
+}

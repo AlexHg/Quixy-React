@@ -1,0 +1,8 @@
+.NewsCardFeed{
+  transition:all 1s;
+  opacity: 0;
+  &.mounted{
+    opacity:1;
+  }
+}
+
