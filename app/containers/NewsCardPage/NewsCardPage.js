@@ -118,13 +118,14 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                       <span>
                         {this.formatDate(this.state.newscard.published)}
                       </span>
+                      
                     </small>
                     <div className="NewTitle">
                       {this.state.newscard.title}
                     </div>
-                    
+                  
                   </h3>
-                  <span className="Summary">{this.state.newscard.summary}</span>
+                  <span className="Summary"><br/>{this.state.newscard.summary}</span>
                   
                   <div className="Actions">
                     <button className="CompleteNew" onClick={this.completeNew} >
@@ -132,12 +133,15 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                     </button>
                     <div className="Interactive">
                       <button className="Like">
+                        <span className="ActionCounter">0</span>
                         <FontAwesomeIcon icon="thumbs-up" style={{cursor:"pointer"}}/>
                       </button>
                       <button className="Favorite">
+                        <span className="ActionCounter">+99</span>
                         <FontAwesomeIcon icon="star" style={{cursor:"pointer"}}/>
                       </button>
                       <button className="Share">
+                        <span className="ActionCounter">0</span>
                         <FontAwesomeIcon icon="share-alt" style={{cursor:"pointer"}}/>
                       </button>
                       <button className="Quote">

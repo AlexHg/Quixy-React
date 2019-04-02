@@ -49,6 +49,20 @@
     .profilem{
       border:3px solid #520e28;
     }
+    & ~ * {
+      &.Footer{
+        background: #741c3e;
+      }
+      button, a[type=btn]{
+        border: 2px solid #741c3e;
+        color: #741c3e;
+        &:hover{
+            background: #741c3e;
+            color:white;
+        }
+      }
+    }
+    
   }
   &.t2{
     background: #2b4e94;
@@ -66,6 +80,22 @@
     .profilem{
       border:3px solid #1f3e7c;
     }
+    & ~ * {
+      &.Footer{
+        background: #2b4e94;
+        .ButtonF{
+          color:white;
+        }
+      }
+      button,  a[type=btn]{
+        border: 2px solid #2b4e94;
+        color: #2b4e94;
+        &:hover{
+            background: #2b4e94;
+            color:white;
+        }
+      }
+    }
   }
   &.t3{
     background: #222;
@@ -82,6 +112,116 @@
     }
     .profilem{
       border:3px solid black;
+    }
+    & ~ *{
+      &.Footer{
+        background: #222;
+      }
+      button, a[type=btn]{
+        border: 2px solid #222;
+        color: #222;
+        &:hover{
+            background: #222;
+            color:white;
+        }
+      }
+    }
+  }
+  &.t4{
+    background: #041122;
+    .logo{
+      background: #259074;
+    }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#259074;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid black;
+    }
+    & ~ *{ 
+      &.Footer{
+        background: #041122;
+      }
+      button, a[type=btn]{
+        border: 2px solid #041122;
+        color: #041122;
+        &:hover{
+            background: #041122;
+            color:white;
+        }
+      }
+    }
+  }
+  &.t5{
+    background: #0c0330;
+    .logo{
+      background: #842440;
+    }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#842440;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid black;
+    }
+    & ~ *{ 
+      &.Footer{
+        background: #0c0330;
+        .ButtonF{
+            color:#f6ecc8;
+        }
+      }
+      button, a[type=btn]{
+        border: 2px solid #0c0330;
+        color: #0c0330;
+        &:hover{
+            background: #0c0330;
+            color:white;
+        }
+      }
+    }
+  }
+  &.t6{
+    background: #2b2424;
+    .logo{
+      background: #c4b493;
+    }
+    .router-link {
+      &:active, &:hover {
+        //background: #645dcb;
+        color: #FFF;
+        background:#842440;
+        border: 2px solid transparent;
+      }
+    }
+    .profilem{
+      border:3px solid black;
+    }
+    & ~ *{ 
+      &.Footer{
+        background: #2b2424; //#786b40;
+        .ButtonF{
+            color:#c4b493;
+        }
+      } 
+      
+      button, a[type=btn]{
+        border: 2px solid #786b40;
+        color: #786b40;
+        &:hover{
+            background: #786b40;
+            color:white;
+        }
+      }
     }
   }
   

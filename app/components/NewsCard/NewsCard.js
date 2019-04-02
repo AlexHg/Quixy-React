@@ -40,6 +40,13 @@ const SlugCreator = (str) => {
   return str;
 }
 
+const formatDate = (date) => {
+  var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+  var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+  var f=new Date(date);
+  return diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+}
+
 const NewsCard = ({params}) => {
   
   //params.slug = SlugCreator(params.title)
@@ -51,10 +58,11 @@ const NewsCard = ({params}) => {
       <div className="NewsCardBody">
         
         <div className="NewsCardContent">
-          <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />
+          <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />          
           <Link className="NewsCardTitle" to={"/NewsCard/"+params.slug}>
             {params.title}
           </Link>
+
           <p className="Summary">{params.summary}</p>
         </div>
         <div className="clip">
@@ -62,9 +70,28 @@ const NewsCard = ({params}) => {
             <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
           </Link>
         </div>
+
         
       </div>
-      
+      <div className="NewsCardFooter">
+        <div className="FooterLeft">
+          <span className="actionCounter">
+            <FontAwesomeIcon icon="thumbs-up"/> 0
+          </span>
+          <span className="actionCounter">
+            <FontAwesomeIcon icon="comment"/> 0
+          </span>
+          <span className="actionCounter">
+            <FontAwesomeIcon icon="share-alt"/> 0
+          </span>
+          &nbsp;&nbsp;&nbsp;
+          Publicado el {formatDate(params.published)}
+
+        </div>
+        <div className="FooterRight">
+          <Link type="btn" to={"/NewsCard/"+params.slug}>Leer más...</Link>
+        </div>
+      </div>
 
     </article>
   )
