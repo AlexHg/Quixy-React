@@ -11,8 +11,6 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import FeedPage from 'containers/FeedPage/Loadable';
 import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -61,7 +59,6 @@ const App = () => {
         <Route path="/logout" exact component={Logout} />
         
         <Route path="/busqueda" component={BusquedaPage} />
-        <Route path="/feed" component={FeedPage} />
 
         <Route path="/NewsCard/:slug" component={NewsCardPage} />
 
