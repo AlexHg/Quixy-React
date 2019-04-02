@@ -6,11 +6,16 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
+
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
-import NewsCard from 'components/NewsCard';
+
 import Collection from 'components/Collection';
 import BreakingNew from 'components/BreakingNew';
+
+import NewsCardFeed from 'containers/NewsCardFeed/Loadable';
+import NewsCardPage from 'containers/NewsCardPage/Loadable';
+import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {apiRestHost,apiRestHostDev} from '../../server.json';
@@ -30,24 +35,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
   
   componentWillMount() { 
-    fetch("http://"+window.location.hostname+':8080/api/newscards/')
-      .then((response) => {
-        return response.json()
-      }).then((newscards) => {
-        this.setState({ resultados: newscards })
-      })
+    return true;
   };
 
   render() { 
     return (
-      <div className="feature-page" data-offcanvas="true" >
-        <Helmet>
-          <title>Inicio</title>
-          <meta
-            name="description"
-            content="Quixy | Plataforma de noticias inteligente"
-          />
-        </Helmet>
+      <div className="Principal" >
         <aside className="FeaturedAside">
           <div className="BreakingNewsSlider">
             <BreakingNew key={1} params={{
@@ -96,8 +89,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             }} />
           </div>
         </aside>
-        <section className="ShowAreaNewsCards">
-          {this.state.resultados.map( (resultado, i) => <NewsCard key={i} params={resultado}/> )}
+        <section className="PageArea">
+        <Switch>
+          <Route exact path="/feed/" component={NewsCardFeed} />
+          <Route path="/feed/:slug" component={NewsCardPage}/>
+          <Route path="" component={NotFoundPage} />
+        </Switch>
         </section>
 
       </div>

@@ -10,10 +10,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
 import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
+
+import Principal from 'containers/Principal/Loadable';
+
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import './style.scss';
@@ -53,7 +56,11 @@ const App = () => {
       </Helmet>
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
+        
+
+        <Route exact path="/feed/:page?" component={Principal} />
+
 
         <Route path="/sesion" exact component={SignupPage} />
         <Route path="/logout" exact component={Logout} />
@@ -61,6 +68,8 @@ const App = () => {
         <Route path="/busqueda" component={BusquedaPage} />
 
         <Route path="/NewsCard/:slug" component={NewsCardPage} />
+
+        
 
 
         <Route path="" component={NotFoundPage} />
