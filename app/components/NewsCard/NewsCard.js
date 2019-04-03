@@ -59,14 +59,14 @@ const NewsCard = ({params}) => {
         
         <div className="NewsCardContent">
           <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />          
-          <Link className="NewsCardTitle" to={"/feed/"+params.slug}>
+          <Link className="NewsCardTitle" to={"/newscard/"+params.slug}>
             {params.title}
           </Link>
 
           <p className="Summary">{params.summary}</p>
         </div>
         <div className="clip">
-          <Link to={"/feed/"+params.slug}>
+          <Link to={"/newscard/"+params.slug}>
             <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
           </Link>
         </div>
@@ -89,7 +89,7 @@ const NewsCard = ({params}) => {
 
         </div>
         <div className="FooterRight">
-          <Link type="btn" to={"/feed/"+params.slug}>Leer más...</Link>
+          <Link type="btn" to={"/newscard/"+params.slug}>Leer más...</Link>
         </div>
       </div>
 

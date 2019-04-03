@@ -101,133 +101,150 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
     ]
     return (
       <div className="ModalViewerContainer">
+        <Helmet>
+          <title>{this.state.newscard.title}</title>
+          <meta
+            name="description"
+            content="{this.state.newscard.title} - Quixy | Plataforma de noticias inteligente"
+          />
+        </Helmet>
           <div className="ModalViewer">
-              <div className="NewsCardContainer">
-                <div className="Thumbnail left-side">
-                  <img src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+            <div className="MetaNew">
+              <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />
+              <span className="DateNew">{this.formatDate(this.state.newscard.published)}</span>
+            </div>
+            
+            <article className="NewsCard">
+            
+              <div className="NewsCardBody">
+                
+                <div className="NewsCardContent">
+                            
+                  <span className="NewsCardTitle" >
+                    {this.state.newscard.title}
+                  </span>
+
+                  <p className="Summary">{this.state.newscard.summary}</p>
+                
+                  <span className="NewsCardAuthors">
+                    Escrito por {
+                        this.state.newscard.authors != undefined 
+                        && this.state.newscard.authors.join(", ")
+                      }
+                  </span>
                 </div>
-                <div className="SummaryContainer">
-                  <h3 className="Title">
-                    <small>
-                      <span>
-                        Autor(es): {
-                          this.state.newscard.authors != undefined 
-                          && this.state.newscard.authors.join(", ")
-                        }
-                      </span>
-                      <span>
-                        {this.formatDate(this.state.newscard.published)}
-                      </span>
-                      
-                    </small>
-                    <div className="NewTitle">
-                      {this.state.newscard.title}
-                    </div>
-                  
-                  </h3>
-                  <span className="Summary"><br/>{this.state.newscard.summary}</span>
-                  
-                  <div className="Actions">
-                    <button className="CompleteNew" onClick={this.completeNew} >
-                      Ver nota completa
-                    </button>
-                    <div className="Interactive">
-                      <button className="Like">
-                        <span className="ActionCounter">0</span>
-                        <FontAwesomeIcon icon="thumbs-up" style={{cursor:"pointer"}}/>
-                      </button>
-                      <button className="Favorite">
-                        <span className="ActionCounter">+99</span>
-                        <FontAwesomeIcon icon="star" style={{cursor:"pointer"}}/>
-                      </button>
-                      <button className="Share">
-                        <span className="ActionCounter">0</span>
-                        <FontAwesomeIcon icon="share-alt" style={{cursor:"pointer"}}/>
-                      </button>
-                      <button className="Quote">
-                        <FontAwesomeIcon icon="quote-right" style={{cursor:"pointer"}}/>
-                      </button>
-                      <button className="Original" onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)}>
-                        <FontAwesomeIcon icon="link" style={{cursor:"pointer"}}/>
-                      </button>
-                    </div>
-                  </div>
+                <div className="clip">
+                  <span>
+                    <img className="Thumbnail" src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+                  </span>
                 </div>
-              </div>
-              
-              <div className="CompleteNewContent">
-                {this.state.newscard.body}
-                <div style={{textAlign:"right"}}>
-                  <br/>
-                  <button className="VerOriginal" onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)} >
-                    Ver nota original
-                  </button>
-                  &nbsp;&nbsp;
-                  <button className="CompleteNew2" onClick={() => document.querySelector(".CompleteNew").click()} >
-                    Esconder nota completa
-                  </button>
-                </div>
+
                 
               </div>
-              
-              <div className="controlcont" style={{marginTop: '2rem'}}>
-                <button className="control" data-dir="left" onClick={this.scrollGallery}>&lt;</button>
-                &nbsp;
-                <button className="control" data-dir="right" onClick={this.scrollGallery}>></button>
-              </div>
+              <div className="NewsCardFooter">
+                <div className="FooterLeft Actions">
+                  <button className="actionBtn">
+                    <FontAwesomeIcon icon="thumbs-up"/> 0
+                  </button>
+                  <button className="actionBtn">
+                    <FontAwesomeIcon icon="star"/> 0
+                  </button>
+                  <button className="actionBtn">
+                    <FontAwesomeIcon icon="share-alt"/> 0
+                  </button>
+                  <button className="actionBtn">
+                    <FontAwesomeIcon icon="quote-right"/>
+                  </button>
+                  <button className="actionBtn">
+                    <FontAwesomeIcon icon="link"/>
+                  </button>
 
-              {/*this.state.newscard.gallery*/}
-              <div className="GallerySlide">
-                <div className="SlideContainer">
-                  {gallery.map((image, i)=>(
-                    <a href={image} target="_window" key={i}><img className="GalleryImage" src={image}/></a>
-                  ))}
+                </div>
+                <div className="FooterRight Actions">
+                  <button className="actionBtn CompleteNew" onClick={this.completeNew}>Ver nota completa</button>
                 </div>
               </div>
 
-              {/*this.state.newscard.actions.comments*/}
-              <div className="CommentBox">
-                {this.state.session != undefined &&
-                  <div className="CommentInput">
-                      <textarea placeholder="Escribe algo..."></textarea>
-                      <br/>
-                      <button className="CommentGo">Comentar</button>
-                  </div>
-                }
-                {comments.map((comment, i)=>(
-                  <div className="Comment">
-                    <div className="CommentHeader">
-                      <div className="ProfileImage">
-                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
-                      </div>
-                      <div className="CommentData">
-                        <span className="CommentDate">{this.formatDate(comment.date)}</span>
-                        <div className="UserName">
-                          <a href={comment.email}>{comment.name}</a>
-                        </div>
-                      </div>
-                    </div>
-                    <br/>
-                    <span className="CommentText">{comment.content}</span>
-                    <br/><br/>
-                    <button className="Actions" data-email={comment.email}>Responder</button>
+            </article>
 
-                  </div>
+            <div className="CompleteNewContent">
+
+              <span className="NewsCardTitle" >
+                {this.state.newscard.title}
+              </span>
+              <img className="Thumbnail" style={{width:'400px',float: 'right', margin: '2rem 15px 15px 2rem'}} src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+              <br/>{this.state.newscard.body}
+              <div style={{textAlign:"right"}}>
+                <br/>
+                <button className="VerOriginal" onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)} >
+                  Ver nota original
+                </button>
+                &nbsp;&nbsp;
+                <button className="CompleteNew2" onClick={() => document.querySelector(".CompleteNew").click()} >
+                  Esconder nota completa
+                </button>
+              </div>
+              
+            </div>
+            
+            <div className="controlcont" style={{marginTop: '2rem'}}>
+              <button className="control" data-dir="left" onClick={this.scrollGallery}>&lt;</button>
+              &nbsp;
+              <button className="control" data-dir="right" onClick={this.scrollGallery}>></button>
+            </div>
+
+            {/*this.state.newscard.gallery*/}
+            <div className="GallerySlide">
+              <div className="SlideContainer">
+                {gallery.map((image, i)=>(
+                  <a href={image} target="_window" key={i}><img className="GalleryImage" src={image}/></a>
                 ))}
               </div>
+            </div>
 
-              <div className="RelatedCollections">
-                
-              </div>
+            {/*this.state.newscard.actions.comments*/}
+            <div className="CommentBox">
+              {this.state.session != undefined &&
+                <div className="CommentInput">
+                    <textarea placeholder="Escribe algo..."></textarea>
+                    <br/>
+                    <button className="CommentGo">Comentar</button>
+                </div>
+              }
+              {comments.map((comment, i)=>(
+                <div className="Comment" key={'comment'+i}>
+                  <div className="CommentHeader">
+                    <div className="ProfileImage">
+                      <Link to={"/user/"+comment.email}>
+                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+                      </Link>
+                    </div>
+                    <div className="CommentData">
+                      <div className="UserName">
+                        <Link to={"/user/"+comment.email}>{comment.name}</Link>
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                  <div className="CommentText" >{comment.content}</div>
+                  <span className="CommentDate">Publicado {this.formatDate(comment.date)}</span>
+                </div>
+              ))}
+            </div>
 
-              <div className="RelatedNewsCards">
-                COMPONENT LIST
-              </div>
+            <div className="RelatedCollections">
+              
+            </div>
+
+            <div className="RelatedNewsCards">
+              COMPONENT LIST
+            </div>
 
 
-              <h1></h1>
-            
-          </div>
+            <h1></h1>
+          
+        </div>
       </div>
     )
   }

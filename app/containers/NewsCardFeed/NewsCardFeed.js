@@ -57,7 +57,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <title>Nuevas noticias</title>
           <meta
             name="description"
-            content="Quixy | Plataforma de noticias inteligente"
+            content="Nuevas noticias - Quixy | Plataforma de noticias inteligente"
           />
         </Helmet>
 

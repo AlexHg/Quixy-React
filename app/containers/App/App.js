@@ -57,13 +57,11 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
-        <Route exact path="/feed/:page?" component={Principal} />
+        <Route exact path="/(feed|newscard|collection)/:page?" component={Principal} />
 
+        <Route path="/user(/:path)?" component={BusquedaPage} />
 
-        
-        
-        <Route path="/busqueda" component={BusquedaPage} />
-        
+        <Route path="/search(/:path)?" component={BusquedaPage} />
         <Route path="/session" exact component={SignupPage} />
         <Route path="/logout" exact component={Logout} />
 
