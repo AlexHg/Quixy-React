@@ -21,7 +21,9 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       session: JSON.parse(sessionStorage.getItem("session")),
       busqueda: "",
       searchAwait: false,
-      newscard: {},
+      newscard: {
+        gallery: [], 
+      },
     };
   }
 
@@ -68,16 +70,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
     
   }
   render() {
-    var gallery = [
-      "https://ichef.bbci.co.uk/news/660/cpsprodpb/37B5/production/_89716241_thinkstockphotos-523060154.jpg",
-      "https://media1.tenor.com/images/5c406b927ec59a31eb67e3366f3121ef/tenor.gif?itemid=11909469",
-      "https://www.newton.ac.uk/files/covers/968361.jpg",
-      "https://globalgamejam.org/sites/default/files/styles/game_sidebar__normal/public/game/featured_image/promo_5.png?itok=9dymM8JD",
-      "https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
-      "https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80",
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-      "https://images.unsplash.com/photo-1507723714871-f8d4b0d065b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
-    ]
+
 
     var comments = [
       { 
@@ -127,9 +120,9 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                   <p className="Summary">{this.state.newscard.summary}</p>
                 
                   <span className="NewsCardAuthors">
-                    Escrito por {
+                     {
                         this.state.newscard.authors != undefined 
-                        && this.state.newscard.authors.join(", ")
+                        && "Escrito por "+this.state.newscard.authors.join(", ")
                       }
                   </span>
                 </div>
@@ -155,8 +148,8 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
                   <button className="actionBtn">
                     <FontAwesomeIcon icon="quote-right"/>
                   </button>
-                  <button className="actionBtn">
-                    <FontAwesomeIcon icon="link"/>
+                  <button className="actionBtn"  onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)}>
+                    <FontAwesomeIcon icon="link" />
                   </button>
 
                 </div>
@@ -194,10 +187,12 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
             </div>
 
             {/*this.state.newscard.gallery*/}
+            
             <div className="GallerySlide">
               <div className="SlideContainer">
-                {gallery.map((image, i)=>(
-                  <a href={image} target="_window" key={i}><img className="GalleryImage" src={image}/></a>
+                <a href={this.state.newscard.thumbnail} target="_window" key={'gallery-th'}><img className="GalleryImage" src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.style="display:none;"}}/></a>
+                {this.state.newscard.gallery.map((image, i)=>(
+                  <a href={image.split(',')[0]} target="_window" key={'gallery-'+i}><img className="GalleryImage" src={image.split(',')[0]} onError={(e)=>{e.target.onerror = null; e.target.style="display:none;"}}/></a>
                 ))}
               </div>
             </div>

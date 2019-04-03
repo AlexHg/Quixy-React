@@ -64,9 +64,6 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             <Link className="router-link" to="/busqueda">
               Busqueda
             </Link>
-            <Link className="router-link" to="/feed">
-              Feed
-            </Link>
             
             {!this.state.session.active &&
               <Link className="router-link" to="/session">
