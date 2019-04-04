@@ -23,7 +23,7 @@ import http from 'http';
 
 import './style.scss';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(){
     super();
     this.state = {
@@ -33,7 +33,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       searchAwait: false,
     };
   }
-  
+  shouldComponentUpdate() {return true}
   componentWillMount() { 
     return true;
   };
@@ -92,9 +92,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <section className="PageArea">
         <Switch>
           <Route exact path="/feed/" component={NewsCardFeed} />
-          <Route path="/newscard/:slug" component={NewsCardPage}/>
-          <Route path="/collection/:slug" component={NewsCardPage}/>
-          <Route path="" component={NotFoundPage} />
+          <Route exact path="/newscard/:slug" component={NewsCardPage}/>
+          <Route exact path="/collection/:slug" component={NewsCardPage}/>
+          <Route exact path="" component={NotFoundPage} />
         </Switch>
         </section>
 

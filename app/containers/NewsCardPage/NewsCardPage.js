@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, RouterHandler, Switch } from "react-router-dom";
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCardMini from 'components/NewsCardMini';
 import Collection from 'components/Collection';
@@ -14,7 +14,7 @@ import http from 'http';
 
 import './style.scss';
 
-export default class NewsCardPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class NewsCardPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor({match}){
     super();
     this.state = {
@@ -25,18 +25,28 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       newscard: {
         gallery: [], 
       },
+      
     };
   }
-
   componentWillMount() {
-    fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+this.state.slug)
+    this.mountData(this.state.slug);
+  }
+  componentDidUpdate(){
+    //console.log("Component updated")
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({slug: nextProps.match.params.slug})
+    this.mountData(nextProps.match.params.slug);
+  }
+  mountData(slug){
+    fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+slug)
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
-        //console.log(newscard_r)
         this.setState({newscard: newscard_r})
       })
   }
+
   completeNew = (event) => {
     let likeButton = event.target;
     let completeNew = document.querySelector(".CompleteNewContent");
@@ -70,6 +80,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
     }, 10);
     
   }
+  
   render() {
 
     var NewsCardMiniExample = {
@@ -103,7 +114,8 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       }
     ]
     return (
-      <div className="ModalViewerContainer">
+      <div className="ModalViewerContainer" name={window.location.href}>
+
         <Helmet>
           <title>{this.state.newscard.title}</title>
           <meta

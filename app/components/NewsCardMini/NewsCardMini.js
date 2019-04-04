@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteHandler, Router } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.scss';
 
@@ -47,6 +47,10 @@ const formatDate = (date) => {
   return diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
 }
 
+const refresh = () => {
+  //super().forceUpdate();
+}
+
 const NewsCard = ({params}) => {
   
   //params.slug = SlugCreator(params.title)
@@ -60,13 +64,13 @@ const NewsCard = ({params}) => {
         <div className="NewsCardMiniContent">
           <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '13px'}} />          
           
-          <Link className="NewsCardMiniTitle" to={"/newscard/"+params.slug}>
+          <Link onClick={refresh()} className="NewsCardMiniTitle" to={"/newscard/"+params.slug}>
             {params.title}
           </Link>
           <span className="dateNCM">Publicado el {formatDate(params.published)}</span>
         </div>
         <div className="clip">
-          <Link to={"/newscard/"+params.slug}>
+          <Link to={"/newscard/"+params.slug} onClick={refresh()}>
             <img className="Thumbnail" src={params.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
           </Link>
         </div>

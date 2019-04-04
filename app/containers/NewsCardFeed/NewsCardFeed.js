@@ -17,7 +17,7 @@ import http from 'http';
 
 import './style.scss';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(){
     super();
     this.state = {
@@ -27,13 +27,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       searchAwait: false,
     };
   }
-  
+  shouldComponentUpdate() {return true}
   componentWillMount() { 
     fetch("http://"+window.location.hostname+':8080/api/newscards/')
       .then((response) => {
         return response.json()
       }).then((newscards) => {
-        console.log(JSON.stringify(newscards[0]));
+        //console.log(JSON.stringify(newscards[0]));
         this.setState({ resultados: newscards })
       })
 
