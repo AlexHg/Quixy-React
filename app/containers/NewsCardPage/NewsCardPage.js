@@ -1,10 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router, Route, Link, RouterHandler, Switch } from "react-router-dom";
-import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
+import { BrowserRouter as Router, Link} from "react-router-dom";
 import NewsCardMini from 'components/NewsCardMini';
-import Collection from 'components/Collection';
-import BreakingNew from 'components/BreakingNew';
+
 import qwest from 'qwest';
 
 //import {noticias} from '../../dataold.json';
@@ -67,7 +65,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
   }
   scrollGallery = (event) => {
     let direction = event.target.dataset.dir;
-    console.log(direction)
+    //console.log(direction)
 
     let galleryBox = document.querySelector(".GallerySlide")
     let counter = 0
