@@ -19,9 +19,8 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     super();
     this.state = {
       slug: match.params.slug,
+      slugChange: false,
       session: JSON.parse(sessionStorage.getItem("session")),
-      busqueda: "",
-      searchAwait: false,
       newscard: {
         gallery: [], 
       },
@@ -29,22 +28,23 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     };
   }
   componentWillMount() {
-    this.mountData(this.state.slug);
+    this.mountData();
   }
   componentDidUpdate(){
-    //console.log("Component updated")
+    if(this.state.slugChange) this.mountData();
   }
-  
+
   componentWillReceiveProps(nextProps){
-    this.setState({slug: nextProps.match.params.slug})
-    this.mountData(nextProps.match.params.slug);
+    if(nextProps.match.params.slug != this.state.slug){
+      this.setState({slug: nextProps.match.params.slug, slugChange: true})
+    }
   }
-  mountData(slug){
-    fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+slug)
+  mountData(){
+    fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+this.state.slug)
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
-        this.setState({newscard: newscard_r})
+        this.setState({newscard: newscard_r, slugChange:false})
       })
   }
 
