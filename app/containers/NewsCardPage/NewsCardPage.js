@@ -34,6 +34,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
   componentDidUpdate(){
     //console.log("Component updated")
   }
+  
   componentWillReceiveProps(nextProps){
     this.setState({slug: nextProps.match.params.slug})
     this.mountData(nextProps.match.params.slug);
