@@ -35,6 +35,7 @@
 .Header{
   &.t1{
     background: #741c3e;
+    
     .logo{
       background: #520e28;
     }
@@ -50,6 +51,9 @@
       border:3px solid #520e28;
     }
     & ~ * {
+      .Username{
+        color: #741c3e;
+      }
       &.Footer{
         background: #741c3e;
       }
@@ -81,6 +85,9 @@
       border:3px solid #1f3e7c;
     }
     & ~ * {
+      .Username{
+        color: #1f3e7c;
+      }
       &.Footer{
         background: #2b4e94;
         .ButtonF{
@@ -114,6 +121,9 @@
       border:3px solid black;
     }
     & ~ *{
+      .Username{
+        color: #222;
+      }
       &.Footer{
         background: #222;
       }
@@ -144,6 +154,9 @@
       border:3px solid black;
     }
     & ~ *{ 
+      .Username{
+        color: #041122;
+      }
       &.Footer{
         background: #041122;
       }
@@ -174,6 +187,9 @@
       border:3px solid black;
     }
     & ~ *{ 
+      .Username{
+        color: #0c0330;
+      }
       &.Footer{
         background: #0c0330;
         .ButtonF{
@@ -207,6 +223,9 @@
       border:3px solid black;
     }
     & ~ *{ 
+      .Username{
+        color: #2b2424;
+      }
       &.Footer{
         background: #2b2424; //#786b40;
         .ButtonF{

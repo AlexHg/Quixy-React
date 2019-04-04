@@ -33,6 +33,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       .then((response) => {
         return response.json()
       }).then((newscards) => {
+        console.log(JSON.stringify(newscards[0]));
         this.setState({ resultados: newscards })
       })
 
@@ -60,7 +61,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             content="Nuevas noticias - Quixy | Plataforma de noticias inteligente"
           />
         </Helmet>
-
+        
         {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado}/> )}
       </div>
     );

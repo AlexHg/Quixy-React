@@ -26,36 +26,7 @@
         font-size: 13px;
         color:gray;
     }
-    .NewsCard{
-        .NewsCardBody{
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .NewsCardContent{
-                width: calc(100% - 180px);
-                .Summary{
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 50;  /* Number of lines displayed before it truncate */
-                    overflow: hidden;
-                }
-            }
-        }
-        .NewsCardFooter{
-            padding: 1.2rem .3rem;
-            .FooterLeft.Actions, .FooterRight.Actions{
-                .actionBtn{
-                    min-width: 65px;
-                    padding: .07rem 1rem !important;
-                    margin: 0 .2rem;
-                    &:first-child{
-                        padding-left: 0rem;
-                    }
-                }
-            }
-        }
-    }
+    
     .ModalViewer{
         display:block;
         height: fit-content;
@@ -164,13 +135,14 @@
         border-radius: 4px;
         overflow-x:scroll;
         position: relative;
+        background: white;
+        border:1px solid #E2E2E2;
         .SlideContainer{
-            margin-top: 1rem;
             padding: 0 .5rem;
             min-width: 100%;
-            background: white;
+            
             white-space: nowrap;
-            border:1px solid #E2E2E2;
+            
             img{
                 height: 160px;
                 
@@ -178,62 +150,150 @@
             }
         }
     }
-    .CommentBox{
-        margin-top: 2rem;
-        width: 500px;
-        max-width: 100%;
-        .CommentInput{
-            border:1px solid #E2E2E2;
-            background:white;
-            margin: 1rem 0;
+
+
+    .NewsCard{
+    
+        border:1px solid #E2E2E2;
+        background:white;
+        border-radius:4px;
+        margin-bottom: 1rem;
+        &:hover{
+            border:1px solid rgb(197, 197, 197);
+        }
+        //max-width: 700px;
+        .NewsCardTitle{
+            font-size: 1.5rem;
+            display:block;
+            text-decoration: none;
+            color:black;
+            margin-bottom:.5rem;
+            font-weight: 500;
+        }
+        .NewsCardBody{
             padding: 1rem;
-            border-radius: 4px;
-            textarea{
-                width:100%;
-                border:1px solid #b3d4fc;
-                min-height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .NewsCardContent{
+                width: calc(100% - 180px);
+                .Summary{
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 50;  /* Number of lines displayed before it truncate */
+                    overflow: hidden;
+                }
+            }
+            .clip{
+                height: 150px;
+                width: 150px;
+                border-radius: 4px;
+                position:relative;
+                overflow: hidden;
+                .Thumbnail{
+                    position: absolute;
+                    top: -9999px;
+                    bottom: -9999px;
+                    left: -9999px;
+                    right: -9999px;
+                    margin: auto;
+                    min-width: 100%;
+                    height: 100%;
+                }
             }
         }
-        .Comment{
-            border:1px solid #E2E2E2;
-            background:white;
-            margin: 1rem 0;
-            padding: .7rem;
-            border-radius: 4px;
-            .CommentText{
-                padding-top:.4rem;
-            }
-            .CommentDate{
-                font-size:11px;
-                color:gray;
-            }
-            .CommentHeader{
-                display:flex;
-                justify-content: flex-start;
-                align-items: center;
-                .CommentData{
-                    width: 100%;
-                    padding: 0 0 0 .7rem;
-                    display: flex;
-                    justify-content: space-between;
-                    
-                    .UserName{
-                        font-size: 14px;
-                        a{
-                            text-decoration: none;
-                            color:black;
-                        }
-                        
+        .NewsCardFooter{
+            padding: 1.2rem .3rem;
+            height: 30px;
+            width: 100%;
+            border-top: 1px solid #E2E2E2;
+            color: gray;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 1.2rem .3rem;
+            .FooterLeft.Actions, .FooterRight.Actions{
+                .actionBtn{
+                    min-width: 65px;
+                    padding: .07rem 1rem !important;
+                    margin: 0 .2rem;
+                    &:first-child{
+                        padding-left: 0rem;
                     }
                 }
-                
-                img {
-                    width: 30px;
-                    border-radius: 100%;
+            }
+        }  
+    }
+        
+    .Secundary{
+        display:grid;
+        grid-template-columns: 24fr 32fr;
+        grid-column-gap: 2rem;
+        margin-bottom: 2rem;
+        .CommentBox{
+            margin-top: 2rem;
+            max-width: 100%;
+            display:inline-block;
+            .CommentInput{
+                border:1px solid #E2E2E2;
+                background:white;
+                margin: 1rem 0;
+                padding: 1rem;
+                border-radius: 4px;
+                textarea{
+                    width:100%;
+                    border:1px solid #b3d4fc;
+                    min-height: 70px;
+                }
+            }
+            .Comment{
+                border:1px solid #E2E2E2;
+                background:white;
+                margin: 1rem 0;
+                padding: .5rem;
+                border-radius: 10px;
+                margin-left: 50px;
+                position:relative;
+                .CommentText{
+                    padding-top:0rem;
+                    font-size:14px;
+                    .Username{
+                        margin-right:.3rem;
+                        text-decoration: none;
+                        font-weight: 600;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .CommentDate{
+                    font-size:11px;
+                    color:gray;
+                }
+                .CommentHeader{
+                    display:flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    
+                    img {
+                        top:.5rem;
+                        position: absolute;
+                        left:-45px;
+                        width: 30px;
+                        border-radius: 100%;
+                    }
+                    
                 }
                 
             }
-            
+        }
+        .RelatedContent{
+            margin-top: 2rem;
+            max-width: 100%;
+            display: inline-block;
         }
     }
+    
 }

@@ -2,10 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
-import NewsCard from 'components/NewsCard';
+import NewsCardMini from 'components/NewsCardMini';
 import Collection from 'components/Collection';
 import BreakingNew from 'components/BreakingNew';
 import qwest from 'qwest';
+
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {apiRestHost,apiRestHostDev} from '../../server.json';
@@ -32,7 +33,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
-        console.log(newscard_r)
+        //console.log(newscard_r)
         this.setState({newscard: newscard_r})
       })
   }
@@ -71,25 +72,34 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
   }
   render() {
 
-
+    var NewsCardMiniExample = {
+      _id: '5ca3a73a480f651c60aad126',
+      title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+      slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+      thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+      newspaper: '5ca39621480f651c60aad05a'
+    }
     var comments = [
       { 
+        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
         name: 'Alejandro Hernandez', 
         email: 'alejandro@konecta.team',
         date: Date.now(), 
-        content: "Este es un comentario de prueba",
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus dolor purus, sed vulputate magna congue a. Aenean pretium quam ut felis malesuada, in dapibus neque lobortis. ",
       },
       { 
+        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
         name: 'Alejandro Hernandez', 
         email: 'alejandro@konecta.team',
         date: Date.now(), 
-        content: "Este es un comentario de prueba",
+        content: "Etiam et ligula vestibulum, pellentesque neque ultricies, porttitor nisl.",
       },
       { 
+        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
         name: 'Alejandro Hernandez', 
         email: 'alejandro@konecta.team',
         date: Date.now(), 
-        content: "Este es un comentario de prueba",
+        content: "Suspendisse potenti. Cras ut nulla aliquet, vestibulum felis et, scelerisque risus. Phasellus pulvinar, risus at sodales semper, quam lacus ullamcorper justo, et porta dui felis id velit. Nam vel elit dictum, consequat mauris ac, tincidunt nisl.",
       }
     ]
     return (
@@ -180,7 +190,7 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
               
             </div>
             
-            <div className="controlcont" style={{marginTop: '2rem'}}>
+            <div className="controlcont" style={{marginTop: '1.7rem', marginBottom:'.7rem'}}>
               <button className="control" data-dir="left" onClick={this.scrollGallery}>&lt;</button>
               &nbsp;
               <button className="control" data-dir="right" onClick={this.scrollGallery}>></button>
@@ -198,46 +208,44 @@ export default class NewsCardPage extends React.PureComponent { // eslint-disabl
             </div>
 
             {/*this.state.newscard.actions.comments*/}
-            <div className="CommentBox">
-              {this.state.session != undefined &&
-                <div className="CommentInput">
-                    <textarea placeholder="Escribe algo..."></textarea>
-                    <br/>
-                    <button className="CommentGo">Comentar</button>
-                </div>
-              }
-              {comments.map((comment, i)=>(
-                <div className="Comment" key={'comment'+i}>
-                  <div className="CommentHeader">
-                    <div className="ProfileImage">
-                      <Link to={"/user/"+comment.email}>
-                        <img src="https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg" onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
-                      </Link>
-                    </div>
-                    <div className="CommentData">
-                      <div className="UserName">
-                        <Link to={"/user/"+comment.email}>{comment.name}</Link>
-                      </div>
-                      
-                      
-                    </div>
+            <div className="Secundary">
+              <div className="CommentBox">
+                <h3>Comentarios (50)</h3>
+
+                {this.state.session != undefined &&
+                  <div className="CommentInput">
+                      <textarea placeholder="Escribe algo..."></textarea>
+                      <br/>
+                      <button className="CommentGo" style={{marginTop: '.7rem'}}>Comentar</button>
                   </div>
-                  <div className="CommentText" >{comment.content}</div>
-                  <span className="CommentDate">Publicado {this.formatDate(comment.date)}</span>
-                </div>
-              ))}
+                }
+                {comments.map((comment, i)=>(
+                  <div className="Comment" key={'comment'+i}>
+                    <div className="CommentHeader">
+                      <div className="ProfileImage">
+                        <Link to={"/user/"+comment.email}>
+                          <img src={comment.image} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="CommentText" >
+                      <Link className="Username" to={"/user/"+comment.email}>{comment.name}</Link> 
+                      {comment.content}
+                    </div>
+                    <span className="CommentDate">Publicado {this.formatDate(comment.date)}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="RelatedContent">
+                <h3>Relacionados</h3>
+                <NewsCardMini key={"NewsCard-0"} params={NewsCardMiniExample}/>
+                <NewsCardMini key={"NewsCard-1"} params={NewsCardMiniExample}/>
+                <NewsCardMini key={"NewsCard-2"} params={NewsCardMiniExample}/>
+                <NewsCardMini key={"NewsCard-3"} params={NewsCardMiniExample}/>
+              </div>
             </div>
-
-            <div className="RelatedCollections">
-              
-            </div>
-
-            <div className="RelatedNewsCards">
-              COMPONENT LIST
-            </div>
-
-
-            <h1></h1>
+          
           
         </div>
       </div>
