@@ -94,7 +94,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
           <div className="CPHContent">
             <div className="CPHInfo">
               <h1 className="CPHTitle">{this.state.slug.replace(/-/g, ' ')}</h1>
-              <p>La Agencia Central de Inteligencia (CIA, por sus siglas en inglés), planeaba una “operación de desestabilización” al gobierno de Luis Echeverría en 1975, según Helen Jordan, identificada como integrante del Partido Socialista Laborista de Estados Unidos, revela un informe de la extinta Dirección Federal de Seguridad (DFS).</p>
+              <p>La Agencia Central de Inteligencia (CIA, por sus siglas en inglés), planeaba una “operación de desestabilización” al gobierno de Luis Echeverría en 1975.</p>
             </div>
             <div className="CPHFooter">
               <div className="FooterLeft Actions">
