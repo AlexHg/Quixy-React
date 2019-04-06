@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Link} from "react-router-dom";
 import NewsCardMini from 'components/NewsCardMini';
@@ -27,14 +28,38 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
   }
   componentWillMount() {
     this.mountData();
+    return "cargando...";
+  }
+  componentDidMount(){
+    setTimeout(
+      ()=> document.querySelector('.ModalViewerContainer').className = "ModalViewerContainer mounted",
+      200
+    )
+    ReactDOM.findDOMNode(this).scrollIntoView(false);
   }
   componentDidUpdate(){
-    if(this.state.slugChange) this.mountData();
+    if(this.state.slugChange){
+      setTimeout(
+        ()=>{
+          document.querySelector('.ModalViewerContainer').className = "ModalViewerContainer mounted"
+          this.mountData();
+          
+        },
+        200
+      )
+      ReactDOM.findDOMNode(this).scrollIntoView(false);
+    }
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.match.params.slug != this.state.slug){
-      this.setState({slug: nextProps.match.params.slug, slugChange: true})
+      document.querySelector('.ModalViewerContainer').className = "ModalViewerContainer unmounted"
+      setTimeout(
+        () => this.setState({slug: nextProps.match.params.slug, slugChange: true})
+        ,200
+      )
+      
+      
     }
   }
   mountData(){
@@ -82,13 +107,43 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
   
   render() {
 
-    var NewsCardMiniExample = {
-      _id: '5ca3a73a480f651c60aad126',
-      title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-      slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-      thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-      newspaper: '5ca39621480f651c60aad05a'
-    }
+    var relacionados = [
+      {
+        _id: '5ca3a73a480f651c60aad126',
+        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+        newspaper: '5ca39621480f651c60aad05a'
+      },
+      {
+        _id: '5ca3a73a480f651c60aad126',
+        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+        newspaper: '5ca39621480f651c60aad05a'
+      },
+      {
+        _id: '5ca3a73a480f651c60aad126',
+        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+        newspaper: '5ca39621480f651c60aad05a'
+      },
+      {
+        _id: '5ca3a73a480f651c60aad126',
+        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+        newspaper: '5ca39621480f651c60aad05a'
+      },
+      {
+        _id: '5ca3a73a480f651c60aad126',
+        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
+        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
+        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
+        newspaper: '5ca39621480f651c60aad05a'
+      }
+    ]
     var comments = [
       { 
         image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
@@ -231,7 +286,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                   </div>
                 }
                 {comments.map((comment, i)=>(
-                  <div className="Comment" key={'comment'+i}>
+                  <div className="Comment" key={'comment-'+i}>
                     <div className="CommentHeader">
                       <div className="ProfileImage">
                         <Link to={"/user/"+comment.email}>
@@ -250,10 +305,10 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
 
               <div className="RelatedContent">
                 <h3>Relacionados</h3>
-                <NewsCardMini key={"NewsCard-0"} params={NewsCardMiniExample}/>
-                <NewsCardMini key={"NewsCard-1"} params={NewsCardMiniExample}/>
-                <NewsCardMini key={"NewsCard-2"} params={NewsCardMiniExample}/>
-                <NewsCardMini key={"NewsCard-3"} params={NewsCardMiniExample}/>
+                {relacionados.map((NC, i)=>(
+                  <NewsCardMini key={"NewsCardMini-"+i} params={NC}/>
+                ))}
+                
               </div>
             </div>
           

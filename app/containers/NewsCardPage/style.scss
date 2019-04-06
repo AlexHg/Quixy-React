@@ -3,6 +3,14 @@
     max-height: 98vh;
     display: flex;
     justify-content: center;
+    transition:all 1s;
+    opacity: 0;
+    &.mounted{
+        opacity:1;
+    }
+    &.unmounted{
+        opacity:0;
+    }
     .MetaNew{
         display:flex;
         justify-content: space-between;

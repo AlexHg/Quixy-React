@@ -1,0 +1,77 @@
+.CollectionPage{
+  transition:all 1s;
+  opacity: 0;
+
+  &.mounted{
+    opacity:1;
+  }
+  .NewCounter{
+    margin-bottom:.5rem;
+  }
+  .CollectionPageHeader{
+    min-height:280px;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #E2E2E2;
+    background:white;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    .CPHImage{
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+      img{
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+        min-width: 100%;
+        height: 100%;
+      }
+    }
+    .CPHContent{
+      display: flex;
+      align-content: space-between;
+      flex-wrap: wrap;
+      .CPHInfo{
+        width:100%;
+        padding: 2rem;
+        .CPHTitle{
+          font-size: 1.8rem;
+          text-transform: capitalize;
+          display:flex;
+          justify-content: space-around;
+          align-items: center;
+        } 
+        
+      }
+      .CPHFooter{
+        width: 100%;
+        border-top: 1px solid #E2E2E2;
+        color: gray;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        text-decoration: none;
+        padding: .3rem;
+
+        .FooterLeft.Actions, .FooterRight.Actions{
+          .actionBtn{
+            min-width: 65px;
+            padding: .07rem 1rem !important;
+            margin: 0 .2rem;
+            &:first-child{
+                padding-left: 0rem;
+            }
+          }
+        }
+      }
+    }    
+  }
+}
+

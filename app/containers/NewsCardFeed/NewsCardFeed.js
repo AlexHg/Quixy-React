@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
@@ -17,6 +18,7 @@ import http from 'http';
 
 import './style.scss';
 
+var elementClicked;
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(){
     super();
@@ -25,6 +27,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
       busqueda: "",
       resultados: [], 
       searchAwait: false,
+
     };
   }
   shouldComponentUpdate() {return true}
@@ -41,14 +44,39 @@ export default class HomePage extends React.Component { // eslint-disable-line r
   };
 
   componentDidMount(){
+    //this.listenLinks();
     setTimeout(
       ()=> document.querySelector('.NewsCardFeed').className += " mounted",
       200
     )
   }
 
+  listenLinks(){
+    var parent = document.querySelector('.NewsCardFeed');
+    parent.addEventListener('click', function (event) {
+        console.log(event.target.tagName)
+        if (event.target.tagName == 'A') {
+            console.log(event.target.closest(".NewsCard"));
+            elementClicked = event.target.closest(".NewsCard");
+            
+            //parent.removeChild(event.target);
+        }
+    }, false);
+  }
+
   componentWillUnmount(){
+    /*this.setState({scroll: document.querySelector('.NewsCardFeed').offsetTop})
+    console.log(document.querySelector('.NewsCardFeed').offsetTop)*/
     document.querySelector('.NewsCardFeed').className += " unmounting";
+  }
+
+  componentDidUpdate(){
+    //console.log(this.state.elementClicked)
+  }
+  addElementClicked(target){
+    //console.log(target)
+    
+    this.setState({elementClicked: target})
   }
 
   render() { 
@@ -62,7 +90,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
           />
         </Helmet>
         
-        {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado}/> )}
+        {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado} /> )}
       </div>
     );
   }

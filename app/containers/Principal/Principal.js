@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ import BreakingNew from 'components/BreakingNew';
 
 import NewsCardFeed from 'containers/NewsCardFeed/Loadable';
 import NewsCardPage from 'containers/NewsCardPage/Loadable';
+import CollectionPage from 'containers/CollectionPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -46,6 +48,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
             <BreakingNew key={1} params={{
               image:require("images/bnews/b1.jpg"), 
               title:"Lorem Ipsum Dat ed Ipsum",
+              slug:"eu-rebaja-tension-con-mexico-por-tema-migratorio",
               //degree:["#649ce6","#91e591","#9be591"]
             }} />
           </div>
@@ -93,7 +96,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
         <Switch>
           <Route exact path="/feed/" component={NewsCardFeed} />
           <Route exact path="/newscard/:slug" component={NewsCardPage}/>
-          <Route exact path="/collection/:slug" component={NewsCardPage}/>
+          <Route exact path="/collection/:slug" component={CollectionPage}/>
           <Route exact path="" component={NotFoundPage} />
         </Switch>
         </section>
