@@ -19,20 +19,45 @@ import http from 'http';
 import './style.scss';
 
 var elementClicked;
-export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(){
+export default class NewsCardFeed extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor({params}){
     super();
     this.state = {
       session: {},
       busqueda: "",
       resultados: [], 
       searchAwait: false,
-
+      pageCount: 0,
+      newPage: false,
     };
+    //this.pageCount = props.params.pageCount;
+    //console.log(params)
   }
   shouldComponentUpdate() {return true}
+  componentWillReceiveProps({params}){
+    //console.log(params)
+    if(params.pageCount > this.state.pageCount)
+      this.setState({pageCount: params.pageCount, newPage: true});
+  }
+  componentDidUpdate(){
+    var getMore = document.querySelector("#getMore.available");
+    if(this.state.newPage){
+      fetch("http://"+window.location.hostname+':8080/api/newscards/8/'+this.state.pageCount)
+      .then((response) => {
+        return response.json()
+      }).then((newscards) => {
+        if(newscards.length == 0){
+          getMore.classList="notAvaliable"
+        }
+        //console.log(JSON.stringify(newscards[0]));
+        this.setState({newPage: false, resultados: this.state.resultados.concat(newscards) })
+        //var getMore = document.querySelector("#getMore.not-available").className="available"
+      })
+    }
+    //console.log(this.state.elementClicked)
+  }
   componentWillMount() { 
-    fetch("http://"+window.location.hostname+':8080/api/newscards/')
+    fetch("http://"+window.location.hostname+':8080/api/newscards/8/'+this.state.page)
       .then((response) => {
         return response.json()
       }).then((newscards) => {
@@ -49,6 +74,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
       ()=> document.querySelector('.NewsCardFeed').className += " mounted",
       200
     )
+
   }
 
   listenLinks(){
@@ -70,14 +96,15 @@ export default class HomePage extends React.Component { // eslint-disable-line r
     document.querySelector('.NewsCardFeed').className += " unmounting";
   }
 
-  componentDidUpdate(){
-    //console.log(this.state.elementClicked)
-  }
+  
   addElementClicked(target){
     //console.log(target)
     
     this.setState({elementClicked: target})
   }
+
+
+  
 
   render() { 
     return (
@@ -91,6 +118,9 @@ export default class HomePage extends React.Component { // eslint-disable-line r
         </Helmet>
         
         {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado} /> )}
+
+        <div id="getMore" className="available"></div>
+      
       </div>
     );
   }

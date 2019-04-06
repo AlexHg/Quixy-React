@@ -57,7 +57,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
-        <Route exact path="/(feed|newscard|collection)/:page?" component={Principal} />
+        <Route exact path="/(feed|newscard|collection)/:slug?" component={Principal} />
 
         <Route path="/user(/:path)?" component={BusquedaPage} />
 

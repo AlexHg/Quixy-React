@@ -25,20 +25,57 @@ import http from 'http';
 
 import './style.scss';
 
-export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(){
+export default class Principal extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(router){
     super();
     this.state = {
       session: {},
       busqueda: "",
       resultados: [], 
       searchAwait: false,
+      pageCount: 0,
+      
     };
+    this.router = router;
+    //console.log("p: ",this.router)
   }
   shouldComponentUpdate() {return true}
   componentWillMount() { 
     return true;
   };
+
+  componentDidMount(){
+    ReactDOM.findDOMNode(this.refs.pagearea)
+      .addEventListener('scroll', this.getMoreEntries);
+  }
+
+  componentWillUnmount(){
+    ReactDOM.findDOMNode(this.refs.pagearea)
+      .removeEventListener('scroll', this.getMoreEntries);
+  }
+
+  // Solo funciona si existe #carg en la pagina
+  getMoreEntries = () => {
+    var getMore = document.querySelector("#getMore.available");
+    
+    if(getMore == undefined) return;
+
+    var pageCount = this.state;
+    var rect = getMore.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+
+    // Only completely visible elements return true:
+    var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+
+    
+    if(isVisible){
+      //getMore.className = "not-available";
+      var pageCountNext = this.state.pageCount + 1;
+      this.setState({pageCount: pageCountNext})
+      //console.log("visible", this.state.pageCount)
+    }
+  }
 
   render() { 
     return (
@@ -92,11 +129,13 @@ export default class HomePage extends React.Component { // eslint-disable-line r
             }} />
           </div>
         </aside>
-        <section className="PageArea">
+        <section className="PageArea" ref="pagearea">
         <Switch>
-          <Route exact path="/feed/" component={NewsCardFeed} />
-          <Route exact path="/newscard/:slug" component={NewsCardPage}/>
-          <Route exact path="/collection/:slug" component={CollectionPage}/>
+          <Route exact path="/feed/" >
+            <NewsCardFeed params={{pageCount: this.state.pageCount}}/>
+          </Route>
+          <Route exact path="/newscard/:slug" component={NewsCardPage} />
+          <Route exact path="/collection/:slug" component={CollectionPage } />
           <Route exact path="" component={NotFoundPage} />
         </Switch>
         </section>

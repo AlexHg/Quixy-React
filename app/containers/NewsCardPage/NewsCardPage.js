@@ -105,6 +105,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     
   }
   
+  
   render() {
 
     var relacionados = [
