@@ -16,10 +16,12 @@ class PrincipalFooter extends React.Component { // eslint-disable-line react/pre
   }
 
   tab1(){
+    //document.querySelector(".Header .centered a").href="/feed/tab1"
     document.querySelector(".Principal").className="Principal tab1"
   }
 
   tab2(){
+    //document.querySelector(".Header .centered a").href="/feed/tab2"
     document.querySelector(".Principal").className="Principal tab2"
   }
 

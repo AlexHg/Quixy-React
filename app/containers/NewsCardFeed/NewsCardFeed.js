@@ -42,7 +42,7 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
   componentDidUpdate(){
     var getMoreNC = document.querySelector("#getMoreNC.available");
     if(this.state.newPage){
-      fetch("http://"+window.location.hostname+':8080/api/newscards/8/'+this.state.pageCount)
+      fetch("http://"+window.location.hostname+':8080/api/newscards/get/8/'+this.state.pageCount)
       .then((response) => {
         return response.json()
       }).then((newscards) => {
@@ -56,7 +56,7 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
     //console.log(this.state.elementClicked)
   }
   componentWillMount() { 
-    fetch("http://"+window.location.hostname+':8080/api/newscards/8/'+this.state.page)
+    fetch("http://"+window.location.hostname+':8080/api/newscards/get/8/'+this.state.page)
       .then((response) => {
         return response.json()
       }).then((newscards) => {

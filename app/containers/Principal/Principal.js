@@ -28,18 +28,18 @@ import http from 'http';
 import './style.scss';
 
 export default class Principal extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(router){
+  constructor({match}){
     super();
     this.state = {
       session: {},
-      busqueda: "",
+      busqueda: "", 
       resultados: [], 
       searchAwait: false,
       pageCount: 0,
-      
+      tab: match.params.slug,
     };
-    this.router = router;
-    //console.log("p: ",this.router)
+    
+    console.log("p: ",this.state.tab)
   }
   shouldComponentUpdate() {return true}
   componentWillMount() { 
@@ -47,6 +47,8 @@ export default class Principal extends React.Component { // eslint-disable-line 
   };
 
   componentDidMount(){
+    /*if(this.state.tab == 'tab1' || this.state.tab == 'tab2') //console.log("go to "+this.state.tab)
+      document.querySelector("#"+this.state.tab).click();*/
     ReactDOM.findDOMNode(this.refs.pagearea)
       .addEventListener('scroll', this.getMoreEntriesNC);
   }
@@ -132,7 +134,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
         </aside>
         <section className="PageArea" ref="pagearea">
         <Switch>
-          <Route exact path="/feed/" >
+          <Route exact path="/feed/:slug?" >
             <NewsCardFeed params={{pageCount: this.state.pageCount}}/>
           </Route>
           <Route exact path="/newscard/:slug" component={NewsCardPage} />

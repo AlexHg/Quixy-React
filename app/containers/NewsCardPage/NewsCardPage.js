@@ -22,6 +22,9 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       session: JSON.parse(sessionStorage.getItem("session")),
       newscard: {
         gallery: [], 
+        newspaper: {
+          thumbnail: "",
+        },
       },
       
     };
@@ -32,6 +35,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     
   }
   componentDidMount(){
+    //this.setState({session: JSON.parse(sessionStorage.getItem("session")),})
     setTimeout(
       ()=> document.querySelector('.ModalViewerContainer').className = "ModalViewerContainer mounted",
       200
@@ -108,6 +112,19 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     
   }
   
+  likeHandler = () => {
+    alert("Action: Like, From: "+this.state.session._id)
+    
+  }
+  favoriteHandler = () => {
+    alert("Action: Favorite, From: "+this.state.session._id)
+  }
+  shareHandler = () => {
+    alert("Action: Share")
+  }
+  quoteHandler = () => {
+    alert("Action: Quote")
+  }
   
   render() {
 
@@ -183,7 +200,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         </Helmet>
           <div className="ModalViewer">
             <div className="MetaNew">
-              <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '15px'}} />
+              <img src={this.state.newscard.newspaper.thumbnail} style={{height: '20px'}} />
               <span className="DateNew">{this.formatDate(this.state.newscard.published)}</span>
             </div>
             
@@ -215,25 +232,31 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                 
               </div>
               <div className="NewsCardFooter">
+              
                 <div className="FooterLeft Actions">
-                  <button className="actionBtn">
-                    <FontAwesomeIcon icon="thumbs-up"/> 
-                    <span> 0</span>
-                  </button>
-                  <button className="actionBtn">
-                    <FontAwesomeIcon icon="star"/>
-                    <span> 0</span>
-                  </button>
-                  <button className="actionBtn">
-                    <FontAwesomeIcon icon="share-alt"/> 
-                    <span> 0</span>
-                  </button>
-                  <button className="actionBtn">
-                    <FontAwesomeIcon icon="quote-right"/>
-                  </button>
-                  <button className="actionBtn"  onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)}>
-                    <FontAwesomeIcon icon="link" />
-                  </button>
+                  {this.state.session != undefined &&
+                    <button className="actionBtn" onClick={this.likeHandler}>
+                      <FontAwesomeIcon icon="thumbs-up"/> 
+                      <span> 0</span>
+                    </button>
+                  }
+                  {this.state.session != undefined &&
+                    <button className="actionBtn" onClick={this.favoriteHandler}>
+                      <FontAwesomeIcon icon="star"/>
+                      <span> 0</span>
+                    </button>
+                  }
+                  
+                    <button className="actionBtn" onClick={this.shareHandler}>
+                      <FontAwesomeIcon icon="share-alt"/> 
+                      <span> 0</span>
+                    </button>
+                    <button className="actionBtn" onClick={this.quoteHandler}>
+                      <FontAwesomeIcon icon="quote-right"/>
+                    </button>
+                    <button className="actionBtn" onClick={() => window.open(this.state.newscard.url,this.state.newscard.title)}>
+                      <FontAwesomeIcon icon="link" />
+                    </button>
 
                 </div>
                 <div className="FooterRight Actions">
