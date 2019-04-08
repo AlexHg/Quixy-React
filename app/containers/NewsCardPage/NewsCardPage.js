@@ -36,7 +36,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       ()=> document.querySelector('.ModalViewerContainer').className = "ModalViewerContainer mounted",
       200
     )
-    ReactDOM.findDOMNode(this).scrollIntoView(false);
+    document.querySelector(".PageArea").scrollTop = 0;
     document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentDidUpdate(){
@@ -49,7 +49,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         },
         200
       )
-      ReactDOM.findDOMNode(this).scrollIntoView(false);
+      document.querySelector(".PageArea").scrollTop = 0;
     }
     document.querySelector(".PrincipalFooter #tab2").click();
   }

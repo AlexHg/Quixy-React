@@ -41,12 +41,17 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       },
       200
     )
-    ReactDOM.findDOMNode(this).scrollIntoView(false);
+    //ReactDOM.findDOMNode(this).scrollIntoView(false);
+    document.querySelector(".PageArea").scrollTop = 0;
     document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentDidUpdate(){
 
-    if(this.state.slugChange) this.mountData();
+    if(this.state.slugChange){
+      this.mountData();
+      
+    }
+    document.querySelector(".PageArea").scrollTop = 0;
     document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentWillMount() { 
