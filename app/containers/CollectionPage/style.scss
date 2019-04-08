@@ -32,6 +32,17 @@
         height: 100%;
       }
     }
+    @media screen and (max-width: 700px), (min-width:1000px) and (max-width: 1170px){
+      grid-template-columns: 1fr;
+      .CPHImage{
+        height: 200px;
+        img{
+          min-height: 100%;
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
     .CPHContent{
       display: flex;
       align-content: space-between;

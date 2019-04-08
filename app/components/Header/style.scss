@@ -24,7 +24,7 @@
 }
 .profile-menu{
   height: 100vh;
-  width: 300px;
+  width: 0;
   background:#222;
   position: absolute;
   top:51px;
@@ -54,8 +54,11 @@
       .Username{
         color: #741c3e;
       }
-      &.Footer{
+      .Footer{
         background: #741c3e;
+        .ButtonF{
+          background: #741c3e;
+        }
       }
       button, a[type=btn]{
         border: 2px solid #741c3e;
@@ -88,10 +91,11 @@
       .Username{
         color: #1f3e7c;
       }
-      &.Footer{
+      .Footer{
         background: #2b4e94;
         .ButtonF{
           color:white;
+          background: #2b4e94;
         }
       }
       button,  a[type=btn]{
@@ -124,8 +128,11 @@
       .Username{
         color: #222;
       }
-      &.Footer{
+      .Footer{
         background: #222;
+        .ButtonF{
+          background: #222;
+        }
       }
       button, a[type=btn]{
         border: 2px solid #222;
@@ -157,8 +164,11 @@
       .Username{
         color: #041122;
       }
-      &.Footer{
+      .Footer{
         background: #041122;
+        .ButtonF{
+          background: #041122;
+        }
       }
       button, a[type=btn]{
         border: 2px solid #041122;
@@ -190,10 +200,11 @@
       .Username{
         color: #0c0330;
       }
-      &.Footer{
+      .Footer{
         background: #0c0330;
         .ButtonF{
             color:#f6ecc8;
+            background: #0c0330;
         }
       }
       button, a[type=btn]{
@@ -226,10 +237,11 @@
       .Username{
         color: #2b2424;
       }
-      &.Footer{
+      .Footer{
         background: #2b2424; //#786b40;
         .ButtonF{
             color:#c4b493;
+            background: #2b2424;
         }
       } 
       

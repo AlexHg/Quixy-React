@@ -19,6 +19,8 @@ import NewsCardPage from 'containers/NewsCardPage/Loadable';
 import CollectionPage from 'containers/CollectionPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
+import PrincipalFooter from 'components/PrincipalFooter';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {apiRestHost,apiRestHostDev} from '../../server.json';
 import http from 'http';
@@ -46,22 +48,22 @@ export default class Principal extends React.Component { // eslint-disable-line 
 
   componentDidMount(){
     ReactDOM.findDOMNode(this.refs.pagearea)
-      .addEventListener('scroll', this.getMoreEntries);
+      .addEventListener('scroll', this.getMoreEntriesNC);
   }
 
   componentWillUnmount(){
     ReactDOM.findDOMNode(this.refs.pagearea)
-      .removeEventListener('scroll', this.getMoreEntries);
+      .removeEventListener('scroll', this.getMoreEntriesNC);
   }
 
   // Solo funciona si existe #carg en la pagina
-  getMoreEntries = () => {
-    var getMore = document.querySelector("#getMore.available");
+  getMoreEntriesNC = () => {
+    var getMoreNC = document.querySelector("#getMoreNC.available");
     
-    if(getMore == undefined) return;
+    if(getMoreNC == undefined) return;
 
     var pageCount = this.state;
-    var rect = getMore.getBoundingClientRect();
+    var rect = getMoreNC.getBoundingClientRect();
     var elemTop = rect.top;
     var elemBottom = rect.bottom;
 
@@ -70,7 +72,6 @@ export default class Principal extends React.Component { // eslint-disable-line 
 
     
     if(isVisible){
-      //getMore.className = "not-available";
       var pageCountNext = this.state.pageCount + 1;
       this.setState({pageCount: pageCountNext})
       //console.log("visible", this.state.pageCount)
@@ -79,7 +80,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
 
   render() { 
     return (
-      <div className="Principal" >
+      <div className="Principal tab1">
         <aside className="FeaturedAside">
           <div className="BreakingNewsSlider">
             <BreakingNew key={1} params={{
@@ -140,6 +141,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
         </Switch>
         </section>
 
+        <PrincipalFooter/>
       </div>
     );
   }

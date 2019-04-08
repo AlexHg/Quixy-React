@@ -67,7 +67,6 @@ const App = () => {
 
         <Route path="" component={NotFoundPage} />
       </Switch>
-      <Footer></Footer> 
     </div>
   )
 };

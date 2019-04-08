@@ -4,15 +4,48 @@
   grid-template-rows: 1fr;
   width: 100%;
   height: 94vh;
+  transition: margin-left .5s;
   @media screen and (max-width:1000px){
     height: 85vh!important;
+    grid-template-columns: 100% 100%;
+    /*position:absolute;
+    left:0;
+    margin-left: -100%;*/
+    &.tab1{
+      .PageArea{
+        transition: opacity .5s;
+        display:none;
+        opacity: 0;
+      }
+      .FeaturedAside{
+        transition: opacity .5s;
+        display:block;
+        opacity: 1;
+      }
+    }
+    &.tab2{
+      .PageArea{
+        transition: opacity .5s;
+        display:block;
+        opacity: 1;
+      }
+      .FeaturedAside{
+        transition: opacity .5s;
+        display:none;
+        opacity: 0;
+      }
+    }
   }
 }
 
 .FeaturedAside, .PageArea{
   overflow-y: scroll;
-  max-width: 100vw;
+  max-width: 100%;
   padding: 2rem;
+  transition: opacity .5s;
+  @media screen and (max-width: 630px){
+    padding: 1rem;
+  }
 }
 .FeaturedAside{
   .BreakingNewsSlider{
@@ -25,6 +58,9 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 1rem;
+    @media screen and (min-width:750px) and (max-width: 1000px){
+      grid-template-columns: 1fr 1fr 1fr;
+    }
     .RecomendationTitle{
       grid-column-start: 1;
       grid-column-end: -1;

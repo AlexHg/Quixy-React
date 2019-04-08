@@ -6,7 +6,7 @@ import './style.scss';
 const Collection = ({params}) => {
     params.slug = params.title.replace(/ /g,'-').toLowerCase()
     return (
-        <Link className="Collection" to={"/collection/"+params.slug}>
+        <Link className="Collection" to={"/collection/"+params.slug} >
             <img className="BackgroundImage" src={params.image} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
             <div className="CollectionInfo">
                 <div className="arrow"></div>

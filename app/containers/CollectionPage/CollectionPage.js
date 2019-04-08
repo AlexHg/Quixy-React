@@ -35,13 +35,19 @@ export default class CollectionPage extends React.Component { // eslint-disable-
 
   componentDidMount(){
     setTimeout(
-      ()=> document.querySelector('.CollectionPage').className += " mounted",
+      ()=>{
+        document.querySelector('.CollectionPage').className += " mounted"
+        //document.querySelector(".PrincipalFooter #t2").click();
+      },
       200
     )
     ReactDOM.findDOMNode(this).scrollIntoView(false);
+    document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentDidUpdate(){
+
     if(this.state.slugChange) this.mountData();
+    document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentWillMount() { 
     this.mountData();
@@ -49,7 +55,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   };
 
   mountData(){
-    fetch("http://"+window.location.hostname+':8080/api/newscards/')
+    fetch("http://"+window.location.hostname+':8080/api/newscards/10/1')
       .then((response) => {
         return response.json()
       }).then((newscards) => {
@@ -99,13 +105,16 @@ export default class CollectionPage extends React.Component { // eslint-disable-
             <div className="CPHFooter">
               <div className="FooterLeft Actions">
                 <button className="actionBtn">
-                  <FontAwesomeIcon icon="thumbs-up"/> 0
+                  <FontAwesomeIcon icon="thumbs-up"/> 
+                  <span> 0</span>
                 </button>
                 <button className="actionBtn">
-                  <FontAwesomeIcon icon="star"/> 0
+                  <FontAwesomeIcon icon="star"/> 
+                  <span> 0</span>
                 </button>
                 <button className="actionBtn">
-                  <FontAwesomeIcon icon="share-alt"/> 0
+                  <FontAwesomeIcon icon="share-alt"/> 
+                  <span> 0</span>
                 </button>
 
               </div>

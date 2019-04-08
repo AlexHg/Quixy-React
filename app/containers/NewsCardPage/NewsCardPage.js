@@ -29,6 +29,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
   componentWillMount() {
     this.mountData();
     return "cargando...";
+    
   }
   componentDidMount(){
     setTimeout(
@@ -36,6 +37,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       200
     )
     ReactDOM.findDOMNode(this).scrollIntoView(false);
+    document.querySelector(".PrincipalFooter #tab2").click();
   }
   componentDidUpdate(){
     if(this.state.slugChange){
@@ -49,6 +51,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       )
       ReactDOM.findDOMNode(this).scrollIntoView(false);
     }
+    document.querySelector(".PrincipalFooter #tab2").click();
   }
 
   componentWillReceiveProps(nextProps){
@@ -214,13 +217,16 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               <div className="NewsCardFooter">
                 <div className="FooterLeft Actions">
                   <button className="actionBtn">
-                    <FontAwesomeIcon icon="thumbs-up"/> 0
+                    <FontAwesomeIcon icon="thumbs-up"/> 
+                    <span> 0</span>
                   </button>
                   <button className="actionBtn">
-                    <FontAwesomeIcon icon="star"/> 0
+                    <FontAwesomeIcon icon="star"/>
+                    <span> 0</span>
                   </button>
                   <button className="actionBtn">
-                    <FontAwesomeIcon icon="share-alt"/> 0
+                    <FontAwesomeIcon icon="share-alt"/> 
+                    <span> 0</span>
                   </button>
                   <button className="actionBtn">
                     <FontAwesomeIcon icon="quote-right"/>
@@ -242,7 +248,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               <span className="NewsCardTitle" >
                 {this.state.newscard.title}
               </span>
-              <img className="Thumbnail" style={{width:'400px',float: 'right', margin: '2rem 15px 15px 2rem'}} src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+              <img className="Thumbnail" style={{maxWidth:'100%',width:'400px',float: 'right', margin: '2rem 15px 15px 2rem'}} src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
               <br/>{this.state.newscard.body}
               <div style={{textAlign:"right"}}>
                 <br/>

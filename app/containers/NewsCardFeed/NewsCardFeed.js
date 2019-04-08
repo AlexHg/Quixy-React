@@ -40,18 +40,17 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
       this.setState({pageCount: params.pageCount, newPage: true});
   }
   componentDidUpdate(){
-    var getMore = document.querySelector("#getMore.available");
+    var getMoreNC = document.querySelector("#getMoreNC.available");
     if(this.state.newPage){
       fetch("http://"+window.location.hostname+':8080/api/newscards/8/'+this.state.pageCount)
       .then((response) => {
         return response.json()
       }).then((newscards) => {
         if(newscards.length == 0){
-          getMore.classList="notAvaliable"
+          getMoreNC.classList="notAvaliable"
         }
-        //console.log(JSON.stringify(newscards[0]));
+
         this.setState({newPage: false, resultados: this.state.resultados.concat(newscards) })
-        //var getMore = document.querySelector("#getMore.not-available").className="available"
       })
     }
     //console.log(this.state.elementClicked)
@@ -119,7 +118,7 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
         
         {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado} /> )}
 
-        <div id="getMore" className="available"></div>
+        <div id="getMoreNC" className="available"></div>
       
       </div>
     );

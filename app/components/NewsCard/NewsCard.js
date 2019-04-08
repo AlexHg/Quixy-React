@@ -63,7 +63,12 @@ const NewsCard = ({params}) => {
             {params.title}
           </Link>
 
-          <p className="Summary">{params.summary}</p>
+          <p className="Summary">
+            {params.summary}
+          </p>
+          <div className="publishedAtMovil">
+              Publicado el {formatDate(params.published)}
+          </div>
         </div>
         <div className="clip">
           <Link to={"/newscard/"+params.slug}>
@@ -84,9 +89,10 @@ const NewsCard = ({params}) => {
           <span className="actionCounter">
             <FontAwesomeIcon icon="share-alt"/> 0
           </span>
-          &nbsp;&nbsp;&nbsp;
-          Publicado el {formatDate(params.published)}
-
+          <span className="publishedAt">
+            &nbsp;&nbsp;&nbsp;
+            Publicado el {formatDate(params.published)}
+          </span>
         </div>
         <div className="FooterRight">
           <Link type="btn" to={"/newscard/"+params.slug}>Leer más...</Link>
