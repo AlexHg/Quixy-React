@@ -53,4 +53,33 @@
             padding: 1rem;
         }
     }
+
+    .AccountSwitch{
+        .History{
+            background:white;
+            border: 1px solid #e2e2e2;
+            padding:1rem;
+            .HistoryElem:first-child{
+                border-top: 1px solid #e2e2e2;
+            }
+            .HistoryElem{
+                border-bottom: 1px solid #e2e2e2;
+                padding: .5rem 1rem;
+                color:gray;
+                transition: all .5s;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                text-decoration: none;
+                &:hover{
+                    color:black;
+                }
+                .HistoryDate{
+                    font-size: 12px;
+                }
+            }
+        }
+
+    }
 }

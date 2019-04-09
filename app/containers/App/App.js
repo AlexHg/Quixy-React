@@ -40,7 +40,7 @@ class Logout extends React.Component {
 
 const App = () => {
   (function(){
-    fetch("http://"+window.location.hostname+':8080/api/auth/history/newscards')
+    fetch("http://"+window.location.hostname+':8080/api/auth/history/')
       .then((response) => {
         return response.json()
       }).then((session) => {

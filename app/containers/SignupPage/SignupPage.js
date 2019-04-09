@@ -6,6 +6,8 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
+import AccountFooter from 'components/AccountFooter';
+
 import './style.scss';
 import {apiRestHost,apiRestHostDev} from '../../server.json';
 export default class SignupPage extends React.Component {
@@ -54,6 +56,9 @@ export default class SignupPage extends React.Component {
         console.log(this.state.session);*/
         var u = user.userData
         u.password="************";
+        u.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+
+
         sessionStorage.setItem('session',JSON.stringify(u));
         this.props.history.push('/account')
       }
@@ -191,7 +196,7 @@ export default class SignupPage extends React.Component {
                 />
               </FormGroup>
               
-              <div id="errorl"><br/></div>
+              <div id="errorl"><br/></div> 
               <Button
                 block
                 type="submit"
@@ -207,6 +212,7 @@ export default class SignupPage extends React.Component {
             </form>
           </div>
         </div>
+        <AccountFooter/>
       </div>
     );
   }
