@@ -55,7 +55,7 @@ export default class SignupPage extends React.Component {
         var u = user.userData
         u.password="************";
         sessionStorage.setItem('session',JSON.stringify(u));
-        this.props.history.push('/')
+        this.props.history.push('/account')
       }
      
     })
@@ -110,7 +110,7 @@ export default class SignupPage extends React.Component {
   componentWillMount() {
     //Middleware temporal
     if(sessionStorage.getItem("session") != undefined)
-      this.props.history.push('/')
+      this.props.history.push('/account')
   }
   render() {
     return (

@@ -57,15 +57,15 @@ const App = () => {
         <meta name="description" content="Plataforma de noticias inteligente (IA, PNL, RS)" />
       </Helmet>
       <Header />
-      <Switch>
+      <Switch> 
         <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
         <Route exact path="/(feed|newscard|collection)/:slug?" component={Principal} />
 
-        <Route path="/user(/:path)?" component={BusquedaPage} />
+        <Route path="/user/:path?" component={BusquedaPage} />
 
-        <Route path="/search(/:path)?" component={BusquedaPage} />
+        <Route path="/search/:path?" component={BusquedaPage} />
 
-        <Route path="/account(/:path)?" exact component={AccountPage} />
+        <Route path="/account/:path?" exact component={AccountPage} />
 
         <Route path="/session" exact component={SignupPage} />
         <Route path="/logout" exact component={Logout} />

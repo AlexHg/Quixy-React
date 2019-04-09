@@ -4,16 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Route, Redirect } from 'react-router'
 import './style.scss';
 
-class PrincipalFooter extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AccountFooter extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  constructor({match}){
+  constructor(){
     super();
     this.state = {
       session: {
         active: false,
       },
     }
-    //console.log("match",match)
   }
 
   tab1(){
@@ -27,21 +26,20 @@ class PrincipalFooter extends React.Component { // eslint-disable-line react/pre
   }
 
   
-
   render() {
     return(
         <div className="PrincipalFooter Footer">
-            <div className="ButtonF" id="tab1" onClick={this.tab1}>
+            <Link className="ButtonF" to="/feed/tab1" >
                 <FontAwesomeIcon icon="warehouse" style={{cursor:'pointer'}} />
-            </div>
-            <div className="ButtonF" id="tab2" onClick={this.tab2}>
+            </Link>
+            <Link className="ButtonF" to="/feed/tab2" >
                 <FontAwesomeIcon icon="newspaper" style={{cursor:'pointer'}} />
-            </div>
-            <Link className="ButtonF" to="/account">
+            </Link>
+            <Link className="ButtonF" to="/account" style={{filter: 'brightness(50%)'}}>
                 <FontAwesomeIcon icon="user" style={{cursor:'pointer'}} />
             </Link>
         </div>
     )
   }
 }
-export default PrincipalFooter;
+export default AccountFooter;

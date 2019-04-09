@@ -47,8 +47,8 @@ export default class Principal extends React.Component { // eslint-disable-line 
   };
 
   componentDidMount(){
-    /*if(this.state.tab == 'tab1' || this.state.tab == 'tab2') //console.log("go to "+this.state.tab)
-      document.querySelector("#"+this.state.tab).click();*/
+    if(this.state.tab == 'tab1' || this.state.tab == 'tab2') //console.log("go to "+this.state.tab)
+      document.querySelector("#"+this.state.tab).click();
     ReactDOM.findDOMNode(this.refs.pagearea)
       .addEventListener('scroll', this.getMoreEntriesNC);
   }
@@ -114,7 +114,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
 
             <h3 className="RecomendationTitle">Recien llegado</h3>
             <Collection key={5} params={{
-              title:"AMLO en presidencia",
+              title:"AMLO en presidencia", 
               image:require("images/bnews/b1.jpg"),
               description:"Lorem Ipsum Dat ed Ipsum"
             }} />

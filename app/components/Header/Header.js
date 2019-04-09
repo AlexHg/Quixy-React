@@ -80,7 +80,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           </div>
           {this.state.session.active && (
             <Link className="profilem" to="/account">
-              <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/>
+              <img src={this.state.session.photo}/>
             </Link>
           )}
           
