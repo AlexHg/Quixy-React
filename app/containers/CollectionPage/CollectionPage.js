@@ -60,7 +60,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   };
 
   mountData(){
-    fetch("http://"+window.location.hostname+':8080/api/newscards/10/1')
+    fetch("http://"+window.location.hostname+':8080/api/newscards/get/10/1')
       .then((response) => {
         return response.json()
       }).then((newscards) => {

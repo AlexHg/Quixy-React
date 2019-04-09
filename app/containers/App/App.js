@@ -10,17 +10,19 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+
 import SignupPage from 'containers/SignupPage/Loadable';
 import BusquedaPage from 'containers/BusquedaPage/Loadable';
 
 import Principal from 'containers/Principal/Loadable';
+import AccountPage from 'containers/AccountPage/Loadable';
 
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import './style.scss';
-import NewsCardPage from 'containers/NewsCardPage/Loadable';
+
 
 import {apiRestHost,apiRestHostDev} from '../../server.json';
 
@@ -62,6 +64,9 @@ const App = () => {
         <Route path="/user(/:path)?" component={BusquedaPage} />
 
         <Route path="/search(/:path)?" component={BusquedaPage} />
+
+        <Route path="/account(/:path)?" exact component={AccountPage} />
+
         <Route path="/session" exact component={SignupPage} />
         <Route path="/logout" exact component={Logout} />
 

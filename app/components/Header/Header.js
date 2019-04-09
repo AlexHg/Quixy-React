@@ -79,18 +79,18 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             
           </div>
           {this.state.session.active && (
-            <label className="profilem" htmlFor="profile-menu-launcher">
+            <Link className="profilem" to="/account">
               <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/>
-            </label>
+            </Link>
           )}
           
         </div>
-        <div className="nav-mobile">
+        <label className="nav-mobile" htmlFor="mobile-menu-launcher">
           <FontAwesomeIcon icon="bars" style={{cursor:'pointer'}} />
-        </div>
+        </label>
         
-        <input type="checkbox" id="profile-menu-launcher"/>
-        <div className="profile-menu"></div>
+        <input type="checkbox" id="mobile-menu-launcher"/>
+        <div className="mobile-menu"></div>
       </div>
     );
   }
