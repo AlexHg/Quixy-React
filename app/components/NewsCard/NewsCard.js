@@ -81,13 +81,13 @@ const NewsCard = ({params}) => {
       <div className="NewsCardFooter">
         <div className="FooterLeft">
           <span className="actionCounter">
-            <FontAwesomeIcon icon="thumbs-up"/> 0
+            <FontAwesomeIcon icon="thumbs-up"/> {params.actions.likes.length}
           </span>
           <span className="actionCounter">
-            <FontAwesomeIcon icon="comment"/> 0
+            <FontAwesomeIcon icon="comment"/> {params.actions.comments.length}
           </span>
           <span className="actionCounter">
-            <FontAwesomeIcon icon="share-alt"/> 0
+            <FontAwesomeIcon icon="share-alt"/> {params.actions.shares.length}
           </span>
           <span className="publishedAt">
             &nbsp;&nbsp;&nbsp;

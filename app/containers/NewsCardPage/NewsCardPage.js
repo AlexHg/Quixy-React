@@ -302,13 +302,13 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                   {this.state.session != undefined &&
                     <button className="actionBtn" onClick={this.favoriteHandler}>
                       <FontAwesomeIcon icon="star"/>
-                      <span> 0</span>
+                      <span> {this.state.newscard.actions.favorites.length}</span>
                     </button>
                   }
                   
                     <button className="actionBtn" onClick={this.shareHandler}>
                       <FontAwesomeIcon icon="share-alt"/> 
-                      <span> 0</span>
+                      <span> {this.state.newscard.actions.shares.length}</span>
                     </button>
                     <button className="actionBtn" onClick={this.quoteHandler}>
                       <FontAwesomeIcon icon="quote-right"/>
