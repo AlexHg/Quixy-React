@@ -39,7 +39,7 @@ class Logout extends React.Component {
 }
 
 const App = () => {
-  (function(){
+  /*(function(){
     fetch("http://"+window.location.hostname+':8080/api/auth/history/')
       .then((response) => {
         return response.json()
@@ -47,7 +47,7 @@ const App = () => {
         console.log(session)
         //if(session.type == "error") sessionStorage.removeItem("session")
       })
-  })();
+  })();*/
   return (
     <div className="app-wrapper">
       <Helmet

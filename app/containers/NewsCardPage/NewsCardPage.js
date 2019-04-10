@@ -19,11 +19,14 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     this.state = {
       slug: match.params.slug,
       slugChange: false,
-      session: JSON.parse(sessionStorage.getItem("session")),
+      session: {active: false, ...JSON.parse(sessionStorage.getItem("session"))},
       newscard: {
         gallery: [], 
         newspaper: {
           thumbnail: "",
+        },
+        actions: {
+          comments: [],
         },
       },
       
@@ -69,12 +72,14 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       
     }
   }
-  mountData(){
+  mountData = () =>{
     fetch("http://"+window.location.hostname+":8080/api/newscards/slug/"+this.state.slug)
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
         this.setState({newscard: newscard_r, slugChange:false})
+        //console.log(this.state.newscard)
+        if(this.state.session.active) this.viewHandler();
       })
   }
 
@@ -111,16 +116,59 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     }, 10);
     
   }
-  
+  viewHandler = ()=>{
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/view",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      console.log(response)
+    })
+  }
   likeHandler = () => {
     alert("Action: Like, From: "+this.state.session._id)
-    
   }
   favoriteHandler = () => {
     alert("Action: Favorite, From: "+this.state.session._id)
   }
   shareHandler = () => {
     alert("Action: Share")
+  }
+  commentHandler = (target) => {    
+    var textArea = target.parentNode.querySelector(".CommentArea")
+    var comment = textArea.value;
+    if(comment.length > 0){
+      //alert("Comment: "+comment+" From: "+this.state.session._id)
+      fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/comment",{
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "comment": comment,
+          "email": this.state.session.email.toLowerCase(),
+          "token": this.state.session.token,
+        })
+      })
+      .then((response) => {
+        return (response.json())
+      })
+      .then(ActionList => {
+        console.log(ActionList)
+        this.state.newscard.actions = ActionList;
+        this.forceUpdate();
+        textArea.value=""
+      })
+    }
+    
   }
   quoteHandler = () => {
     alert("Action: Quote")
@@ -166,24 +214,13 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       }
     ]
     var comments = [
+
       { 
-        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
-        name: 'Alejandro Hernandez', 
-        email: 'alejandro@konecta.team',
-        date: Date.now(), 
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus dolor purus, sed vulputate magna congue a. Aenean pretium quam ut felis malesuada, in dapibus neque lobortis. ",
-      },
-      { 
-        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
-        name: 'Alejandro Hernandez', 
-        email: 'alejandro@konecta.team',
-        date: Date.now(), 
-        content: "Etiam et ligula vestibulum, pellentesque neque ultricies, porttitor nisl.",
-      },
-      { 
-        image: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
-        name: 'Alejandro Hernandez', 
-        email: 'alejandro@konecta.team',
+        user: {
+          photo: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
+          name: 'Alejandro Hernandez', 
+          email: 'alejandro@konecta.team',
+        },
         date: Date.now(), 
         content: "Suspendisse potenti. Cras ut nulla aliquet, vestibulum felis et, scelerisque risus. Phasellus pulvinar, risus at sodales semper, quam lacus ullamcorper justo, et porta dui felis id velit. Nam vel elit dictum, consequat mauris ac, tincidunt nisl.",
       }
@@ -310,25 +347,25 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
 
                 {this.state.session != undefined &&
                   <div className="CommentInput">
-                      <textarea placeholder="Escribe algo..."></textarea>
+                      <textarea className="CommentArea" placeholder="Escribe algo..."></textarea>
                       <br/>
-                      <button className="CommentGo" style={{marginTop: '.7rem'}}>Comentar</button>
+                      <button className="CommentGo" style={{marginTop: '.7rem'}} onClick={({target}) => this.commentHandler(target)}>Comentar</button>
                   </div>
                 }
-                {comments.map((comment, i)=>(
+                {this.state.newscard.actions.comments.map((comment, i)=>(
                   <div className="Comment" key={'comment-'+i}>
                     <div className="CommentHeader">
                       <div className="ProfileImage">
-                        <Link to={"/user/"+comment.email}>
-                          <img src={comment.image} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
+                        <Link to={"/user/"+comment.user.email}>
+                          <img src={""+comment.user.photo} onError={(e)=>{e.target.onerror = null; e.target.src=require('images/imagenno.png')}}/>
                         </Link>
                       </div>
                     </div>
                     <div className="CommentText" >
-                      <Link className="Username" to={"/user/"+comment.email}>{comment.name}</Link> 
+                      <Link className="Username" to={"/user/"+comment.user.email}>{comment.user.name}</Link> 
                       {comment.content}
                     </div>
-                    <span className="CommentDate">Publicado {this.formatDate(comment.date)}</span>
+                    <span className="CommentDate">Publicado {this.formatDate(comment.created)}</span>
                   </div>
                 ))}
               </div>

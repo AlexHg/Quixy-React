@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 import AccountFooter from 'components/AccountFooter';
 import './style.scss';
@@ -13,11 +14,13 @@ export default class AccountPage extends React.Component {
       this.state = {
         session: {
             active:false, 
+            history: [],
             ...JSON.parse(sessionStorage.getItem("session")),
         },
       };
       console.log(match);
       console.log(this.state.session);
+      this.getHistory();
     }
 
     componentWillMount(){    
@@ -37,9 +40,19 @@ export default class AccountPage extends React.Component {
         var HistoryExample = [
             {
                 date: Date.now(),
-                type: "view", // View || Like || Share || Favorite || Search || Comment
+                typeData: "view", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "newscard", // Newscard || Collection || Search
+                    typeData: "newscard", // Newscard || Collection || Search
+                    title: "Trump pisa fuerte para el cierre de la frontera con México",
+                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
+                    comment: ""
+                },
+            },  
+            {
+                date: Date.now(),
+                typeData: "view", // View || Like || Share || Favorite || Search || Comment
+                content: {
+                    typeData: "collection", // Newscard || Collection || Search
                     title: "Trump pisa fuerte para el cierre de la frontera con México",
                     slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
                     comment: ""
@@ -47,9 +60,9 @@ export default class AccountPage extends React.Component {
             },
             {
                 date: Date.now(),
-                type: "view", // View || Like || Share || Favorite || Search || Comment
+                typeData: "like", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "collection", // Newscard || Collection || Search
+                    typeData: "collection", // Newscard || Collection || Search
                     title: "Trump pisa fuerte para el cierre de la frontera con México",
                     slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
                     comment: ""
@@ -57,19 +70,9 @@ export default class AccountPage extends React.Component {
             },
             {
                 date: Date.now(),
-                type: "like", // View || Like || Share || Favorite || Search || Comment
+                typeData: "comment", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "collection", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },
-            {
-                date: Date.now(),
-                type: "comment", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    type: "newscard", // Newscard || Collection || Search
+                    typeData: "newscard", // Newscard || Collection || Search
                     title: "Trump pisa fuerte para el cierre de la frontera con México",
                     slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
                     comment: "Hola a todos"
@@ -77,9 +80,9 @@ export default class AccountPage extends React.Component {
             },
             {
                 date: Date.now(),
-                type: "search", // View || Like || Share || Favorite || Search || Comment
+                typeData: "search", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "newscard", // Newscard || Collection || Search
+                    typeData: "newscard", // Newscard || Collection || Search
                     title: "Noticias de Peña nieto",
                     slug: "Noticias de Peña nieto",
                     comment: ""
@@ -87,9 +90,9 @@ export default class AccountPage extends React.Component {
             },
             {
                 date: Date.now(),
-                type: "view", // View || Like || Share || Favorite || Search || Comment
+                typeData: "view", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "newscard", // Newscard || Collection || Search
+                    typeData: "newscard", // Newscard || Collection || Search
                     title: "Trump pisa fuerte para el cierre de la frontera con México",
                     slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
                     comment: ""
@@ -97,16 +100,40 @@ export default class AccountPage extends React.Component {
             },
             {
                 date: Date.now(),
-                type: "favorite", // View || Like || Share || Favorite || Search || Comment
+                typeData: "favorite", // View || Like || Share || Favorite || Search || Comment
                 content: {
-                    type: "collection", // Newscard || Collection || Search
+                    typeData: "collection", // Newscard || Collection || Search
                     title: "Trump pisa fuerte para el cierre de la frontera con México",
                     slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
                     comment: ""
                 },
             },
         ]
-        return HistoryExample;
+        var HistoryRet = [];
+        fetch("http://"+window.location.hostname+":8080/api/auth/history",{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": this.state.session._id,
+                "email": this.state.session.email.toLowerCase(),
+                "token": this.state.session.token,
+            })
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then(history => {
+            
+            this.state.session.history = history
+            
+            this.forceUpdate()
+            console.log(this.state.session.history)
+
+        })
+        
     }
 
 
@@ -133,7 +160,6 @@ export default class AccountPage extends React.Component {
                     <nav className="UserNav">
                         <Link to="/account/history">Historial</Link><br/>
                         <Link to="/account/edit">Editar información</Link><br/>
-                        <Link to="/account/preferences">Preferencias de usuario</Link><br/>
                         <Link to="/account/configuration">Configuración</Link><br/>
                         <Link to="/logout">Cerrar sesión</Link><br/>
                     </nav>
@@ -145,30 +171,32 @@ export default class AccountPage extends React.Component {
                                 <h2>Historial de actividad</h2><br/>
                                 <div className="AllHistory">
                                     
-                                    {this.getHistory().map((hist, i)=>(
+                                    {this.state.session.history.map((hist, i)=>(
                                         <Link to={
-                                                "/"+(hist.type=="search" && "search" || hist.content.type)+"/"+hist.content.slug
+                                                "/"+(hist.typeData=="search" && "search" || typeof hist.content.typeData != undefined && hist.content.typeData)+"/"+hist.content.slug
                                             } 
-                                        className="HistoryElem">
-                                            {hist.type == "search" && (
+                                            key={"history-"+i}
+                                            className="HistoryElem"
+                                        >
+                                            {hist.typeData == "search" && (
                                                 <div>
-                                                    <FontAwesomeIcon icon="search"/> Busqueda '{hist.content.title}'
+                                                    <FontAwesomeIcon icon="search"/>&nbsp;&nbsp; Busqueda '{hist.content.title}'
                                                 </div>
-                                            ) || hist.type == "view" && (
+                                            ) || hist.typeData == "view" && (
                                                 <div>
-                                                    <FontAwesomeIcon icon={hist.content.type == "newscard" && "newspaper" || "warehouse"}/>
-                                                    &nbsp;
-                                                    {this.capitalizeFst(hist.content.type)} visitado
+                                                    <FontAwesomeIcon icon={hist.content.typeData == "newscard" && "newspaper" || "warehouse"}/>
+                                                    &nbsp;&nbsp;
+                                                    {this.capitalizeFst(hist.content.typeData)} visitado
                                                     '{hist.content.title}'
                                                 </div>
                                             ) || (
                                                 <div>
-                                                    {hist.type == 'like' && <FontAwesomeIcon icon="thumbs-up"/>}
-                                                    {hist.type == 'favorite' && <FontAwesomeIcon icon="star"/>}
-                                                    {hist.type == 'share' && <FontAwesomeIcon icon="share-alt"/>}
-                                                    {hist.type == 'comment' && <FontAwesomeIcon icon="comment"/>}
-                                                    &nbsp;
-                                                    {this.capitalizeFst(hist.type)}
+                                                    {hist.typeData == 'like' && <FontAwesomeIcon icon="thumbs-up"/>}
+                                                    {hist.typeData == 'favorite' && <FontAwesomeIcon icon="star"/>}
+                                                    {hist.typeData == 'share' && <FontAwesomeIcon icon="share-alt"/>}
+                                                    {hist.typeData == 'comment' && <FontAwesomeIcon icon="comment"/>}
+                                                    &nbsp;&nbsp;
+                                                    {this.capitalizeFst(hist.typeData)}
                                                     {hist.type=="comment" && ": '"+hist.content.comment+"'"}
                                                     &nbsp;
                                                     realizado en '{hist.content.title}' 
@@ -182,10 +210,42 @@ export default class AccountPage extends React.Component {
                             </div>
                         </Route>
                         <Route exact path="/account/edit">
-                            <div>editar info</div>
-                        </Route>
-                        <Route exact path="/account/preferences">
-                            <div>Preferencias de usuario</div>
+                            <form className="UserDataEdit">
+                                <div>
+                                    <img src={this.state.session.photo} className="ProfileImage"/><br/>
+                                    <input type="file" />
+                                </div>
+                                <FormGroup controlId="rname" bsSize="large">
+                                    <ControlLabel>Nombre</ControlLabel>
+                                    <FormControl
+                                        //onChange={this.handleChange}
+                                        type="text"
+                                    />
+                                </FormGroup>
+                                <FormGroup controlId="remail" bsSize="large">
+                                    <ControlLabel>Correo electronico</ControlLabel>
+                                    <FormControl
+                                        //onChange={this.handleChange}
+                                        type="text"
+                                    />
+                                </FormGroup>
+                                <FormGroup controlId="rpassword" bsSize="large">
+                                    <ControlLabel>Contraseña</ControlLabel>
+                                    <FormControl
+                                        //onChange={this.handleChange}
+                                        autoComplete="new-password"
+                                        type="password"
+                                    />
+                                </FormGroup>
+                                <FormGroup controlId="rpasswordRepeat" bsSize="large">
+                                    <ControlLabel>Repetir contraseña</ControlLabel>
+                                    <FormControl
+                                        //onChange={this.handleChange}
+                                        autoComplete="new-password"
+                                        type="password"
+                                    />
+                                </FormGroup>
+                            </form>
                         </Route>
                         <Route exact path="/account/configuration">
                             <div>configuración</div>

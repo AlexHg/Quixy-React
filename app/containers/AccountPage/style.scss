@@ -76,10 +76,21 @@
                     color:black;
                 }
                 .HistoryDate{
-                    font-size: 12px;
+                    font-size: 11px;
                 }
             }
         }
-
+        .UserDataEdit{
+            background:white;
+            border: 1px solid #e2e2e2;
+            padding:1rem;
+            .ProfileImage{
+                max-width: 200px;
+                border-radius: 4px;
+                //margin: 0 auto; 
+                display:block;
+                border: 2px solid #E2E2E2;
+            }
+        }
     }
 }
