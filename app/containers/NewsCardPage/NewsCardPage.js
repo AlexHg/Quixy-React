@@ -27,6 +27,9 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         },
         actions: {
           comments: [],
+          likes: [],
+          shares: [],
+          favorites: [],
         },
       },
       
@@ -133,7 +136,26 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     })
   }
   likeHandler = () => {
-    alert("Action: Like, From: "+this.state.session._id)
+    //alert("Comment: "+comment+" From: "+this.state.session._id)
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/like",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      return (response.json())
+    }).then(ActionList => {
+      console.log(ActionList)
+      this.state.newscard.actions = ActionList;
+      this.forceUpdate();
+      textArea.value=""
+    })
   }
   favoriteHandler = () => {
     alert("Action: Favorite, From: "+this.state.session._id)
@@ -274,7 +296,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                   {this.state.session != undefined &&
                     <button className="actionBtn" onClick={this.likeHandler}>
                       <FontAwesomeIcon icon="thumbs-up"/> 
-                      <span> 0</span>
+                      <span> {this.state.newscard.actions.likes.length}</span>
                     </button>
                   }
                   {this.state.session != undefined &&
