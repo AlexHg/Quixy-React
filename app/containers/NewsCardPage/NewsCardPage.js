@@ -365,7 +365,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
             {/*this.state.newscard.actions.comments*/}
             <div className="Secundary">
               <div className="CommentBox">
-                <h3>Comentarios (50)</h3>
+                <h3>Comentarios ({this.state.newscard.actions.comments.length})</h3>
 
                 {this.state.session != undefined &&
                   <div className="CommentInput">
@@ -374,7 +374,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                       <button className="CommentGo" style={{marginTop: '.7rem'}} onClick={({target}) => this.commentHandler(target)}>Comentar</button>
                   </div>
                 }
-                {this.state.newscard.actions.comments.map((comment, i)=>(
+                {this.state.newscard.actions.comments.map((comment, i)=> comment != null && comment.user != null && (
                   <div className="Comment" key={'comment-'+i}>
                     <div className="CommentHeader">
                       <div className="ProfileImage">

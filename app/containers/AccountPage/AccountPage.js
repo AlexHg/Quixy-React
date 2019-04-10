@@ -171,7 +171,7 @@ export default class AccountPage extends React.Component {
                                 <h2>Historial de actividad</h2><br/>
                                 <div className="AllHistory">
                                     
-                                    {this.state.session.history.map((hist, i)=>(
+                                    {this.state.session.history.map((hist, i)=> hist != null &&(
                                         <Link to={
                                                 "/"+(hist.typeData=="search" && "search" || typeof hist.content.typeData != undefined && hist.content.typeData)+"/"+hist.content.slug
                                             } 
@@ -197,7 +197,7 @@ export default class AccountPage extends React.Component {
                                                     {hist.typeData == 'comment' && <FontAwesomeIcon icon="comment"/>}
                                                     &nbsp;&nbsp;
                                                     {this.capitalizeFst(hist.typeData)}
-                                                    {hist.type=="comment" && ": '"+hist.content.comment+"'"}
+                                                    {hist.typeData=="comment" && ": '"+hist.content.comment+"'"}
                                                     &nbsp;
                                                     realizado en '{hist.content.title}' 
                                                 </div>

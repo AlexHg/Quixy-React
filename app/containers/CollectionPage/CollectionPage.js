@@ -28,7 +28,14 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       busqueda: "",
       resultados: [], 
       searchAwait: false,
-
+      collection: {
+        actions: {
+          likes: [],
+          shares: [],
+          favorites: [],
+          subscriptions: [],
+        }
+      }
     };
   }
   shouldComponentUpdate() {return true}
@@ -66,6 +73,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       }).then((newscards) => {
         //console.log(JSON.stringify(newscards[0]));
         this.setState({ resultados: newscards, slugChange:false})
+        //if(this.state.session.active) this.viewHandler();
       })
   }
   componentWillReceiveProps(nextProps){
@@ -86,6 +94,45 @@ export default class CollectionPage extends React.Component { // eslint-disable-
             //parent.removeChild(event.target);
         }
     }, false);
+  }
+
+  viewHandler = ()=>{
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/view",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      console.log(response)
+    })
+  }
+  likeHandler = () => {
+    //alert("Comment: "+comment+" From: "+this.state.session._id)
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/like",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      return (response.json())
+    }).then(ActionList => {
+      console.log(ActionList)
+      this.state.newscard.actions = ActionList;
+      this.forceUpdate();
+      textArea.value=""
+    })
   }
 
   render() { 
@@ -109,9 +156,9 @@ export default class CollectionPage extends React.Component { // eslint-disable-
             </div>
             <div className="CPHFooter">
               <div className="FooterLeft Actions">
-                <button className="actionBtn">
-                  <FontAwesomeIcon icon="thumbs-up"/> 
-                  <span> 0</span>
+                <button className="actionBtn" onClick={this.likeHandler}>
+                  <FontAwesomeIcon icon="thumbs-up" /> 
+                  <span> {this.state.collection.actions.likes.length}</span>
                 </button>
                 <button className="actionBtn">
                   <FontAwesomeIcon icon="star"/> 
