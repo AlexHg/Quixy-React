@@ -18,8 +18,8 @@ export default class AccountPage extends React.Component {
             ...JSON.parse(sessionStorage.getItem("session")),
         },
       };
-      console.log(match);
-      console.log(this.state.session);
+      //console.log(match);
+      //console.log(this.state.session);
       this.getHistory();
     }
 
@@ -130,7 +130,7 @@ export default class AccountPage extends React.Component {
             this.state.session.history = history
             
             this.forceUpdate()
-            console.log(this.state.session.history)
+            //console.log(this.state.session.history)
 
         })
         

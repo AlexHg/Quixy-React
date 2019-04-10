@@ -151,7 +151,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     .then((response) => {
       return (response.json())
     }).then(ActionList => {
-      console.log(ActionList)
+      //console.log(ActionList)
       this.state.newscard.actions = ActionList;
       this.forceUpdate();
       textArea.value=""
@@ -184,7 +184,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         return (response.json())
       })
       .then(ActionList => {
-        console.log(ActionList)
+        //console.log(ActionList)
         this.state.newscard.actions = ActionList;
         this.forceUpdate();
         textArea.value=""

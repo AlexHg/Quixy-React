@@ -79,9 +79,9 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
   listenLinks(){
     var parent = document.querySelector('.NewsCardFeed');
     parent.addEventListener('click', function (event) {
-        console.log(event.target.tagName)
+        //console.log(event.target.tagName)
         if (event.target.tagName == 'A') {
-            console.log(event.target.closest(".NewsCard"));
+            //console.log(event.target.closest(".NewsCard"));
             elementClicked = event.target.closest(".NewsCard");
             
             //parent.removeChild(event.target);

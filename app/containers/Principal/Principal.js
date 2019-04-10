@@ -39,7 +39,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
       tab: match.params.slug,
     };
     
-    console.log("p: ",this.state.tab)
+    //console.log("p: ",this.state.tab)
   }
   shouldComponentUpdate() {return true}
   componentWillMount() { 

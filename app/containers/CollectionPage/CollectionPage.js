@@ -86,9 +86,9 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   listenLinks(){
     var parent = document.querySelector('.CollectionPage');
     parent.addEventListener('click', function (event) {
-        console.log(event.target.tagName)
+        //console.log(event.target.tagName)
         if (event.target.tagName == 'A') {
-            console.log(event.target.closest(".NewsCard"));
+            //console.log(event.target.closest(".NewsCard"));
             elementClicked = event.target.closest(".NewsCard");
             
             //parent.removeChild(event.target);
@@ -128,7 +128,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
     .then((response) => {
       return (response.json())
     }).then(ActionList => {
-      console.log(ActionList)
+      //console.log(ActionList)
       this.state.newscard.actions = ActionList;
       this.forceUpdate();
       textArea.value=""
