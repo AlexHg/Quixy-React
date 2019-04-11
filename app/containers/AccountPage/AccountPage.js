@@ -179,7 +179,7 @@ export default class AccountPage extends React.Component {
                                     } className="FavElem">
                                         <FontAwesomeIcon icon={fav.typeData == "newscard" && "newspaper" || "warehouse"}/>
                                         &nbsp;&nbsp;
-                                        '{fav.title}' 
+                                        {fav.title} - {fav.typeData}
                                     </Link>
                                 ))}
                             </div>
