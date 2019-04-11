@@ -139,10 +139,10 @@ export default class CollectionPage extends React.Component { // eslint-disable-
     return (
       <div className="CollectionPage" data-offcanvas="true" >
         <Helmet> 
-          <title>Nuevas noticias</title>
+          <title>Nuevas sobre {this.state.slug.replace(/-/g, ' ')}</title>
           <meta
             name="description"
-            content="Nuevas noticias - Quixy | Plataforma de noticias inteligente"
+            content={"Nuevas sobre "+this.state.slug.replace(/-/g, ' ')+" - Quixy | Plataforma de noticias inteligente"}
           />
         </Helmet>
         <div className="CollectionPageHeader" >

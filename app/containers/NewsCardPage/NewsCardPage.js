@@ -4,7 +4,10 @@ import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Link} from "react-router-dom";
 import NewsCardMini from 'components/NewsCardMini';
 
-import qwest from 'qwest';
+import {
+  FacebookShareButton,GooglePlusShareButton,LinkedinShareButton,TwitterShareButton,PinterestShareButton,TelegramShareButton,WhatsappShareButton,RedditShareButton,EmailShareButton,TumblrShareButton,
+  FacebookIcon,TwitterIcon,GooglePlusIcon,LinkedinIcon,PinterestIcon,TelegramIcon,WhatsappIcon,RedditIcon,TumblrIcon,EmailIcon,
+} from 'react-share';
 
 //import {noticias} from '../../dataold.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +24,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       slugChange: false,
       session: {active: false, ...JSON.parse(sessionStorage.getItem("session"))},
       newscard: {
+        title: "",
         gallery: [], 
         newspaper: {
           thumbnail: "",
@@ -158,10 +162,51 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     })
   }
   favoriteHandler = () => {
-    alert("Action: Favorite, From: "+this.state.session._id)
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/favorite",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      return response.json()
+    }).then(ActionList => {
+      //console.log(ActionList)
+      this.state.newscard.actions = ActionList;
+      this.forceUpdate();
+      textArea.value=""
+    })
   }
   shareHandler = () => {
-    alert("Action: Share")
+    var SocialShareContainer = document.querySelector("#SocialShareContainer")
+    if(SocialShareContainer.className == "active") SocialShareContainer.className = "";
+    else SocialShareContainer.className = "active"
+  }
+  shareFinishedHandler = () => {
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id+"/action/share",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      return response.json()
+    }).then(ActionList => {
+      //console.log(ActionList)
+      this.state.newscard.actions = ActionList;
+      this.forceUpdate();
+      textArea.value=""
+    })
   }
   commentHandler = (target) => {    
     var textArea = target.parentNode.querySelector(".CommentArea")
@@ -274,7 +319,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                   </span>
 
                   <p className="Summary">{this.state.newscard.summary}</p>
-                
+                  
                   <span className="NewsCardAuthors">
                      {
                         this.state.newscard.authors != undefined 
@@ -324,6 +369,134 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               </div>
 
             </article>
+
+            <div id="SocialShareContainer">
+              <div className="SocialShare">
+                <FacebookShareButton
+                  url={location.href}
+                  quote={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <FacebookIcon
+                    size={32}
+                    round />
+                </FacebookShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <TwitterShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <TwitterIcon
+                    size={32}
+                    round />
+                </TwitterShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <TelegramShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <TelegramIcon size={32} round />
+                </TelegramShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <WhatsappShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  separator=":: "
+                  className="SocialShare__share-button">
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <GooglePlusShareButton
+                  url={location.href}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <GooglePlusIcon
+                    size={32}
+                    round />
+                </GooglePlusShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <LinkedinShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  windowWidth={750}
+                  windowHeight={600}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <LinkedinIcon
+                    size={32}
+                    round />
+                </LinkedinShareButton>                
+              </div>
+
+              <div className="SocialShare">
+                <PinterestShareButton
+                  url={String(window.location)}
+                  media={this.state.newscard.newspaper.thumbnail}
+                  windowWidth={1000}
+                  windowHeight={730}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <PinterestIcon size={32} round />
+                </PinterestShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <RedditShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  windowWidth={660}
+                  windowHeight={460}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <RedditIcon
+                    size={32}
+                    round />
+                </RedditShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <TumblrShareButton
+                  url={location.href}
+                  title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  windowWidth={660}
+                  windowHeight={460}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  className="SocialShare__share-button">
+                  <TumblrIcon
+                    size={32}
+                    round />
+                </TumblrShareButton>
+              </div>
+
+              <div className="SocialShare">
+                <EmailShareButton
+                  url={location.href}
+                  subject={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
+                  onShareWindowClose={this.shareFinishedHandler}
+                  body="body"
+                  className="SocialShare__share-button">
+                  <EmailIcon
+                    size={32}
+                    round />
+                </EmailShareButton>
+              </div>
+
+
+            </div>
+                        
 
             <div className="CompleteNewContent">
 

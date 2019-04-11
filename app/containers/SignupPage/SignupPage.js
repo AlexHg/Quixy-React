@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Helmet } from 'react-helmet';
 
 import AccountFooter from 'components/AccountFooter';
 
@@ -120,6 +121,13 @@ export default class SignupPage extends React.Component {
   render() {
     return (
       <div className="SignupContainer">
+        <Helmet> 
+          <title>Sesión</title>
+          <meta
+            name="description"
+            content="Sesión - Quixy | Plataforma de noticias inteligente"
+          />
+        </Helmet>
         <div className="Signup">
           <div style={{width:'100%'}}>
             <img src={require("images/darklogo.png")} style={{width:'100px'}}/><br/><br/>

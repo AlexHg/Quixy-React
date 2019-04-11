@@ -145,6 +145,13 @@ export default class AccountPage extends React.Component {
 
         return (
             <div className="AccountPage">
+                <Helmet> 
+                    <title>Mi cuenta</title>
+                    <meta
+                        name="description"
+                        content="Mi cuenta - Quixy | Plataforma de noticias inteligente"
+                    />
+                </Helmet>
                 <div className="AccountInfo">
                     <div className="ProfileCard">
                         
