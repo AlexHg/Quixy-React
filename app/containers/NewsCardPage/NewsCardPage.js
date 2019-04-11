@@ -107,6 +107,11 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     var f=new Date(date);
     return diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
   }
+  formatQuoteDate = (date) => {
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    var f=new Date(date);
+    return f.getFullYear()+", "+meses[f.getMonth()]+" "+f.getDate();
+  }
   scrollGallery = (event) => {
     let direction = event.target.dataset.dir;
     //console.log(direction)
@@ -238,7 +243,9 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     
   }
   quoteHandler = () => {
-    alert("Action: Quote")
+    var QuoteContainer = document.querySelector("#QuoteContainer")
+    if(QuoteContainer.className == "active") QuoteContainer.className = "";
+    else QuoteContainer.className = "active"
   }
   
   render() {
@@ -324,7 +331,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                      {
                         this.state.newscard.authors != undefined 
                         && "Escrito por "+this.state.newscard.authors.join(", ")
-                      }
+                      }                      
                   </span>
                 </div>
                 <div className="clip">
@@ -497,6 +504,10 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
 
             </div>
                         
+            <div id="QuoteContainer">
+              <h4>¡Agrega esta noticia a tus documentos!</h4><br/>
+              [1] {(this.state.newscard.authors || []).join(", ")}. ({this.formatQuoteDate(this.state.newscard.published)}). {this.state.newscard.title} (1nd ed.) [Online]. Available: {location.href}
+            </div>
 
             <div className="CompleteNewContent">
 

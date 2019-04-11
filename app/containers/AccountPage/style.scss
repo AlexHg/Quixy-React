@@ -83,6 +83,26 @@
                 }
             }
         }
+        .Favorites{
+            background:white;
+            border: 1px solid #e2e2e2;
+            padding:1rem;
+            .FavElem:first-child{
+                border-top: 1px solid #e2e2e2;
+            }
+            .FavElem{
+                border-bottom: 1px solid #e2e2e2;
+                padding: .5rem 1rem;
+                color:gray;
+                transition: all .5s;
+                display: block;
+                width: 100%;
+                text-decoration: none;
+                &:hover{
+                    color:black;
+                }
+            }
+        }
         .UserDataEdit{
             background:white;
             border: 1px solid #e2e2e2;

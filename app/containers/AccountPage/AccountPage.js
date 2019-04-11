@@ -15,12 +15,14 @@ export default class AccountPage extends React.Component {
         session: {
             active:false, 
             history: [],
+            favorites: [],
             ...JSON.parse(sessionStorage.getItem("session")),
         },
       };
       //console.log(match);
       //console.log(this.state.session);
       this.getHistory();
+      this.getFavorites();
     }
 
     componentWillMount(){    
@@ -37,79 +39,6 @@ export default class AccountPage extends React.Component {
     }
 
     getHistory(){
-        var HistoryExample = [
-            {
-                date: Date.now(),
-                typeData: "view", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "newscard", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },  
-            {
-                date: Date.now(),
-                typeData: "view", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "collection", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },
-            {
-                date: Date.now(),
-                typeData: "like", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "collection", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },
-            {
-                date: Date.now(),
-                typeData: "comment", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "newscard", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: "Hola a todos"
-                },
-            },
-            {
-                date: Date.now(),
-                typeData: "search", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "newscard", // Newscard || Collection || Search
-                    title: "Noticias de Peña nieto",
-                    slug: "Noticias de Peña nieto",
-                    comment: ""
-                },
-            },
-            {
-                date: Date.now(),
-                typeData: "view", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "newscard", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },
-            {
-                date: Date.now(),
-                typeData: "favorite", // View || Like || Share || Favorite || Search || Comment
-                content: {
-                    typeData: "collection", // Newscard || Collection || Search
-                    title: "Trump pisa fuerte para el cierre de la frontera con México",
-                    slug: "trump-pisa-fuerte-para-el-cierre-de-la-frontera-con-mexico",
-                    comment: ""
-                },
-            },
-        ]
-        var HistoryRet = [];
         fetch("http://"+window.location.hostname+":8080/api/auth/history",{
             method: 'POST',
             headers: {
@@ -133,7 +62,31 @@ export default class AccountPage extends React.Component {
             //console.log(this.state.session.history)
 
         })
-        
+    }
+
+    getFavorites(){
+        fetch("http://"+window.location.hostname+":8080/api/auth/favorites",{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": this.state.session._id,
+                "email": this.state.session.email.toLowerCase(),
+                "token": this.state.session.token,
+            })
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then(favorites => {
+            
+            this.state.session.favorites = favorites
+            this.forceUpdate()
+            //console.log(this.state.session.history)
+
+        })
     }
 
 
@@ -166,6 +119,7 @@ export default class AccountPage extends React.Component {
                     </div>
                     <nav className="UserNav">
                         <Link to="/account/history">Historial</Link><br/>
+                        <Link to="/account/favorites">Favoritos</Link><br/>
                         <Link to="/account/edit">Editar información</Link><br/>
                         <Link to="/account/configuration">Configuración</Link><br/>
                         <Link to="/logout">Cerrar sesión</Link><br/>
@@ -214,6 +168,20 @@ export default class AccountPage extends React.Component {
                                     ))}
                                 </div>
                                 
+                            </div>
+                        </Route>
+                        <Route exact path="/account/favorites">
+                            <div className="Favorites">
+                                <h2>Favoritos</h2><br/>
+                                {this.state.session.favorites.map((fav, i)=> fav != null &&(
+                                    <Link key={"fav-"+i} to={
+                                        "/"+(typeof fav.typeData != undefined && fav.typeData)+"/"+fav.slug
+                                    } className="FavElem">
+                                        <FontAwesomeIcon icon={fav.typeData == "newscard" && "newspaper" || "warehouse"}/>
+                                        &nbsp;&nbsp;
+                                        '{fav.title}' 
+                                    </Link>
+                                ))}
                             </div>
                         </Route>
                         <Route exact path="/account/edit">
