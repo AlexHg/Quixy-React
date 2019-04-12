@@ -12,6 +12,10 @@ export default class AccountPage extends React.Component {
     constructor({match}){
       super();
       this.state = {
+        uname: "",
+        uemail: "",
+        upassword: "",
+        upasswordRepeat: "",
         session: {
             active:false, 
             history: [],
@@ -24,7 +28,59 @@ export default class AccountPage extends React.Component {
       this.getHistory();
       this.getFavorites();
     }
-
+    validateLForm() {
+        return this.state.uemail.length > 0 && this.state.upassword.length > 0;
+    }
+    /*validateRForm() {
+        if(this.state.remail == null || this.state.rpassword == null || this.state.rpasswordRepeat == null) return false;
+        let eplen = this.state.remail.length > 0 && this.state.rpassword.length > 0;
+        let repass = this.state.rpassword.length == this.state.rpasswordRepeat.length;
+        return eplen && repass;
+    }*/
+    handleChange = event => {
+        this.setState({
+        [event.target.id]: event.target.value
+        }); 
+        //console.log(this.state);
+    }
+    handleSubmitEdit = event => {
+        event.preventDefault();
+        fetch("http://"+window.location.hostname+':8080/api/user/id/'+this.state.session._id,{
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "name": this.state.uname,
+            "email": this.state.uemail.toLowerCase(),
+            "password": this.state.upassword,
+        })
+        }).then((response) => {
+        return response.json()
+        }).then((user) => {
+        
+        if(user.type == 'error' && user.alert) alert(user.message)
+        else{ 
+            /*this.setState({ session: user })
+            console.log(this.state.session);*/
+            var u = user.userData
+            u.password="************";
+            u.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    
+    
+            sessionStorage.setItem('session',JSON.stringify(u));
+            this.props.history.push('/account')
+        }
+        
+        })
+    }
+    componentDidMount = ()=>{
+        this.setState({uname: this.state.session.name, uemail: this.state.session.email})
+        /*document.querySelector("#uname").value = this.state.session.name
+        document.querySelector("#uemail").value = this.state.session.email*/
+        //setTimeout(()=>console.log(this.state),1000);
+    }
     componentWillMount(){    
         if(!this.state.session.active){
             this.props.history.push('/session')
@@ -120,14 +176,17 @@ export default class AccountPage extends React.Component {
                     <nav className="UserNav">
                         <Link to="/account/history">Historial</Link><br/>
                         <Link to="/account/favorites">Favoritos</Link><br/>
-                        <Link to="/account/edit">Editar información</Link><br/>
-                        <Link to="/account/configuration">Configuración</Link><br/>
+                        {/*<Link to="/account/edit">Editar información</Link><br/>
+                        <Link to="/account/configuration">Configuración</Link><br/>*/}
                         <Link to="/logout">Cerrar sesión</Link><br/>
                     </nav>
                 </div>
                 <div className="AccountSwitch">
                     <Switch>
-                        <Route exact path="/account/(history)?">
+                        <Route exact path="/account/">
+                            <Redirect to="/account/history" />
+                        </Route>
+                        <Route exact path="/account/history">
                             <div className="History">
                                 <h2>Historial de actividad</h2><br/>
                                 <div className="AllHistory">
@@ -184,44 +243,64 @@ export default class AccountPage extends React.Component {
                                 ))}
                             </div>
                         </Route>
-                        <Route exact path="/account/edit">
-                            <form className="UserDataEdit">
-                                <div>
-                                    <img src={this.state.session.photo} className="ProfileImage"/><br/>
-                                    <input type="file" />
-                                </div>
-                                <FormGroup controlId="rname" bsSize="large">
-                                    <ControlLabel>Nombre</ControlLabel>
-                                    <FormControl
-                                        //onChange={this.handleChange}
-                                        type="text"
-                                    />
-                                </FormGroup>
-                                <FormGroup controlId="remail" bsSize="large">
-                                    <ControlLabel>Correo electronico</ControlLabel>
-                                    <FormControl
-                                        //onChange={this.handleChange}
-                                        type="text"
-                                    />
-                                </FormGroup>
-                                <FormGroup controlId="rpassword" bsSize="large">
-                                    <ControlLabel>Contraseña</ControlLabel>
-                                    <FormControl
-                                        //onChange={this.handleChange}
-                                        autoComplete="new-password"
-                                        type="password"
-                                    />
-                                </FormGroup>
-                                <FormGroup controlId="rpasswordRepeat" bsSize="large">
-                                    <ControlLabel>Repetir contraseña</ControlLabel>
-                                    <FormControl
-                                        //onChange={this.handleChange}
-                                        autoComplete="new-password"
-                                        type="password"
-                                    />
-                                </FormGroup>
-                            </form>
-                        </Route>
+                        <Route exact path="/account/edit" component={() =>{
+                            setTimeout(() => {
+                                document.querySelector("#uname").value = this.state.session.name
+                                document.querySelector("#uemail").value = this.state.session.email
+                            },500)
+                            return (
+                                <form className="UserDataEdit" onSubmit={this.handleSubmitEdit}>
+                                    <div>
+                                        <img src={this.state.session.photo} className="ProfileImage"/><br/>
+                                        <input type="file" />
+                                    </div>
+                                    <div className="EditInfoFrom">
+                                        <FormGroup controlId="uname" bsSize="large">
+                                            <ControlLabel>Nombre</ControlLabel>
+                                            <FormControl
+                                                onChange={this.handleChange}
+                                                id="uname"
+                                                type="text"
+                                            />
+                                        </FormGroup>
+                                        <FormGroup controlId="uemail" bsSize="large">
+                                            <ControlLabel>Correo electronico</ControlLabel>
+                                            <FormControl
+                                                onChange={this.handleChange}
+                                                id="uemail"
+                                                type="text"
+                                            />
+                                        </FormGroup>
+                                        <FormGroup controlId="upassword" bsSize="large">
+                                            <ControlLabel>Contraseña</ControlLabel>
+                                            <FormControl
+                                                onChange={this.handleChange}
+                                                autoComplete="new-password"
+                                                id="upassword"
+                                                type="password"
+                                            />
+                                        </FormGroup>
+                                        <FormGroup controlId="upasswordRepeat" bsSize="large">
+                                            <ControlLabel>Repetir contraseña</ControlLabel>
+                                            <FormControl
+                                                onChange={this.handleChange}
+                                                autoComplete="new-password"
+                                                id="upasswordRepeat"
+                                                type="password"
+                                            />
+                                        </FormGroup><br/>
+                                        <Button
+                                            block
+                                            type="submit"
+                                            bsSize="large"
+                                            //disabled={!this.validateLForm()}
+                                        >
+                                            Editar información
+                                        </Button> &nbsp;
+                                    </div>
+                                </form>
+                            )
+                        }}/>
                         <Route exact path="/account/configuration">
                             <div>configuración</div>
                         </Route>

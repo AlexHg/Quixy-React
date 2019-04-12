@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Link} from "react-router-dom";
 import NewsCardMini from 'components/NewsCardMini';
 
 import {
-  FacebookShareButton,GooglePlusShareButton,LinkedinShareButton,TwitterShareButton,PinterestShareButton,TelegramShareButton,WhatsappShareButton,RedditShareButton,EmailShareButton,TumblrShareButton,
-  FacebookIcon,TwitterIcon,GooglePlusIcon,LinkedinIcon,PinterestIcon,TelegramIcon,WhatsappIcon,RedditIcon,TumblrIcon,EmailIcon,
+  FacebookShareButton,LinkedinShareButton,TwitterShareButton,PinterestShareButton,TelegramShareButton,WhatsappShareButton,RedditShareButton,EmailShareButton,TumblrShareButton,
+  FacebookIcon,TwitterIcon,LinkedinIcon,PinterestIcon,TelegramIcon,WhatsappIcon,RedditIcon,TumblrIcon,EmailIcon,
 } from 'react-share';
 
 //import {noticias} from '../../dataold.json';
@@ -424,17 +424,6 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               </div>
 
               <div className="SocialShare">
-                <GooglePlusShareButton
-                  url={location.href}
-                  onShareWindowClose={this.shareFinishedHandler}
-                  className="SocialShare__share-button">
-                  <GooglePlusIcon
-                    size={32}
-                    round />
-                </GooglePlusShareButton>
-              </div>
-
-              <div className="SocialShare">
                 <LinkedinShareButton
                   url={location.href}
                   title={this.state.newscard.title.toUpperCase()+": "+this.state.newscard.summary}
@@ -506,7 +495,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                         
             <div id="QuoteContainer">
               <h4>¡Agrega esta noticia a tus documentos!</h4><br/>
-              [1] {(this.state.newscard.authors || []).join(", ")}. ({this.formatQuoteDate(this.state.newscard.published)}). {this.state.newscard.title} (1nd ed.) [Online]. Available: {location.href}
+              [1] {(this.state.newscard.authors || []).join(", ")}, {this.state.newscard.newspaper.name}. ({this.formatQuoteDate(this.state.newscard.published)}). {this.state.newscard.title} (1nd ed.) [Online]. Available: {location.href}
             </div>
 
             <div className="CompleteNewContent">

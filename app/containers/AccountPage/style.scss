@@ -114,6 +114,25 @@
                 display:block;
                 border: 2px solid #E2E2E2;
             }
+            .EditInfoFrom{
+                text-align: left;
+                display:inline-block;
+                width: 400px;
+                padding:1rem;
+                vertical-align: top;
+                .form-group{
+                    display:flex;
+                    margin-bottom:.5rem;
+                    align-items: center;
+                    justify-content: space-between;
+                    input{
+                        border: 1px solid gray;
+                        padding: .3rem .5rem;
+                        border-radius: .2rem;
+                    }
+                }
+                
+            }
         }
     }
 }
