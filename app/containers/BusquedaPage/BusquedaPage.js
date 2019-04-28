@@ -62,6 +62,20 @@ export default class BusquedaPage extends React.Component {
     }    
   }
 
+  highlight = (text) => {
+    var inputText = document.getElementById("inputText");
+    var innerHTML = inputText.innerHTML;
+    var index = innerHTML.indexOf(text);
+    if (index >= 0) { 
+     innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+     inputText.innerHTML = innerHTML;
+    }
+  }
+
+  componentDidMount = () => {
+    highlight("a")
+  }
+
   render() { 
   
     return (
@@ -82,8 +96,7 @@ export default class BusquedaPage extends React.Component {
           />
         </div>  
         <p>
-          {this.state.busqueda && "Buscando resultados para: "}
-          <b>{this.state.busqueda}</b>
+          
         </p>
         {this.state.resultados.map( (resultado, i) => 
           <NewsCard key={i} params={resultado}/> 
