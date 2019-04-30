@@ -12,7 +12,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 
 import SignupPage from 'containers/SignupPage/Loadable';
-import BusquedaPage from 'containers/BusquedaPage/Loadable';
+import SearchPage from 'containers/SearchPage/Loadable';
 
 import Principal from 'containers/Principal/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
@@ -61,9 +61,9 @@ const App = () => {
         <Route exact path="/" render={() => <Redirect from="/" to="/feed" />} />
         <Route exact path="/(feed|newscard|collection)/:slug?" component={Principal} />
 
-        <Route path="/user/:path?" component={BusquedaPage} />
+        {/*<Route path="/user/:path?" component={BusquedaPage} />*/}
 
-        <Route path="/search/:path?" component={BusquedaPage} />
+        <Route path="/search/:path?" component={SearchPage} />
 
         <Route path="/account/:path?" exact component={AccountPage} />
 

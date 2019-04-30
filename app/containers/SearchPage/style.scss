@@ -1,0 +1,38 @@
+.feature-page {
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.25em;
+  }
+  
+  ul {
+    font-family: 'Open Sans', sans-serif;
+    padding-left: 1.75em;
+
+    li {
+      margin: 1em 0;
+
+      p.title {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.SearchContainer{
+  padding: 1rem 2rem 0 2rem ;
+  .searchBox, .ms-TextField-fieldGroup{
+    border-radius: 2px;
+  }
+  .SearchContent{
+    margin-top:1rem;
+    overflow-y: scroll;
+    max-height: 80vh;
+    .Newscards, .Collections{
+      padding: 0 1rem;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 0 1rem;
+    }
+  } 
+  
+}
