@@ -85,12 +85,16 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           )}
           
         </div>
-        <label className="nav-mobile" htmlFor="mobile-menu-launcher">
+        {/*<label className="nav-mobile" htmlFor="mobile-menu-launcher">
           <FontAwesomeIcon icon="bars" style={{cursor:'pointer'}} />
         </label>
         
         <input type="checkbox" id="mobile-menu-launcher"/>
-        <div className="mobile-menu"></div>
+          <div className="mobile-menu"></div>*/}
+        <Link className="nav-mobile" id="search" to="/search">
+            <FontAwesomeIcon icon="search" style={{cursor:'pointer', color:"white"}} />
+        </Link>
+        
       </div>
     );
   }

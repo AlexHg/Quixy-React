@@ -84,7 +84,9 @@ export default class AccountPage extends React.Component {
     componentWillMount(){    
         if(!this.state.session.active){
             this.props.history.push('/session')
+            
         }
+        return "hola"
     }
 
     formatDate = (date) => {

@@ -35,11 +35,11 @@ export default class SearchPage extends React.Component {
 
   componentWillReceiveProps({params}){
     //console.log(params)
-    if(params.npage > this.state.npage)
+    /*if(params.npage > this.state.npage)
       this.setState({npage: params.npage, nNewPage: true});
 
     if(params.cpage > this.state.cpage)
-      this.setState({cpage: params.cpage, cNewPage: true});
+      this.setState({cpage: params.cpage, cNewPage: true});*/
   }
 
   busquedaHandler = event => {

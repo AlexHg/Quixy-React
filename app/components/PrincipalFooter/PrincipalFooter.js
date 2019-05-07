@@ -37,7 +37,7 @@ class PrincipalFooter extends React.Component { // eslint-disable-line react/pre
             <div className="ButtonF" id="tab2" onClick={this.tab2}>
                 <FontAwesomeIcon icon="newspaper" style={{cursor:'pointer'}} />
             </div>
-            <Link className="ButtonF" to="/account">
+            <Link className="ButtonF" to="/session">
                 <FontAwesomeIcon icon="user" style={{cursor:'pointer'}} />
             </Link>
         </div>
