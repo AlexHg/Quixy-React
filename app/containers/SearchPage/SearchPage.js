@@ -7,10 +7,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { TextField, MaskedTextField } from 'office-ui-fabric-react/lib/TextField';
 import NewsCardMini from 'components/NewsCardMini';
-import BreakingNew from 'components/NewsCard';
-//import {noticias} from '../../dataold.json';
-
-import {newspapers} from '../../data.json';
+import Collection from 'components/Collection';
 import './style.scss';
 
 
@@ -19,52 +16,101 @@ export default class SearchPage extends React.Component {
     super();
     this.state = {
       busqueda: "",
-      searchAwait: false,
+      searchAwaitCOL: false,
+      searchAwaitNC: false,
+
       newscards: [],
+      nlimit: 12,
+      npage: 0,
+      nNewPage: false,
+
       collections: [],
+      climit:7,
+      cpage:0,
+      cNewPage: false,
     };
   }
 
   getNews = () => [];
 
+  componentWillReceiveProps({params}){
+    //console.log(params)
+    if(params.npage > this.state.npage)
+      this.setState({npage: params.npage, nNewPage: true});
+
+    if(params.cpage > this.state.cpage)
+      this.setState({cpage: params.cpage, cNewPage: true});
+  }
+
   busquedaHandler = event => {
     let busquedaInput = event.target
     this.setState({busqueda: busquedaInput.value})
    
-    var makeSearch = async () => {
+    var makeSearchNC = async () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           //this.state.searchAwait = true;
-          console.log("Waiting Search: ",this.state.searchAwait)
-          console.log(this.state.newscards, this.state.collections, "http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda);
+          console.log("Waiting Search: ",this.state.searchAwaitCOL)
+          console.log(this.state.newscards, this.state.collections, "http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda+"/nc/"+this.state.nlimit+"/"+this.state.npage);
           //http://localhost:8080/api/search/
-          fetch("http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda)
-          .then((response) => {
-            return response.json()
-          }).then((content) => {
-            console.log(content)
-            var newscards = content.newscards
-            var collections = content.collections
-            if(newscards.length == 0){
-              //getMoreNC.classList="notAvaliable"
-            }
-            if(collections.length){
-              //getMoreCC.classList="notAvaliable"
-            }
+          fetch("http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda+"/nc/"+this.state.nlimit+"/"+this.state.npage)
+            .then((response) => {
+              return response.json()
+            }).then((content) => {
+              
+              var newscards = content.newscards
+              if(newscards.length == 0){
+                //getMoreNC.classList="notAvaliable"
+              }
 
-            this.setState({newPageNC: true, newPageCC: true, newscards:newscards, collections:collections })
-            this.state.searchAwait = false;
-            console.log("Waiting Search: ",this.state.searchAwait)
-          })
+              this.setState({nNewPage: true, newscards:newscards})
+              this.state.searchAwaitNC = false;
+              console.log("Waiting Search: ",this.state.searchAwaitNC)
+              console.log(content)
+
+            })
           
         }, 1000)
       })
     }
 
-    if(!this.state.searchAwait){
-      this.state.searchAwait = true;
-      //console.log("Waiting Search: ",this.state.searchAwait)
-      makeSearch();
+    var makeSearchCOL = async () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          //this.state.searchAwait = true;
+          console.log("Waiting Search: ",this.state.searchAwaitCOL)
+          console.log(this.state.collections, "http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda+"/col/"+this.state.climit+"/"+this.state.cpage);
+          //http://localhost:8080/api/search/
+          fetch("http://"+window.location.hostname+':8080/api/search/'+this.state.busqueda+"/col/"+this.state.climit+"/"+this.state.cpage)
+            .then((response) => {
+              return response.json()
+            }).then((content) => {
+              
+              var collections = content.collections
+              
+              if(collections.length){
+                //getMoreCC.classList="notAvaliable"
+              }
+
+              this.setState({cNewPage: true, collections:collections })
+              this.state.searchAwaitCOL = false;
+              console.log("Waiting Search: ",this.state.searchAwaitCOL)
+              console.log(content)
+
+            })
+          
+        }, 1000)
+      })
+    }
+
+    if(!this.state.searchAwaitNC && !this.state.searchAwaitCOL){
+      this.state.searchAwaitNC = true;
+      this.state.searchAwaitCOL = true;
+      
+      makeSearchNC();
+      makeSearchCOL();
+
+      setTimeout(() =>console.log("col ",this.state), 2000 );
     }    
   }
 
@@ -92,7 +138,11 @@ export default class SearchPage extends React.Component {
 
             { (this.state.collections.length != 0) && <h3>Collections</h3> }
             
-            <div className="Collections">{this.state.collections.toString()}</div>
+            <div className="Collections">
+              {this.state.collections.map((COL, i) => (
+                <Collection key={"Collection-"+i} params={COL}/>
+              ))}
+            </div>
             
             { (this.state.collections.length != 0) &&
               <div style={{textAlign:'center'}}><br/><button>Cargar más</button></div>

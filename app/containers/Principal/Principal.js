@@ -37,12 +37,25 @@ export default class Principal extends React.Component { // eslint-disable-line 
       searchAwait: false,
       pageCount: 0,
       tab: match.params.slug,
+      collections: [],
+      collectionsRec: [],
     };
     
     //console.log("p: ",this.state.tab)
   }
   shouldComponentUpdate() {return true}
-  componentWillMount() { 
+
+  componentWillMount() {
+    //GET COLLECTIONS 
+    //console.log("http://"+window.location.hostname+':8080/api/collections/get/6/0');
+    fetch("http://"+window.location.hostname+':8080/api/collections/get/6/0')
+      .then((response) => {
+        return response.json()
+      }).then((collections) => {
+        //console.log(JSON.stringify(newscards[0]));
+        this.setState({ collections: collections, collectionsRec: collections })
+      })
+
     return true;
   };
 
@@ -87,49 +100,20 @@ export default class Principal extends React.Component { // eslint-disable-line 
           <div className="BreakingNewsSlider">
             <BreakingNew key={1} params={{
               image:require("images/bnews/b1.jpg"), 
-              title:"Lorem Ipsum Dat ed Ipsum",
+              name:"Lorem Ipsum Dat ed Ipsum",
               slug:"eu-rebaja-tension-con-mexico-por-tema-migratorio",
               //degree:["#649ce6","#91e591","#9be591"]
             }} />
           </div>
           <div className="CollectionsContainer">
             <h3 className="RecomendationTitle">Recomendo para ti</h3>
-            <Collection key={1} params={{
-              title:"Narco en México",
-              image:"https://cdn2.excelsior.com.mx/media/storage/elchapo_0.jpg",
-              description:"Lorem Ipsum Dat ed Ipsum"
-            }} />
-            <Collection key={2} params={{
-              title:"El congreso del estado de México",
-              image:"http://seguidoresdeverdad.com/seguidoresdeverdad/html/blog/wp-content/uploads/2017/01/politicos-770x300.jpg",
-            }} />
-            <Collection key={3} params={{
-              title:"lorem",
-              image:"https://img.gestion.pe/files/ec_article_multimedia_gallery/uploads/2017/11/08/5a03559158092.jpeg",
-            }} />
-            <Collection key={4} params={{
-              title:"lorem",
-              image:"https://pbs.twimg.com/profile_images/1040750620871815168/rWbZvyrs_400x400.jpg",
-            }} />
-
-            <h3 className="RecomendationTitle">Recien llegado</h3>
-            <Collection key={5} params={{
-              title:"AMLO en presidencia", 
-              image:require("images/bnews/b1.jpg"),
-              description:"Lorem Ipsum Dat ed Ipsum"
-            }} />
-            <Collection key={6} params={{
-              title:"El congreso del estado Mex",
-              image:"http://seguidoresdeverdad.com/seguidoresdeverdad/html/blog/wp-content/uploads/2017/01/politicos-770x300.jpg",
-            }} />
-            <Collection key={7} params={{
-              title:"lorem",
-              image:"https://img.gestion.pe/files/ec_article_multimedia_gallery/uploads/2017/11/08/5a03559158092.jpeg",
-            }} />
-            <Collection key={8} params={{
-              title:"lorem",
-              image:"https://pbs.twimg.com/profile_images/1040750620871815168/rWbZvyrs_400x400.jpg",
-            }} />
+            {this.state.collectionsRec.map((COL, i)=>(
+                <Collection key={"CollectionRecommend-"+COL.slug} params={COL} />
+            ))}
+            <h3 className="RecomendationTitle">Recien llegados</h3>
+            {this.state.collections.map((COL, i)=>(
+                <Collection key={"CollectionNew-"+COL.slug} params={COL} />
+            ))}
           </div>
         </aside>
         <section className="PageArea" ref="pagearea">

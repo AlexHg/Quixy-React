@@ -27,11 +27,24 @@
     margin-top:1rem;
     overflow-y: scroll;
     max-height: 80vh;
-    .Newscards, .Collections{
+    .Newscards{
       padding: 0 1rem;
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 0 1rem;
+    }
+    .Collections{
+      padding: 0 1rem;
+      /*display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-gap: 1rem;*/
+      display: flex;
+      justify-content: center;
+      flex-wrap:wrap;
+      .Collection{
+        width:190px;
+        margin:.5rem;
+      }
     }
   } 
   
