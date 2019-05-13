@@ -24,6 +24,8 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       slugChange: false,
       session: {active: false, ...JSON.parse(sessionStorage.getItem("session"))},
       newscard: {
+        relacionados: [],
+        _id: "",
         title: "",
         gallery: [], 
         newspaper: {
@@ -35,9 +37,11 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
           shares: [],
           favorites: [],
         },
+        
       },
       
     };
+    console.log(this.state.newscard)
   }
   componentWillMount() {
     this.mountData();
@@ -84,8 +88,10 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
-        this.setState({newscard: newscard_r, slugChange:false})
-        //console.log(this.state.newscard)
+        this.setState({newscard: newscard_r, slugChange:false}, ()=>{
+          console.log(this.state.newscard)
+        })
+        console.log(newscard_r)
         if(this.state.session.active) this.viewHandler();
       })
   }
@@ -287,18 +293,6 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         newspaper: '5ca39621480f651c60aad05a'
       }
     ]
-    var comments = [
-
-      { 
-        user: {
-          photo: "https://content-static.upwork.com/uploads/2014/10/02123010/profilephoto_goodcrop.jpg",
-          name: 'Alejandro Hernandez', 
-          email: 'alejandro@konecta.team',
-        },
-        date: Date.now(), 
-        content: "Suspendisse potenti. Cras ut nulla aliquet, vestibulum felis et, scelerisque risus. Phasellus pulvinar, risus at sodales semper, quam lacus ullamcorper justo, et porta dui felis id velit. Nam vel elit dictum, consequat mauris ac, tincidunt nisl.",
-      }
-    ]
     return (
       <div className="ModalViewerContainer" name={window.location.href}>
 
@@ -322,7 +316,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                 <div className="NewsCardContent">
                             
                   <span className="NewsCardTitle" >
-                    {this.state.newscard.title}
+                    {this.state.newscard.title/*+": "+ this.state.newscard._id*/}
                   </span>
 
                   <p className="Summary">{this.state.newscard.summary}</p>
@@ -528,8 +522,8 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
             
             <div className="GallerySlide">
               <div className="SlideContainer">
-                <a href={this.state.newscard.thumbnail} target="_window" key={'gallery-th'}><img className="GalleryImage" src={this.state.newscard.thumbnail} onError={(e)=>{e.target.onerror = null; e.target.style="display:none;"}}/></a>
-                {this.state.newscard.gallery.map((image, i)=>(
+                
+                {this.state.newscard.gallery.map((image, i)=> ( this.state.newscard.gallery.indexOf(image.split(',')[0]) != -1 ) && (
                   <a href={image.split(',')[0]} target="_window" key={'gallery-'+i}><img className="GalleryImage" src={image.split(',')[0]} onError={(e)=>{e.target.onerror = null; e.target.style="display:none;"}}/></a>
                 ))}
               </div>
@@ -567,7 +561,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
 
               <div className="RelatedContent">
                 <h3>Relacionados</h3>
-                {relacionados.map((NC, i)=>(
+                {this.state.newscard.relacionados.map((NC, i)=>(
                   <NewsCardMini key={"NewsCardMini-"+i} params={NC}/>
                 ))}
                 

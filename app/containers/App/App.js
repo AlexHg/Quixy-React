@@ -16,7 +16,7 @@ import SearchPage from 'containers/SearchPage/Loadable';
 
 import Principal from 'containers/Principal/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
-
+import CollectionFeed from 'containers/CollectionFeed/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Header from 'components/Header';
@@ -62,7 +62,7 @@ const App = () => {
         <Route exact path="/(feed|newscard|collection)/:slug?" component={Principal} />
 
         {/*<Route path="/user/:path?" component={BusquedaPage} />*/}
-
+        <Route path="/collectionfeed" component={CollectionFeed} />
         <Route path="/search/:path?" component={SearchPage} />
 
         <Route path="/account/:path?" exact component={AccountPage} />

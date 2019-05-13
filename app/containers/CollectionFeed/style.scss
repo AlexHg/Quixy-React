@@ -1,0 +1,14 @@
+.CollectionFeed{
+    padding: 4rem;
+    overflow-y:scroll;
+    height: 95vh;
+}
+.CollectionFeedContent{
+    background:white;
+    padding:4rem;
+}
+.Collections{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1rem;
+}

@@ -207,10 +207,10 @@ export default class CollectionPage extends React.Component { // eslint-disable-
     return (
       <div className="CollectionPage" data-offcanvas="true" >
         <Helmet> 
-          <title>Nuevas sobre {this.state.slug.replace(/-/g, ' ')}</title>
+          <title>Nuevas sobre {this.state.collection.name}</title>
           <meta
             name="description"
-            content={"Nuevas sobre "+this.state.slug.replace(/-/g, ' ')+" - Quixy | Plataforma de noticias inteligente"}
+            content={"Nuevas sobre "+this.state.collection.name+" - Quixy | Plataforma de noticias inteligente"}
           />
         </Helmet>
         <div className="CollectionPageHeader" >
@@ -219,8 +219,8 @@ export default class CollectionPage extends React.Component { // eslint-disable-
           </div>
           <div className="CPHContent">
             <div className="CPHInfo">
-              <h1 className="CPHTitle">{this.state.slug.replace(/-/g, ' ')}</h1>
-              <p><b>Palabras clave: </b>{this.state.collection.keywords.join(", ")}</p>
+              <h1 className="CPHTitle">{this.state.collection.name}</h1>
+              <p style={{maxHeight: "106px",overflowY: "scroll"}}><b>Palabras clave: </b>{this.state.collection.keywords.join(", ")}</p>
             </div>
             <div className="CPHFooter">
               <div className="FooterLeft Actions">
