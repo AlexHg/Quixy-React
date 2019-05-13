@@ -62,7 +62,7 @@ const NewsCard = ({params}) => {
       <div className="NewsCardMiniBody">
         
         <div className="NewsCardMiniContent">
-          <img src="http://mocaf.org.mx/wp-content/uploads/2018/03/La-Jornada.png" style={{height: '13px'}} />          
+          <img src={params.newspaper.thumbnail} style={{height: '13px'}} />          
           
           <Link onClick={refresh()} className="NewsCardMiniTitle" to={"/newscard/"+params.slug}>
             {params.title}
