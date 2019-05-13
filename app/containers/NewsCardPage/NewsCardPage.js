@@ -339,13 +339,13 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               <div className="NewsCardFooter">
               
                 <div className="FooterLeft Actions">
-                  {this.state.session != undefined &&
+                  {this.state.session.active &&
                     <button className="actionBtn" onClick={this.likeHandler}>
                       <FontAwesomeIcon icon="thumbs-up"/> 
                       <span> {this.state.newscard.actions.likes.length}</span>
                     </button>
                   }
-                  {this.state.session != undefined &&
+                  {this.state.session.active &&
                     <button className="actionBtn" onClick={this.favoriteHandler}>
                       <FontAwesomeIcon icon="star"/>
                       <span> {this.state.newscard.actions.favorites.length}</span>
@@ -534,7 +534,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               <div className="CommentBox">
                 <h3>Comentarios ({this.state.newscard.actions.comments.length})</h3>
 
-                {this.state.session != undefined &&
+                {this.state.session.active &&
                   <div className="CommentInput">
                       <textarea className="CommentArea" placeholder="Escribe algo..."></textarea>
                       <br/>

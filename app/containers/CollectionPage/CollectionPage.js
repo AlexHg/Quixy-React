@@ -224,13 +224,13 @@ export default class CollectionPage extends React.Component { // eslint-disable-
             </div>
             <div className="CPHFooter">
               <div className="FooterLeft Actions">
-                {this.state.session != undefined &&
+                {this.state.session.active &&
                   <button className="actionBtn" onClick={this.likeHandler}>
                     <FontAwesomeIcon icon="thumbs-up"/> 
                     <span> {this.state.collection.actions.likes.length}</span>
                   </button>
                 }
-                {this.state.session != undefined &&
+                {this.state.session.active &&
                   <button className="actionBtn" onClick={this.favoriteHandler}>
                     <FontAwesomeIcon icon="star"/>
                     <span> {this.state.collection.actions.favorites.length}</span>
