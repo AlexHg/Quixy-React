@@ -46,11 +46,12 @@ export default class CollectionPage extends React.Component { // eslint-disable-
         }
       }
     };
+    console.log(JSON.parse(sessionStorage.getItem("session")))
   }
   shouldComponentUpdate() {return true}
 
   componentDidMount(){
-    
+    console.log("sess", this.state.session.admin)
     setTimeout(
       ()=>{
         document.querySelector('.CollectionPage').className += " mounted"
@@ -91,6 +92,11 @@ export default class CollectionPage extends React.Component { // eslint-disable-
     .then((response) => {
       return response.json()
     }).then((collection) => {
+      if(collection == 'fail'){
+        //BrowserRouter.push("/404");
+        console.log("fail");
+        return;
+      }
       console.log(collection);
       this.setState({ collection: collection, slugChange:false})
       if(this.state.session.active) this.viewHandler();
@@ -202,22 +208,20 @@ export default class CollectionPage extends React.Component { // eslint-disable-
     })
   }
   deleteHandler = () => {
+    if(confirm("Seguro desea eliminar la colección "+this.state.collection.name+"?"))
     fetch("http://"+window.location.hostname+":8080/api/collections/id/"+this.state.collection._id,{
       method: 'Delete',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "email": this.state.session.email.toLowerCase(),
-        "token": this.state.session.token,
-      })
+      }
     })
     .then((response) => {
       return response.json()
     }).then(res => {
       if(res.deleted == "deleted"){
-
+        alert("esta noticia se ha eliminado");
+        window.history.back();
       }
     })
   }
@@ -270,10 +274,10 @@ export default class CollectionPage extends React.Component { // eslint-disable-
           
           
         </div>
-        {!this.state.admin && (
+        {this.state.session.admin && (
           <div id="AdminOptions" className="Actions" style={{background:'white', border: '1px solid #E2E2E2', padding:'.7rem', paddingTop: '.3rem', marginBottom: '.7rem'}}>
             <h4 style={{marginBottom:'.5rem'}}>Acciones de administrador</h4>
-            <button className="actionBtn" onClick={this.likeHandler}>
+            <button className="actionBtn" onClick={this.deleteHandler}>
               <span> Eliminar Colección</span>
             </button>
             

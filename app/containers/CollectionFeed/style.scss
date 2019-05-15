@@ -1,7 +1,9 @@
+.feature-page{
+    overflow-y:scroll;
+    height: 93vh;
+}
 .CollectionFeed{
     padding: 4rem 0;
-    overflow-y:scroll;
-    height: 95vh;
     display: flex;
     justify-content: center;
 }

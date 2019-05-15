@@ -15,13 +15,12 @@ export default class CollectionFeed extends React.Component {
     super();
     this.state = {
       collections: [],
-      climit:10000,
-      cpage:0,
-      cNewPage: false,
+      pageCount: 0,
+      newPage: true,
     };
   }
   componentWillMount() { 
-    fetch("http://"+window.location.hostname+':8080/api/collections/get/'+this.state.climit+'/'+this.state.page)
+    fetch("http://"+window.location.hostname+':8080/api/collections/get/18/'+this.state.pageCount)
       .then((response) => {
         return response.json()
       }).then((collections) => {
@@ -30,7 +29,27 @@ export default class CollectionFeed extends React.Component {
       })
 
     return "cargando...";
-  };
+  }
+
+  getMoreColHandler = () => {
+    console.log("cargar mas")
+    if(this.state.newPage){
+      this.setState({pageCount: this.state.pageCount+1}, () => {
+        fetch("http://"+window.location.hostname+':8080/api/collections/get/18/'+this.state.pageCount)
+          .then((response) => {
+            return response.json()
+          }).then((collections) => {
+            console.log(collections.length);
+            if(collections.length == 0){
+              getMoreCOL.classList="notAvaliable"
+              this.setState({newPage: false});
+            }
+
+            this.setState({collections: this.state.collections.concat(collections) })
+          })
+      })
+    }
+  }
   render() { 
     return (
       <div className="feature-page news-cards-container" >
@@ -48,14 +67,14 @@ export default class CollectionFeed extends React.Component {
             { (this.state.collections.length != 0) && <h3>Collections</h3> }
             
             <div className="Collections">
-              {this.state.collections.map((COL, i) => COL.newsCards.length > 1 && (
+              {this.state.collections.map((COL, i) => (
                 <Collection key={"Collection-"+i} params={COL}/>
               ))}
             </div>
             
-            { (this.state.collections.length != 0) &&
-              <div style={{textAlign:'center'}}><br/><button>Cargar más</button></div>
-            }
+            
+              <div style={{textAlign:'center'}}><br/><button id="getMoreCOL" onClick={this.getMoreColHandler}>Cargar más</button></div>
+          
             
           </div>
         </div>
