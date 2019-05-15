@@ -22,9 +22,9 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     this.state = {
       slug: match.params.slug,
       slugChange: false,
-      session: {active: false, ...JSON.parse(sessionStorage.getItem("session"))},
+      session: {active: false, admin: false, ...JSON.parse(sessionStorage.getItem("session"))},
       newscard: {
-        relacionados: [],
+        
         _id: "",
         title: "",
         gallery: [], 
@@ -37,6 +37,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
           shares: [],
           favorites: [],
         },
+        relacionados: [],
         
       },
       
@@ -88,10 +89,15 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       .then((response) => {
         return response.json()
       }).then((newscard_r) => {
+        if(newscard_r == 'fail'){
+          //BrowserRouter.push("/404");
+          console.log("fail");
+          return;
+        }
         this.setState({newscard: newscard_r, slugChange:false}, ()=>{
           console.log(this.state.newscard)
         })
-        console.log(newscard_r)
+        
         if(this.state.session.active) this.viewHandler();
       })
   }
@@ -305,7 +311,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
         </Helmet>
           <div className="ModalViewer">
             <div className="MetaNew">
-              <img src={this.state.newscard.newspaper.thumbnail} style={{height: '20px'}} />
+              <img src={this.state.newscard.newspaper.thumbnail} style={{height: '30px'}} />
               <span className="DateNew">{this.formatDate(this.state.newscard.published)}</span>
             </div>
             

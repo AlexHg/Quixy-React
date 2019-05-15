@@ -1,14 +1,18 @@
 .CollectionFeed{
-    padding: 4rem;
+    padding: 4rem 0;
     overflow-y:scroll;
     height: 95vh;
+    display: flex;
+    justify-content: center;
 }
 .CollectionFeedContent{
     background:white;
-    padding:4rem;
+    padding:2rem;
+    width: 1400px;
+    max-width: 100%;
 }
 .Collections{
     display:grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(207px, 1fr));
     grid-gap: 1rem;
 }

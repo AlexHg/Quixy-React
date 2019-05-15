@@ -62,7 +62,7 @@ const NewsCard = ({params}) => {
       <div className="NewsCardMiniBody">
         
         <div className="NewsCardMiniContent">
-          <img src={params.newspaper.thumbnail} style={{height: '13px'}} />          
+          <img src={params.newspaper.thumbnail} style={{height: '23px'}} />          
           
           <Link onClick={refresh()} className="NewsCardMiniTitle" to={"/newscard/"+params.slug}>
             {params.title}

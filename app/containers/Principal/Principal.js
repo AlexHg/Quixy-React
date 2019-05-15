@@ -39,6 +39,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
       tab: match.params.slug,
       collections: [],
       collectionsRec: [],
+      breakingnew: [],
     };
     
     //console.log("p: ",this.state.tab)
@@ -54,6 +55,14 @@ export default class Principal extends React.Component { // eslint-disable-line 
       }).then((collections) => {
         //console.log(JSON.stringify(newscards[0]));
         this.setState({ collections: collections, collectionsRec: collections })
+      })
+
+    fetch("http://"+window.location.hostname+':8080/api/breakingnews/popular')
+      .then((response) => {
+        return response.json()
+      }).then((breakingnew) => {
+        console.log("bn",breakingnew);
+        this.setState({ breakingnew })
       })
 
     return true;
@@ -98,12 +107,10 @@ export default class Principal extends React.Component { // eslint-disable-line 
       <div className="Principal tab1">
         <aside className="FeaturedAside">
           <div className="BreakingNewsSlider">
-            <BreakingNew key={1} params={{
-              image:require("images/bnews/b1.jpg"), 
-              name:"Lorem Ipsum Dat ed Ipsum",
-              slug:"eu-rebaja-tension-con-mexico-por-tema-migratorio",
-              //degree:["#649ce6","#91e591","#9be591"]
-            }} />
+            {this.state.breakingnew.map(BN => (
+              <BreakingNew key={1} params={BN} />
+            ))}
+            
           </div>
           <div className="CollectionsContainer">
             <h3 className="RecomendationTitle">Recomendo para ti</h3>

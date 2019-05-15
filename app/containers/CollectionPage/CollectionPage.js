@@ -27,7 +27,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   constructor({match}){
     super();
     this.state = {
-      session: {active: false, ...JSON.parse(sessionStorage.getItem("session"))},
+      session: {active: false, admin: false, ...JSON.parse(sessionStorage.getItem("session"))},
       slug: match.params.slug,
       slugChange: false,
       busqueda: "",
@@ -101,7 +101,6 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       this.setState({slug: nextProps.match.params.slug, slugChange: true})
     }
   }
-
 
   listenLinks(){
     var parent = document.querySelector('.CollectionPage');
@@ -202,6 +201,26 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       //textArea.value=""
     })
   }
+  deleteHandler = () => {
+    fetch("http://"+window.location.hostname+":8080/api/collections/id/"+this.state.collection._id,{
+      method: 'Delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": this.state.session.email.toLowerCase(),
+        "token": this.state.session.token,
+      })
+    })
+    .then((response) => {
+      return response.json()
+    }).then(res => {
+      if(res.deleted == "deleted"){
+
+      }
+    })
+  }
 
   render() { 
     return (
@@ -251,6 +270,15 @@ export default class CollectionPage extends React.Component { // eslint-disable-
           
           
         </div>
+        {!this.state.admin && (
+          <div id="AdminOptions" className="Actions" style={{background:'white', border: '1px solid #E2E2E2', padding:'.7rem', paddingTop: '.3rem', marginBottom: '.7rem'}}>
+            <h4 style={{marginBottom:'.5rem'}}>Acciones de administrador</h4>
+            <button className="actionBtn" onClick={this.likeHandler}>
+              <span> Eliminar Colección</span>
+            </button>
+            
+          </div>
+        )}
         <div id="SocialShareContainer">
           <div className="SocialShare">
             <FacebookShareButton

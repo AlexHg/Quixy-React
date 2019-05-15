@@ -69,7 +69,7 @@ const App = () => {
 
         <Route path="/session" exact component={SignupPage} />
         <Route path="/logout" exact component={Logout} />
-
+    
         <Route path="" component={NotFoundPage} />
       </Switch>
     </div>

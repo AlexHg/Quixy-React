@@ -58,7 +58,7 @@ const NewsCard = ({params}) => {
       <div className="NewsCardBody">
         
         <div className="NewsCardContent">
-          <img src={params.newspaper.thumbnail} style={{height: '15px'}} />          
+          <img src={params.newspaper.thumbnail} style={{height: '25px'}} />          
           <Link className="NewsCardTitle" to={"/newscard/"+params.slug}>
             {params.title}
           </Link>
