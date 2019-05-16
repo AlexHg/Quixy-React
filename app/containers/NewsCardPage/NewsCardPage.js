@@ -259,10 +259,27 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
     if(QuoteContainer.className == "active") QuoteContainer.className = "";
     else QuoteContainer.className = "active"
   }
-  
+  deleteHandler = () => {
+    if(confirm("Seguro desea eliminar la colección "+this.state.newscard.title+"?"))
+    fetch("http://"+window.location.hostname+":8080/api/newscards/id/"+this.state.newscard._id,{
+      method: 'Delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => {
+      return response.json()
+    }).then(res => {
+      if(res.deleted == "deleted"){
+        alert("esta noticia se ha eliminado");
+        window.history.back();
+      }
+    })
+  }
   render() {
 
-    var relacionados = [
+    var relacionados = [ 
       {
         _id: '5ca3a73a480f651c60aad126',
         title: 'Suspenden comparecencia de subsecretaria de Bienestar',
@@ -376,6 +393,15 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               </div>
 
             </article>
+            {this.state.session.admin && (
+              <div id="AdminOptions" className="Actions" style={{background:'white', border: '1px solid #E2E2E2', padding:'.7rem', paddingTop: '.3rem', marginBottom: '.7rem'}}>
+                <h4 style={{marginBottom:'.5rem'}}>Acciones de administrador</h4>
+                <button className="actionBtn" onClick={this.deleteHandler}>
+                  <span> Eliminar Noticia</span>
+                </button>
+                
+              </div>
+            )}
 
             <div id="SocialShareContainer">
               <div className="SocialShare">

@@ -31,7 +31,6 @@ export default class CollectionPage extends React.Component { // eslint-disable-
       slug: match.params.slug,
       slugChange: false,
       busqueda: "",
-      resultados: [], 
       searchAwait: false,
       collection: {
         _id: '',
@@ -46,12 +45,13 @@ export default class CollectionPage extends React.Component { // eslint-disable-
         }
       }
     };
-    console.log(JSON.parse(sessionStorage.getItem("session")))
+    //console.log(JSON.parse(sessionStorage.getItem("session")))
+    console.log(this.state)
   }
   shouldComponentUpdate() {return true}
 
   componentDidMount(){
-    console.log("sess", this.state.session.admin)
+    //console.log("sess", this.state.session.admin)
     setTimeout(
       ()=>{
         document.querySelector('.CollectionPage').className += " mounted"
@@ -87,7 +87,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
         this.setState({ resultados: newscards, slugChange:false})
         //if(this.state.session.active) this.viewHandler();
       })*/
-      console.log("http://"+window.location.hostname+':8080/api/collections/slug/'+this.state.slug)
+     // console.log("http://"+window.location.hostname+':8080/api/collections/slug/'+this.state.slug)
     fetch("http://"+window.location.hostname+':8080/api/collections/slug/'+this.state.slug)
     .then((response) => {
       return response.json()
@@ -97,9 +97,10 @@ export default class CollectionPage extends React.Component { // eslint-disable-
         console.log("fail");
         return;
       }
-      console.log(collection);
-      this.setState({ collection: collection, slugChange:false})
+      //console.log(collection);
+      this.setState({ collection: collection, slugChange:false},() => console.log("si",this.state))
       if(this.state.session.active) this.viewHandler();
+      
     })
   }
   componentWillReceiveProps(nextProps){
@@ -139,7 +140,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   }
   likeHandler = () => {
     //alert("Comment: "+comment+" From: "+this.state.session._id)
-    console.log(this.state.session)
+    //console.log(this.state.session)
     fetch("http://"+window.location.hostname+":8080/api/collections/id/"+this.state.collection._id+"/action/like",{
       method: 'POST',
       headers: {
@@ -210,7 +211,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
   deleteHandler = () => {
     if(confirm("Seguro desea eliminar la colección "+this.state.collection.name+"?"))
     fetch("http://"+window.location.hostname+":8080/api/collections/id/"+this.state.collection._id,{
-      method: 'Delete',
+      method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
