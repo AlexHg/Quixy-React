@@ -20,7 +20,7 @@ export default class CollectionFeed extends React.Component {
     };
   }
   componentWillMount() { 
-    fetch("http://"+window.location.hostname+':8080/api/collections/get/18/'+this.state.pageCount)
+    fetch("http://"+window.location.hostname+':8080/api/collections/get/27/'+this.state.pageCount)
       .then((response) => {
         return response.json()
       }).then((collections) => {
@@ -35,7 +35,7 @@ export default class CollectionFeed extends React.Component {
     console.log("cargar mas")
     if(this.state.newPage){
       this.setState({pageCount: this.state.pageCount+1}, () => {
-        fetch("http://"+window.location.hostname+':8080/api/collections/get/18/'+this.state.pageCount)
+        fetch("http://"+window.location.hostname+':8080/api/collections/get/27/'+this.state.pageCount)
           .then((response) => {
             return response.json()
           }).then((collections) => {

@@ -113,11 +113,11 @@ export default class Principal extends React.Component { // eslint-disable-line 
             
           </div>
           <div className="CollectionsContainer">
-            <h3 className="RecomendationTitle">Recomendo para ti</h3>
+            <h3 className="RecomendationTitle">Recomendo para ti <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>
             {this.state.collectionsRec.map((COL, i)=>(
                 <Collection key={"CollectionRecommend-"+COL.slug} params={COL} />
             ))}
-            <h3 className="RecomendationTitle">Recien llegados</h3>
+            <h3 className="RecomendationTitle">Recien llegados <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>
             {this.state.collections.map((COL, i)=>(
                 <Collection key={"CollectionNew-"+COL.slug} params={COL} />
             ))}
