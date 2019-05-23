@@ -20,12 +20,12 @@ export default class SearchPage extends React.Component {
       searchAwaitNC: false,
 
       newscards: [],
-      nlimit: 12,
+      nlimit: 24,
       npage: 0,
       nNewPage: false,
 
       collections: [],
-      climit:7,
+      climit:14,
       cpage:0,
       cNewPage: false,
     };
@@ -144,9 +144,9 @@ export default class SearchPage extends React.Component {
               ))}
             </div>
             
-            { (this.state.collections.length != 0) &&
+            { /*(this.state.collections.length != 0) &&
               <div style={{textAlign:'center'}}><br/><button>Cargar más</button></div>
-            }
+            */}
 
             { (this.state.newscards.length != 0) && <h3>NewsCards</h3> }
             <div className="Newscards">
@@ -154,9 +154,9 @@ export default class SearchPage extends React.Component {
                 <NewsCardMini key={"NewsCardMini-"+i} params={NC}/>
               ))}
             </div><br/>
-            { (this.state.newscards.length != 0) &&
+            {/* (this.state.newscards.length != 0) &&
               <div style={{textAlign:'center'}}><br/><button>Cargar más</button></div>
-            }
+            */}
             
           </div>
         </div>

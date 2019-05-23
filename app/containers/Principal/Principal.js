@@ -31,7 +31,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
   constructor({match}){
     super();
     this.state = {
-      session: {},
+      session: {active: false, admin: false, _id: false, ...JSON.parse(sessionStorage.getItem("session"))},
       busqueda: "", 
       resultados: [], 
       searchAwait: false,
@@ -40,10 +40,23 @@ export default class Principal extends React.Component { // eslint-disable-line 
       collections: [],
       collectionsRec: [],
       breakingnew: [],
+      breakingnewElem: {},
+      breakingnewCount: 0,
     };
     
     //console.log("p: ",this.state.tab)
   }
+
+  slider = (direction) => {
+    var breakingnewCount = this.state.breakingnewCount + direction; 
+    if( breakingnewCount < 0) breakingnewCount = this.state.breakingnew.length - 1;
+    else if( breakingnewCount >= this.state.breakingnew.length) breakingnewCount = 0;
+
+    this.setState({breakingnewCount});
+
+    console.log(breakingnewCount);
+  }
+
   shouldComponentUpdate() {return true}
 
   componentWillMount() {
@@ -54,7 +67,7 @@ export default class Principal extends React.Component { // eslint-disable-line 
         return response.json()
       }).then((collections) => {
         //console.log(JSON.stringify(newscards[0]));
-        this.setState({ collections: collections, collectionsRec: collections })
+        this.setState({ collections: collections})
       })
 
     fetch("http://"+window.location.hostname+':8080/api/breakingnews/popular')
@@ -73,6 +86,15 @@ export default class Principal extends React.Component { // eslint-disable-line 
       document.querySelector("#"+this.state.tab).click();
     ReactDOM.findDOMNode(this.refs.pagearea)
       .addEventListener('scroll', this.getMoreEntriesNC);
+
+    if(this.state.session.active && this.state.session.history.length > 200)
+    fetch("http://"+window.location.hostname+':8080/api/users/recommend/'+this.state.session._id)
+      .then((response) => {
+        return response.json()
+      }).then((collections) => {
+        //console.log(JSON.stringify(newscards[0]));
+        this.setState({ collectionsRec: collections })
+      })
   }
 
   componentWillUnmount(){
@@ -106,14 +128,26 @@ export default class Principal extends React.Component { // eslint-disable-line 
     return (
       <div className="Principal tab1">
         <aside className="FeaturedAside">
-          <div className="BreakingNewsSlider">
-            {this.state.breakingnew.map(BN => (
-              <BreakingNew key={1} params={BN} />
-            ))}
+          <div className="BreakingNewsSlider" style={{position:"relative"}}>
             
+            {this.state.breakingnew.length > 0 && 
+              <BreakingNew 
+                key={"breakingnew"-1} 
+                params={{...this.state.breakingnew[this.state.breakingnewCount] , count:this.state.breakingnewCount}} 
+              />
+            }
+            <div 
+              style={{position:"absolute", top:"calc(50% - 45px)", left:0, padding: ".5rem 1.1rem", background:"rgba(0,0,0,.7)", color:"white", fontWeight:700}} 
+              onClick={() => this.slider(-1)}
+            >&lt;</div>
+            <div 
+              style={{position:"absolute", top:"calc(50% - 45px)", right:0, padding: ".5rem 1.1rem", background:"rgba(0,0,0,.7)", color:"white", fontWeight:700}} 
+              onClick={() => this.slider(1)}
+            >></div>
+
           </div>
           <div className="CollectionsContainer">
-            <h3 className="RecomendationTitle">Recomendo para ti <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>
+            {this.state.session.active && this.state.session.history.length > 200 && <h3 className="RecomendationTitle">Recomendo para ti <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>}
             {this.state.collectionsRec.map((COL, i)=>(
                 <Collection key={"CollectionRecommend-"+COL.slug} params={COL} />
             ))}
