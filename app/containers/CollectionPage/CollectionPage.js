@@ -389,7 +389,7 @@ export default class CollectionPage extends React.Component { // eslint-disable-
         </div>
                  
         <h3 className="NewCounter">Noticias ({this.state.collection.newsCards.length})</h3>
-        {this.state.collection.newsCards.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado} /> )}
+        {this.state.collection.newsCards.map( (resultado, i) => <NewsCard key={resultado._id} params={resultado} /> )}
       </div>
     );
   }

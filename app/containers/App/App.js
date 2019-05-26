@@ -32,6 +32,8 @@ class Logout extends React.Component {
   }
   componentWillMount(){
     sessionStorage.removeItem("session")
+
+    
   }
   render(){
     return <Redirect to='/session' />;
@@ -48,6 +50,7 @@ const App = () => {
         //if(session.type == "error") sessionStorage.removeItem("session")
       })
   })();*/
+  
   return (
     <div className="app-wrapper">
       <Helmet

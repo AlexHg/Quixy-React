@@ -116,7 +116,7 @@ export default class NewsCardFeed extends React.Component { // eslint-disable-li
           />
         </Helmet>
         
-        {this.state.resultados.map( (resultado, i) => <NewsCard key={"NewsCard-"+i} params={resultado} /> )}
+        {this.state.resultados.map( (resultado, i) => <NewsCard key={resultado._id} params={resultado} /> )}
 
         <div id="getMoreNC" className="available"></div>
       

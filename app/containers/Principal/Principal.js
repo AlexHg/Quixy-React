@@ -60,6 +60,12 @@ export default class Principal extends React.Component { // eslint-disable-line 
   shouldComponentUpdate() {return true}
 
   componentWillMount() {
+    /*console.log("sistema de reco")
+    fetch("http://"+window.location.hostname+':8080/api/users/preferences/full-setup')
+    .then((response) => {
+      console.log("prepareee")
+        fetch("http://"+window.location.hostname+':8080/api/users/preferences/prepare')
+    })*/
     //GET COLLECTIONS 
     //console.log("http://"+window.location.hostname+':8080/api/collections/get/6/0');
     fetch("http://"+window.location.hostname+':8080/api/collections/get/6/0')
@@ -82,18 +88,29 @@ export default class Principal extends React.Component { // eslint-disable-line 
   };
 
   componentDidMount(){
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
     if(this.state.tab == 'tab1' || this.state.tab == 'tab2') //console.log("go to "+this.state.tab)
       document.querySelector("#"+this.state.tab).click();
     ReactDOM.findDOMNode(this.refs.pagearea)
       .addEventListener('scroll', this.getMoreEntriesNC);
 
-    if(this.state.session.active && this.state.session.history.length > 200)
+      console.log("http://"+window.location.hostname+':8080/api/users/recommend/'+this.state.session._id);
+    if(this.state.session.active && this.state.session.history.length > 10)
     fetch("http://"+window.location.hostname+':8080/api/users/recommend/'+this.state.session._id)
       .then((response) => {
         return response.json()
       }).then((collections) => {
-        //console.log(JSON.stringify(newscards[0]));
-        this.setState({ collectionsRec: collections })
+        if(collections.length > 0){
+          console.log(collections);
+          this.setState({ collectionsRec: collections.slice(0, 6) })
+        }
+        
       })
   }
 
@@ -147,13 +164,13 @@ export default class Principal extends React.Component { // eslint-disable-line 
 
           </div>
           <div className="CollectionsContainer">
-            {this.state.session.active && this.state.session.history.length > 200 && <h3 className="RecomendationTitle">Recomendo para ti <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>}
+            {this.state.session.active && this.state.session.history.length > 10 && <h3 className="RecomendationTitle">Recomendo para ti <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>}
             {this.state.collectionsRec.map((COL, i)=>(
-                <Collection key={"CollectionRecommend-"+COL.slug} params={COL} />
+                <Collection key={"CollectionRecommend-"+COL._id} params={COL} />
             ))}
             <h3 className="RecomendationTitle">Recien llegados <small><Link className="ViewAll" to="/collectionfeed">Ver todas</Link></small></h3>
             {this.state.collections.map((COL, i)=>(
-                <Collection key={"CollectionNew-"+COL.slug} params={COL} />
+                <Collection key={"CollectionNew-"+COL._id} params={COL} />
             ))}
           </div>
         </aside>

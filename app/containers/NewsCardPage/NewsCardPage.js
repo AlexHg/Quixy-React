@@ -24,7 +24,12 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       slugChange: false,
       session: {active: false, admin: false, ...JSON.parse(sessionStorage.getItem("session"))},
       newscard: {
-        
+        filters:{
+          humor: 0,
+          viral: 0,
+          title: 0,
+          count_al: 0
+        },
         _id: "",
         title: "",
         gallery: [], 
@@ -277,45 +282,18 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
       }
     })
   }
+  checkFilters = (params) => {
+    var total = params.filters.humor + params.filters.viral + params.filters.title;
+    if(params.filters.humor > 0) return {color:'green'};
+    else if(params.filters.viral > 0) return {color:'orange'};
+    else if(total > 0 || params.filters.count_al > 1){
+      return {color:'red'};
+    }
+    return {color:'black'};
+  }
   render() {
 
-    var relacionados = [ 
-      {
-        _id: '5ca3a73a480f651c60aad126',
-        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-        newspaper: '5ca39621480f651c60aad05a'
-      },
-      {
-        _id: '5ca3a73a480f651c60aad126',
-        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-        newspaper: '5ca39621480f651c60aad05a'
-      },
-      {
-        _id: '5ca3a73a480f651c60aad126',
-        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-        newspaper: '5ca39621480f651c60aad05a'
-      },
-      {
-        _id: '5ca3a73a480f651c60aad126',
-        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-        newspaper: '5ca39621480f651c60aad05a'
-      },
-      {
-        _id: '5ca3a73a480f651c60aad126',
-        title: 'Suspenden comparecencia de subsecretaria de Bienestar',
-        slug: 'suspenden-comparecencia-de-subsecretaria-de-bienestar',
-        thumbnail: 'https://www.milenio.com/uploads/media/2019/03/12/funcionaria-trasladada-silla-ruedas-servicio_87_0_545_339.JPG',
-        newspaper: '5ca39621480f651c60aad05a'
-      }
-    ]
+    
     return (
       <div className="ModalViewerContainer" name={window.location.href}>
 
@@ -338,7 +316,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
                 
                 <div className="NewsCardContent">
                             
-                  <span className="NewsCardTitle" >
+                  <span className="NewsCardTitle" style={this.checkFilters(this.state.newscard)}>
                     {this.state.newscard.title/*+": "+ this.state.newscard._id*/}
                   </span>
 
@@ -594,7 +572,7 @@ export default class NewsCardPage extends React.Component { // eslint-disable-li
               <div className="RelatedContent">
                 <h3>Relacionados</h3>
                 {this.state.newscard.relacionados.map((NC, i)=>(
-                  <NewsCardMini key={"NewsCardMini-"+i} params={NC}/>
+                  <NewsCardMini key={"NewsCardMini-"+NC._id} params={NC}/>
                 ))}
                 
               </div>

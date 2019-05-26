@@ -99,7 +99,7 @@ export default class BusquedaPage extends React.Component {
           
         </p>
         {this.state.resultados.map( (resultado, i) => 
-          <NewsCard key={i} params={resultado}/> 
+          <NewsCard key={resultado._id} params={resultado}/> 
         )}
           
       </div>

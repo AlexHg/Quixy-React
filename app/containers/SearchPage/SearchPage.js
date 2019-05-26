@@ -140,7 +140,7 @@ export default class SearchPage extends React.Component {
             
             <div className="Collections">
               {this.state.collections.map((COL, i) => (
-                <Collection key={"Collection-"+i} params={COL}/>
+                <Collection key={COL._id} params={COL}/>
               ))}
             </div>
             
@@ -151,7 +151,7 @@ export default class SearchPage extends React.Component {
             { (this.state.newscards.length != 0) && <h3>NewsCards</h3> }
             <div className="Newscards">
               {this.state.newscards.map((NC, i)=>(
-                <NewsCardMini key={"NewsCardMini-"+i} params={NC}/>
+                <NewsCardMini key={NC._id} params={NC}/>
               ))}
             </div><br/>
             {/* (this.state.newscards.length != 0) &&

@@ -51,6 +51,16 @@ const refresh = () => {
   //super().forceUpdate();
 }
 
+const checkFilters = (params) => {
+  var total = params.filters.humor + params.filters.viral + params.filters.title;
+  if(params.filters.humor > 0) return {color:'green'};
+  else if(params.filters.viral > 0) return {color:'orange'};
+  else if(total > 0 || params.filters.count_al > 1){
+    return {color:'red'};
+  }
+  return {color:'black'};
+}
+
 const NewsCard = ({params}) => {
   
   //params.slug = SlugCreator(params.title)
@@ -64,7 +74,7 @@ const NewsCard = ({params}) => {
         <div className="NewsCardMiniContent">
           <img src={params.newspaper.thumbnail} style={{height: '23px'}} />          
           
-          <Link onClick={refresh()} className="NewsCardMiniTitle" to={"/newscard/"+params.slug}>
+          <Link onClick={refresh()} className="NewsCardMiniTitle" to={"/newscard/"+params.slug} style={checkFilters(params)}>
             {params.title}
           </Link>
           <span className="dateNCM">Publicado el {formatDate(params.published)}</span>

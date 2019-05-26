@@ -68,7 +68,7 @@ export default class CollectionFeed extends React.Component {
             
             <div className="Collections">
               {this.state.collections.map((COL, i) => (
-                <Collection key={"Collection-"+i} params={COL}/>
+                <Collection key={COL._id} params={COL}/>
               ))}
             </div>
             

@@ -47,6 +47,16 @@ const formatDate = (date) => {
   return diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
 }
 
+const checkFilters = (params) => {
+  var total = params.filters.humor + params.filters.viral + params.filters.title;
+  if(params.filters.humor > 0) return {color:'green'};
+  else if(params.filters.viral > 0) return {color:'orange'};
+  else if(total > 0 || params.filters.count_al > 1){
+    return {color:'red'};
+  }
+  return {color:'black'};
+}
+
 const NewsCard = ({params}) => {
   
   //params.slug = SlugCreator(params.title)
@@ -59,7 +69,7 @@ const NewsCard = ({params}) => {
         
         <div className="NewsCardContent">
           <img src={params.newspaper.thumbnail} style={{height: '25px'}} />          
-          <Link className="NewsCardTitle" to={"/newscard/"+params.slug}>
+          <Link className="NewsCardTitle" to={"/newscard/"+params.slug} style={checkFilters(params)}>
             {params.title}
           </Link>
 
